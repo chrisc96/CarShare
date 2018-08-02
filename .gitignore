@@ -1,2 +1,3 @@
 node_modules/
 .directory
+/CarShare/package-lock.json
