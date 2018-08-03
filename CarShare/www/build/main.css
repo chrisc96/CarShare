@@ -25677,3 +25677,63 @@ ion-navbar.toolbar {
   min-height: calc(46px + constant(safe-area-inset-bottom));
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
+
+h1 {
+  font-size: 3rem;
+}
+
+.home-bg {
+  background-image: url(../assets/imgs/home_bg.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+#container {
+  position: absolute;
+  top: 50%;
+  margin-top: -275px;
+  /* half of #content height*/
+  left: 0;
+  width: 100%;
+}
+
+.content {
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#logoTitle {
+  font-family: "Ribeye", cursive;
+  margin-top: 0;
+  margin-bottom: 2px;
+  color: #fffae5;
+}
+
+#logoSubtext {
+  margin-top: 0;
+  margin-bottom: 60px;
+  font-family: monospace;
+  font-size: 1.5rem;
+  color: #fffae5;
+}
+
+.logo {
+  width: 160px;
+}
+
+.btns {
+  width: 250px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.home-btns {
+  margin-bottom: 5%;
+  font-family: monospace;
+  font-size: 1.5rem;
+}
