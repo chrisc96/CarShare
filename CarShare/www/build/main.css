@@ -25677,3 +25677,155 @@ ion-navbar.toolbar {
   min-height: calc(46px + constant(safe-area-inset-bottom));
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
+
+h1 {
+  font-size: 3rem;
+}
+
+.home-bg {
+  background-image: url(../assets/imgs/home_bg.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+#container {
+  position: absolute;
+  top: 50%;
+  margin-top: -230px;
+  /* half of #content height*/
+  left: 0;
+  width: 100%;
+}
+
+.content {
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.content #container {
+  position: absolute;
+  top: 50%;
+  margin-top: -230px;
+  /* half of #content height*/
+  left: 0;
+  width: 100%;
+}
+
+#logoTitle {
+  font-family: "Ribeye", cursive;
+  margin-top: 0;
+  margin-bottom: 2px;
+  color: #fffae5;
+}
+
+#logoSubtext {
+  margin-top: 0;
+  margin-bottom: 60px;
+  font-family: monospace;
+  font-size: 1.5rem;
+  color: #fffae5;
+}
+
+.logo {
+  width: 160px;
+}
+
+.btns {
+  width: 250px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.home-btns {
+  margin-bottom: 5%;
+  font-family: monospace;
+  font-size: 1.8rem;
+  height: 40px;
+}
+
+.login-bg {
+  background-image: url(../assets/imgs/home_bg.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+.content #container {
+  position: absolute;
+  top: 50%;
+  margin-top: -170px;
+  left: 0;
+  width: 100%;
+}
+
+.card {
+  border-radius: 10px;
+  height: 300px;
+}
+
+#loginTxt {
+  font-family: "Ribeye", cursive;
+  font-size: 4rem;
+}
+
+.card-header {
+  padding-bottom: 0px;
+}
+
+#emailTxt,
+#passwordTxt {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.icon {
+  color: #ffc977;
+  font-size: 1.6em;
+  vertical-align: middle;
+  padding-right: 5px;
+  width: 25px;
+}
+
+.item-ios .item-button {
+  padding: 0 0.7em;
+  height: 40px;
+  font-size: 1.8rem;
+}
+
+.item-input ion-input,
+.item-input ion-textarea {
+  border-bottom: 1px solid #ffc977;
+  -webkit-box-shadow: 0 1px 0 0 #ffc977;
+  box-shadow: 0 1px 0 0 #ffc977;
+}
+
+#inputTxt:focus + label {
+  color: #ffc977;
+}
+
+ion-header .toolbar {
+  position: absolute;
+}
+
+ion-header .toolbar .toolbar-background {
+  background: transparent;
+  border: none;
+}
+
+ion-header .toolbar .toolbar-title {
+  color: #ffff;
+}
+
+.back-button-icon {
+  color: #18c71e;
+}
+
+.back-button-text {
+  color: #18c71e;
+}
