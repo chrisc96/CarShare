@@ -9,9 +9,9 @@
       <h1 id="logoTitle">CarShare</h1>
       <p id="logoSubtext">Find and Share your rides!</p>
       <div class="btns">
-        <button class="home-btns" color="secondary" ion-button block>Find a ride</button>
-        <button class="home-btns" color="danger" ion-button full>Post a ride</button>
-        <button class="home-btns" color="default" ion-button full>View my rides</button>
+        <button class="home-btns" color="secondary" (click)="goToFindARide()" ion-button block>Find a ride</button>
+        <button class="home-btns" color="danger" (click)="goToLogin()" ion-button full>Post a ride</button>
+        <button class="home-btns" color="default" (click)="goToLogin()" ion-button full>View my rides</button>
       </div>
     </div>
   </div>

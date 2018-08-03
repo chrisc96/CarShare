@@ -26,6 +26,14 @@ h1 {
 .content {
   text-align: center;
   display: block;
+  #container {
+    position: absolute;
+    top: 50%;
+    margin-top: -230px; /* half of #content height*/
+    left: 0;
+    width: 100%;
+  }
+
   margin-left: auto;
   margin-right: auto;
 }

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component } from "@angular/core";
+import { IonicPage, NavController, NavParams } from "ionic-angular";
 
 /**
  * Generated class for the FindARidePage page.
@@ -10,16 +10,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-find-a-ride',
-  templateUrl: 'find-a-ride.html',
+  selector: "page-find-a-ride",
+  templateUrl: "find-a-ride.html"
 })
 export class FindARidePage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad FindARidePage');
-  }
-
+  constructor(public navCtrl: NavController, public navParams: NavParams) {}
 }
