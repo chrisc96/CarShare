@@ -18,19 +18,35 @@ webpackEmptyAsyncContext.id = 108;
 /***/ }),
 
 /***/ 149:
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-function webpackEmptyAsyncContext(req) {
-	// Here Promise.resolve().then() is used instead of new Promise() to prevent
-	// uncatched exception popping up in devtools
-	return Promise.resolve().then(function() {
-		throw new Error("Cannot find module '" + req + "'.");
+var map = {
+	"../pages/find-a-ride/find-a-ride.module": [
+		272,
+		6
+	],
+	"../pages/login/login.module": [
+		268,
+		5
+	],
+	"../pages/signup/signup.module": [
+		270,
+		2
+	]
+};
+function webpackAsyncContext(req) {
+	var ids = map[req];
+	if(!ids)
+		return Promise.reject(new Error("Cannot find module '" + req + "'."));
+	return __webpack_require__.e(ids[1]).then(function() {
+		return __webpack_require__(ids[0]);
 	});
-}
-webpackEmptyAsyncContext.keys = function() { return []; };
-webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
-module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 149;
+};
+webpackAsyncContext.keys = function webpackAsyncContextKeys() {
+	return Object.keys(map);
+};
+webpackAsyncContext.id = 149;
+module.exports = webpackAsyncContext;
 
 /***/ }),
 
@@ -58,9 +74,9 @@ var HomePage = /** @class */ (function () {
     }
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"/am/st-james/home1/connolchri/Desktop/3rdYear/SWEN325/CarShare/CarShare/src/pages/home/home.html"*/'<ion-header>\n  <link href="https://fonts.googleapis.com/css?family=Ribeye" rel="stylesheet">\n</ion-header>\n\n<ion-content class="home-bg">\n  <div id="container">\n    <div class="content">\n      <img class="logo" src="../../assets/imgs/carLogo.png">\n      <h1 id="logoTitle">CarShare</h1>\n      <p id="logoSubtext">Find and Share your rides!</p>\n\n      <div class="btns">\n        <button class="home-btns" color="secondary" ion-button block>Find a ride</button>\n        <button class="home-btns" color="danger" ion-button full>Post a ride</button>\n        <button class="home-btns" color="default" ion-button full>View my rides</button>\n      </div>\n    </div>\n    <!-- Test Comment -->\n  </div>\n</ion-content>'/*ion-inline-end:"/am/st-james/home1/connolchri/Desktop/3rdYear/SWEN325/CarShare/CarShare/src/pages/home/home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"/am/st-james/home1/connolchri/Desktop/3rdYear/SWEN325/CarShare/CarShare/src/pages/home/home.html"*/'<ion-header>\n  <link href="https://fonts.googleapis.com/css?family=Ribeye" rel="stylesheet">\n</ion-header>\n\n<ion-content class="home-bg">\n  <div id="container">\n    <div class="content">\n      <img class="logo" src="../../assets/imgs/carLogo.png">\n      <h1 id="logoTitle">CarShare</h1>\n      <p id="logoSubtext">Find and Share your rides!</p>\n      <div class="btns">\n        <button class="home-btns" color="secondary" ion-button block>Find a ride</button>\n        <button class="home-btns" color="danger" ion-button full>Post a ride</button>\n        <button class="home-btns" color="default" ion-button full>View my rides</button>\n      </div>\n    </div>\n  </div>\n</ion-content>'/*ion-inline-end:"/am/st-james/home1/connolchri/Desktop/3rdYear/SWEN325/CarShare/CarShare/src/pages/home/home.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]])
     ], HomePage);
     return HomePage;
 }());
@@ -179,7 +195,7 @@ var MyApp = /** @class */ (function () {
     MyApp = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/am/st-james/home1/connolchri/Desktop/3rdYear/SWEN325/CarShare/CarShare/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/am/st-james/home1/connolchri/Desktop/3rdYear/SWEN325/CarShare/CarShare/src/app/app.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
     ], MyApp);
     return MyApp;
 }());

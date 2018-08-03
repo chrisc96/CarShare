@@ -25693,7 +25693,7 @@ h1 {
 #container {
   position: absolute;
   top: 50%;
-  margin-top: -275px;
+  margin-top: -230px;
   /* half of #content height*/
   left: 0;
   width: 100%;
@@ -25735,5 +25735,6 @@ h1 {
 .home-btns {
   margin-bottom: 5%;
   font-family: monospace;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
+  height: 40px;
 }
