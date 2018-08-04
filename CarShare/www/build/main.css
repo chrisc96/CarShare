@@ -25759,7 +25759,7 @@ h1 {
 .content #container {
   position: absolute;
   top: 50%;
-  margin-top: -170px;
+  margin-top: -260px;
   left: 0;
   width: 100%;
 }
@@ -25792,10 +25792,10 @@ h1 {
   width: 25px;
 }
 
-.item-ios .item-button {
-  padding: 0 0.7em;
-  height: 40px;
-  font-size: 1.8rem;
+.button {
+  padding: 0 0.7em !important;
+  height: 40px !important;
+  font-size: 1.8rem !important;
 }
 
 .item-input ion-input,
@@ -25822,10 +25822,18 @@ ion-header .toolbar .toolbar-title {
   color: #ffff;
 }
 
-.back-button-icon {
+ion-header .back-button-icon {
   color: #18c71e;
 }
 
-.back-button-text {
+ion-header .back-button-text {
   color: #18c71e;
+}
+
+.logo {
+  width: 160px;
+}
+
+.item-input-has-focus .label-md[floating], .input-has-focus .label-md[floating] {
+  color: #999;
 }

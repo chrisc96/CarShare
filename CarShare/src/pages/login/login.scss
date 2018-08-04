@@ -12,7 +12,7 @@ page-login {
 .content #container {
   position: absolute;
   top: 50%;
-  margin-top: -170px;
+  margin-top: -260px;
   left: 0;
   width: 100%;
 }
@@ -45,11 +45,12 @@ page-login {
   width: 25px;
 }
 
-.item-ios .item-button {
-  padding: 0 0.7em;
-  height: 40px;
-  font-size: 1.8rem;
+.button {
+  padding: 0 0.7em !important; 
+  height: 40px !important;
+  font-size: 1.8rem !important;
 }
+
 
 .item-input ion-input,
 .item-input ion-textarea {
@@ -73,12 +74,21 @@ ion-header {
       color: #ffff;
     }
   }
+  
+  
+  .back-button-icon {
+    color: #18c71e;
+  }
+  
+  .back-button-text {
+    color: #18c71e;
+  }
 }
 
-.back-button-icon {
-  color: #18c71e;
+.logo {
+  width: 160px;
 }
 
-.back-button-text {
-  color: #18c71e;
+.item-input-has-focus .label-md[floating], .input-has-focus .label-md[floating] {
+  color: #999
 }
