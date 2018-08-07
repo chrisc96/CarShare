@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
+import { SignupPage } from "../signup/signup";
 
 /**
  * Generated class for the LoginPage page.
@@ -14,7 +15,13 @@ import { IonicPage, NavController, NavParams } from "ionic-angular";
   templateUrl: "login.html"
 })
 export class LoginPage {
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams) { }
 
-  tryLogin() {}
+  goToSignupPage() {
+    this.navCtrl.push(SignupPage);
+  }
+
+  tryLogin() {
+
+  }
 }

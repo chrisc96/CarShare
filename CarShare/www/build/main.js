@@ -7,6 +7,7 @@ webpackJsonp([3],{
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__signup_signup__ = __webpack_require__(101);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -16,6 +17,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 /**
@@ -29,10 +31,14 @@ var LoginPage = /** @class */ (function () {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
     }
-    LoginPage.prototype.tryLogin = function () { };
+    LoginPage.prototype.goToSignupPage = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__signup_signup__["a" /* SignupPage */]);
+    };
+    LoginPage.prototype.tryLogin = function () {
+    };
     LoginPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-login",template:/*ion-inline-start:"C:\Users\Chris\Documents\App Dev\CarShare\CarShare\src\pages\login\login.html"*/'<!--\n\n  Generated template for the LoginPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <link href="https://fonts.googleapis.com/css?family=Ribeye" rel="stylesheet">\n\n  <ion-navbar>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content class="login-bg">\n\n  <div id="container">\n\n    <img class="logo" src="../../assets/imgs/carLogo.png">\n\n    <ion-card>\n\n      <ion-card-header>\n\n        <h1 id="loginTxt">Login</h1>\n\n      </ion-card-header>\n\n      <ion-card-content>\n\n        <div>\n\n          <ion-item>\n\n            <ion-label floating>\n\n              <span>\n\n                <ion-icon name="ios-mail-outline"></ion-icon>\n\n              </span>\n\n              <span>\n\n                <div id="emailTxt">Email</div>\n\n              </span>\n\n            </ion-label>\n\n            <ion-input type="text" name="email" class="inputTxt" required></ion-input>\n\n          </ion-item>\n\n\n\n          <ion-item>\n\n            <ion-label floating>\n\n              <span>\n\n                <ion-icon name="ios-lock-outline"></ion-icon>\n\n              </span>\n\n              <span>\n\n                <div id="passwordTxt">Password</div>\n\n              </span>\n\n            </ion-label>\n\n            <ion-input type="password" name="password" class="inputTxt" required></ion-input>\n\n          </ion-item>\n\n        </div>\n\n\n\n        <ion-item class="loginBtn">\n\n          <button ion-button block color="secondary" #submit (click)="tryLogin()">Login</button>\n\n        </ion-item>\n\n      </ion-card-content>\n\n    </ion-card>\n\n  </div>\n\n</ion-content>'/*ion-inline-end:"C:\Users\Chris\Documents\App Dev\CarShare\CarShare\src\pages\login\login.html"*/
+            selector: "page-login",template:/*ion-inline-start:"/am/st-james/home1/connolchri/Desktop/3rdYear/SWEN325/CarShare/CarShare/src/pages/login/login.html"*/'<!--\n  Generated template for the LoginPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <link href="https://fonts.googleapis.com/css?family=Ribeye" rel="stylesheet">\n  <ion-navbar>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content class="login-bg">\n  <div id="container">\n    <img class="logo" src="../../assets/imgs/carLogo.png">\n    <ion-card>\n      <ion-card-header>\n        <h1 id="loginTxt">Login</h1>\n      </ion-card-header>\n      <ion-card-content>\n        <div>\n          <ion-item>\n            <ion-label floating>\n              <span>\n                <ion-icon name="ios-mail-outline"></ion-icon>\n              </span>\n              <span>\n                <div id="emailTxt">Email</div>\n              </span>\n            </ion-label>\n            <ion-input type="text" name="email" class="inputTxt" required></ion-input>\n          </ion-item>\n\n          <ion-item>\n            <ion-label floating>\n              <span>\n                <ion-icon name="ios-lock-outline"></ion-icon>\n              </span>\n              <span>\n                <div id="passwordTxt">Password</div>\n              </span>\n            </ion-label>\n            <ion-input type="password" name="password" class="inputTxt" required></ion-input>\n          </ion-item>\n        </div>\n\n        <ion-item class="loginBtn">\n          <button ion-button block color="secondary" #submit (click)="tryLogin()">Login</button>\n        </ion-item>\n\n        <hr class="loginHr">\n        <div (click)="goToSignupPage()" id="signupLink">Don\'t have an account? Sign up here</div>\n      </ion-card-content>\n    </ion-card>\n  </div>\n</ion-content>'/*ion-inline-end:"/am/st-james/home1/connolchri/Desktop/3rdYear/SWEN325/CarShare/CarShare/src/pages/login/login.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
     ], LoginPage);
@@ -43,7 +49,49 @@ var LoginPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 110:
+/***/ 101:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SignupPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(27);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+/**
+ * Generated class for the SignupPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var SignupPage = /** @class */ (function () {
+    function SignupPage(navCtrl, navParams) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+    }
+    SignupPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: "page-signup",template:/*ion-inline-start:"/am/st-james/home1/connolchri/Desktop/3rdYear/SWEN325/CarShare/CarShare/src/pages/signup/signup.html"*/'<!--\n  Generated template for the SignupPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Signup</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n</ion-content>\n'/*ion-inline-end:"/am/st-james/home1/connolchri/Desktop/3rdYear/SWEN325/CarShare/CarShare/src/pages/signup/signup.html"*/
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
+    ], SignupPage);
+    return SignupPage;
+}());
+
+//# sourceMappingURL=signup.js.map
+
+/***/ }),
+
+/***/ 111:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -56,11 +104,11 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 110;
+webpackEmptyAsyncContext.id = 111;
 
 /***/ }),
 
-/***/ 151:
+/***/ 152:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -88,12 +136,12 @@ function webpackAsyncContext(req) {
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
-webpackAsyncContext.id = 151;
+webpackAsyncContext.id = 152;
 module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 195:
+/***/ 196:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -127,7 +175,7 @@ var HomePage = /** @class */ (function () {
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-home",template:/*ion-inline-start:"C:\Users\Chris\Documents\App Dev\CarShare\CarShare\src\pages\home\home.html"*/'<ion-header>\n\n  <link href="https://fonts.googleapis.com/css?family=Ribeye" rel="stylesheet">\n\n</ion-header>\n\n\n\n<ion-content class="home-bg">\n\n  <div id="container">\n\n    <div class="content">\n\n      <img class="logo" src="../../assets/imgs/carLogo.png">\n\n      <h1 id="logoTitle">CarShare</h1>\n\n      <p id="logoSubtext">Find and Share your rides!</p>\n\n      <div class="btns">\n\n        <button class="home-btns" color="secondary" (click)="goToFindARide()" ion-button block>Find a ride</button>\n\n        <button class="home-btns" color="danger" (click)="goToLogin()" ion-button full>Post a ride</button>\n\n        <button class="home-btns" color="default" (click)="goToLogin()" ion-button full>View my rides</button>\n\n      </div>\n\n    </div>\n\n  </div>\n\n</ion-content>'/*ion-inline-end:"C:\Users\Chris\Documents\App Dev\CarShare\CarShare\src\pages\home\home.html"*/
+            selector: "page-home",template:/*ion-inline-start:"/am/st-james/home1/connolchri/Desktop/3rdYear/SWEN325/CarShare/CarShare/src/pages/home/home.html"*/'<ion-header>\n  <link href="https://fonts.googleapis.com/css?family=Ribeye" rel="stylesheet">\n</ion-header>\n\n<ion-content class="home-bg">\n  <div id="container">\n    <div class="content">\n      <img class="logo" src="../../assets/imgs/carLogo.png">\n      <h1 id="logoTitle">CarShare</h1>\n      <p id="logoSubtext">Find and Share your rides!</p>\n      <div class="btns">\n        <button class="home-btns" color="secondary" (click)="goToFindARide()" ion-button block>Find a ride</button>\n        <button class="home-btns" color="danger" (click)="goToLogin()" ion-button full>Post a ride</button>\n        <button class="home-btns" color="default" (click)="goToLogin()" ion-button full>View my rides</button>\n      </div>\n    </div>\n  </div>\n</ion-content>'/*ion-inline-end:"/am/st-james/home1/connolchri/Desktop/3rdYear/SWEN325/CarShare/CarShare/src/pages/home/home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]])
     ], HomePage);
@@ -135,48 +183,6 @@ var HomePage = /** @class */ (function () {
 }());
 
 //# sourceMappingURL=home.js.map
-
-/***/ }),
-
-/***/ 196:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SignupPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(27);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-/**
- * Generated class for the SignupPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var SignupPage = /** @class */ (function () {
-    function SignupPage(navCtrl, navParams) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-    }
-    SignupPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-signup",template:/*ion-inline-start:"C:\Users\Chris\Documents\App Dev\CarShare\CarShare\src\pages\signup\signup.html"*/'<!--\n\n  Generated template for the SignupPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Signup</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Chris\Documents\App Dev\CarShare\CarShare\src\pages\signup\signup.html"*/
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
-    ], SignupPage);
-    return SignupPage;
-}());
-
-//# sourceMappingURL=signup.js.map
 
 /***/ }),
 
@@ -202,12 +208,12 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(191);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(194);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(192);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(195);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(270);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(196);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_login_login__ = __webpack_require__(100);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_signup_signup__ = __webpack_require__(196);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_signup_signup__ = __webpack_require__(101);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_find_a_ride_find_a_ride__ = __webpack_require__(99);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -261,9 +267,9 @@ var AppModule = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(194);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(191);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(192);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(196);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -289,7 +295,7 @@ var MyApp = /** @class */ (function () {
         });
     }
     MyApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"C:\Users\Chris\Documents\App Dev\CarShare\CarShare\src\app\app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n\n'/*ion-inline-end:"C:\Users\Chris\Documents\App Dev\CarShare\CarShare\src\app\app.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/am/st-james/home1/connolchri/Desktop/3rdYear/SWEN325/CarShare/CarShare/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/am/st-james/home1/connolchri/Desktop/3rdYear/SWEN325/CarShare/CarShare/src/app/app.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */],
             __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */],
@@ -333,7 +339,7 @@ var FindARidePage = /** @class */ (function () {
     }
     FindARidePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-find-a-ride",template:/*ion-inline-start:"C:\Users\Chris\Documents\App Dev\CarShare\CarShare\src\pages\find-a-ride\find-a-ride.html"*/'<!--\n\n  Generated template for the FindARidePage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Find A Ride</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Chris\Documents\App Dev\CarShare\CarShare\src\pages\find-a-ride\find-a-ride.html"*/
+            selector: "page-find-a-ride",template:/*ion-inline-start:"/am/st-james/home1/connolchri/Desktop/3rdYear/SWEN325/CarShare/CarShare/src/pages/find-a-ride/find-a-ride.html"*/'<!--\n  Generated template for the FindARidePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Find A Ride</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n</ion-content>'/*ion-inline-end:"/am/st-james/home1/connolchri/Desktop/3rdYear/SWEN325/CarShare/CarShare/src/pages/find-a-ride/find-a-ride.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
     ], FindARidePage);
