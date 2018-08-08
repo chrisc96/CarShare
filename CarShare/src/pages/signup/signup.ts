@@ -1,5 +1,6 @@
-import { Component } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
+import { AngularFireAuth } from 'angularfire2/auth';
 
 /**
  * Generated class for the SignupPage page.
@@ -14,7 +15,20 @@ import { IonicPage, NavController, NavParams } from "ionic-angular";
   templateUrl: "signup.html"
 })
 export class SignupPage {
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  @ViewChild('email') email : string;
+  @ViewChild('password') password : string;
 
+  constructor(private fireAuth : AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
+
+  }
+
+  signUp() {
+    this.fireAuth.auth.createUserWithEmailAndPassword(this.email, this.password)
+      .then(data => {
+        console.log(data)
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
 }
