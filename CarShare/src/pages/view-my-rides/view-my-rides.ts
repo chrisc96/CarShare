@@ -14,8 +14,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'view-my-rides.html',
 })
 export class ViewMyRidesPage {
+  public name : String;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.name = navParams.data
   }
 
   goToPostARide() {
