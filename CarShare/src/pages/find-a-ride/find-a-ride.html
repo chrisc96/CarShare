@@ -5,14 +5,17 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
+  <link href="https://fonts.googleapis.com/css?family=Ribeye" rel="stylesheet">
   <ion-navbar>
-    <ion-title>Find A Ride</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
-<ion-content padding>
-
+<ion-content class="home-bg">
+  <div id="container">
+    <div class="content">
+      <div class="btns">
+        <button color="secondary" (click)="goToRideListing()" ion-button full>Ride Listing</button>
+      </div>
+    </div>
+  </div>
 </ion-content>

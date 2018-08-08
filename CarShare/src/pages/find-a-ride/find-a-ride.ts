@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
+import { RideListingPage } from "../ride-listing/ride-listing";
 
 /**
  * Generated class for the FindARidePage page.
@@ -15,4 +16,8 @@ import { IonicPage, NavController, NavParams } from "ionic-angular";
 })
 export class FindARidePage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  
+  goToRideListing() {
+    this.navCtrl.push(RideListingPage);
+  }
 }
