@@ -1,3 +1,4 @@
 node_modules/
 .directory
 /CarShare/package-lock.json
+/CarShare/www/build
