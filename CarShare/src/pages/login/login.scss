@@ -171,3 +171,7 @@ ion-header {
 .focus-outline :focus {
   outline: none !important;
 }
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px white inset;
+}

@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { SignupPage } from "../signup/signup";
 import { AngularFireAuth } from 'angularfire2/auth'
 import { Validators, FormBuilder } from '@angular/forms';
-
+import { LoggedInProvider } from '../../providers/logged-in/logged-in'
 
 
 /**
@@ -20,34 +20,36 @@ import { Validators, FormBuilder } from '@angular/forms';
 })
 export class LoginPage {
 
+  pageToGoTo : any;
+
   @ViewChild('email') email = '';
   @ViewChild('password') password = '';
-  
 
-  pageToGoTo : any;
+  loginButtonNotPushed : boolean = false;
+
+  emailIsValid : boolean = true
+  emailNotEmpty : boolean = true
+  emailIsInvalid : boolean = true
+
+  passwordIsValid : boolean = true
+  passwordNotEmpty : boolean = true
 
   requestBeingSent : boolean = false;
   requestDidFail : boolean = false;
-
-  loginButtonNotPushed : boolean = false;
 
   loginForm = this.formBuilder.group({
     emailControl: ['', Validators.compose([Validators.maxLength(70), Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$'), Validators.required])],
     passwordControl: ['', [Validators.requiredTrue]]
   })
 
-  emailIsValid :boolean = true
-  emailNotEmpty : boolean = true
-  emailIsInvalid : boolean = true
-
-  passwordIsValid = true
-  passwordNotEmpty : boolean = true
-
-  constructor(public formBuilder : FormBuilder, public fire: AngularFireAuth,
-              public navCtrl: NavController, public navParams: NavParams) {
-                this.pageToGoTo = this.navParams.data.toPage;
-                // post a ride
-                // view my rides
+  constructor(
+    public formBuilder : FormBuilder,
+    public fire: AngularFireAuth, 
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public loginSystem : LoggedInProvider
+  ) {
+    this.pageToGoTo = this.navParams.data.toPage;
   }
 
   goToSignupPage() {
@@ -61,12 +63,12 @@ export class LoginPage {
 
     if (this.emailIsValid && this.passwordIsValid) {
       this.requestBeingSent = true;
-      this.fire.auth.signInAndRetrieveDataWithEmailAndPassword(this.email, this.password)
+      
+      this.loginSystem.login(this.email, this.password)
       .then( resp => {
-        console.log(resp);
         this.requestBeingSent = false; // finished sending request, set to false
         this.password = ''
-        this.navCtrl.push(this.pageToGoTo, {'data': resp});
+        this.navCtrl.push(this.pageToGoTo, {'userInfo': this.loginSystem.getUser()});
       })
       .catch( err => {
         this.requestBeingSent = false;

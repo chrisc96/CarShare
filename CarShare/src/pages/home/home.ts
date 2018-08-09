@@ -4,23 +4,34 @@ import { LoginPage } from "../login/login";
 import { FindARidePage } from "../find-a-ride/find-a-ride";
 import { ViewMyRidesPage } from "../view-my-rides/view-my-rides";
 import { PostARidePage } from "../post-a-ride/post-a-ride"
+import { LoggedInProvider } from "../../providers/logged-in/logged-in";
 
 @Component({
   selector: "page-home",
   templateUrl: "home.html"
 })
 export class HomePage {
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController, public loginSystem : LoggedInProvider) {}
 
   goToFindARide() {
     this.navCtrl.push(FindARidePage);
   }
 
   goToPostARide() {
-    this.navCtrl.push(LoginPage, {'toPage': PostARidePage});
+    if (!this.loginSystem.userLoggedIn()) {
+      this.navCtrl.push(LoginPage, {'toPage': PostARidePage});
+    }
+    else {
+      this.navCtrl.push(PostARidePage);
+    }
   }
 
   goToViewMyRides() {
-    this.navCtrl.push(LoginPage, {'toPage': ViewMyRidesPage});
+    if (!this.loginSystem.userLoggedIn()) {
+      this.navCtrl.push(LoginPage, {'toPage': ViewMyRidesPage});
+    }
+    else {
+      this.navCtrl.push(ViewMyRidesPage);
+    }
   }
 }
