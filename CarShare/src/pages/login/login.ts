@@ -2,7 +2,7 @@ import { Component, ViewChild } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { SignupPage } from "../signup/signup";
 import { AngularFireAuth } from 'angularfire2/auth'
-import { FormControl, FormGroup, Validators, FormBuilder, EmailValidator } from '@angular/forms';
+import { Validators, FormBuilder } from '@angular/forms';
 
 
 
@@ -25,10 +25,11 @@ export class LoginPage {
   
 
   pageToGoTo : any;
-  requestBeingSent : boolean = false;
-  requestFailed : boolean = false;
 
-  loginPushed : boolean = false;
+  requestBeingSent : boolean = false;
+  requestDidFail : boolean = false;
+
+  loginButtonNotPushed : boolean = false;
 
   loginForm = this.formBuilder.group({
     emailControl: ['', Validators.compose([Validators.maxLength(70), Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$'), Validators.required])],
@@ -54,50 +55,58 @@ export class LoginPage {
   }
 
   tryLogin() {
-    this.determineValidity();
+    this.loginButtonNotPushed = true;
+    this.isEmailValid();
+    this.isPasswordValid();
 
     if (this.emailIsValid && this.passwordIsValid) {
       this.requestBeingSent = true;
-      this.fire.auth.signInWithEmailAndPassword(this.email, this.password)
-      // change login button icon to be a loading icon and non-clickable
+      this.fire.auth.signInAndRetrieveDataWithEmailAndPassword(this.email, this.password)
       .then( resp => {
-        this.requestBeingSent = false;
+        console.log(resp);
+        this.requestBeingSent = false; // finished sending request, set to false
         this.password = ''
-        this.navCtrl.push(this.pageToGoTo);
+        this.navCtrl.push(this.pageToGoTo, {'data': resp});
       })
       .catch( err => {
         this.requestBeingSent = false;
-        this.requestFailed = true;
+        this.requestDidFail = true;
         this.password = '';
       });
     }
   }
 
   onChange(e) {
-    if (this.loginPushed) {
-      this.determineValidity()
+    if (this.loginButtonNotPushed) {
+      this.isEmailValid();
+      this.isPasswordValid();
     }
 
-    if (this.requestFailed && this.password !== undefined) {
-      this.requestFailed = false;
+    // Means that the last request failed, but we're changing the value of the 
+    // password (after it's been set to '') so remove the text for bad login
+    if (this.requestDidFail && this.password !== undefined) {
+      this.requestDidFail = false;
     }
   }
 
-  determineValidity() {
-    // Reset values when clicking submit
-    this.loginPushed = true;
-
+  isEmailValid() {
+    // Reset fields
     this.emailNotEmpty = false;
     this.emailIsInvalid = false;
     this.emailIsValid = false;
-    this.passwordIsValid = false;
-    this.passwordNotEmpty = false;
 
-
+    // Determine validity
     this.emailIsValid = this.loginForm.controls['emailControl'].valid;
     this.emailNotEmpty = this.email !== undefined && this.email !== '';
     this.emailIsInvalid = this.emailNotEmpty && !this.emailIsValid ? true : false
+  }
 
+  isPasswordValid() {
+    // Reset fields
+    this.passwordIsValid = false;
+    this.passwordNotEmpty = false;
+
+    // Determine validity
     this.passwordNotEmpty = this.password !== undefined && this.password !== '';
     this.passwordIsValid = this.passwordNotEmpty;
   }
