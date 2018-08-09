@@ -5,52 +5,54 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <link href="https://fonts.googleapis.com/css?family=Ribeye" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Ribeye' rel='stylesheet'>
   <ion-navbar>
   </ion-navbar>
 </ion-header>
 
 
-<ion-content class="login-bg">
-  <div id="container">
-    <img class="logo" src="../../assets/imgs/carLogo.png">
+<ion-content class='login-bg'>
+  <div id='container'>
+    <img class='logo' src='../../assets/imgs/carLogo.png'>
     <ion-card>
       <ion-card-header>
-        <h1 id="loginTxt">Login</h1>
+        <h1 id='loginTxt'>Login</h1>
       </ion-card-header>
       <ion-card-content>
-        <div>
+        <form [formGroup]='loginForm'>
           <ion-item>
             <ion-label floating>
               <span>
-                <ion-icon name="ios-mail-outline"></ion-icon>
+                <ion-icon name='ios-mail-outline'></ion-icon>
               </span>
               <span>
-                <div id="emailTxt">Email</div>
+                <div id='emailTxt'>Email</div>
               </span>
             </ion-label>
-            <ion-input type="text" name="email" class="inputTxt" required></ion-input>
+            <ion-input type='email' formControlName='emailControl' [(ngModel)]='email' class='inputTxt' required></ion-input>
           </ion-item>
-
+          <p class='formErrorText' *ngIf='!emailIsValid && !emailNotEmpty'>Please enter an email</p>
+          <p class='formErrorText' *ngIf='!emailIsValid && emailIsInvalid'>Please enter a valid email</p>
           <ion-item>
             <ion-label floating>
               <span>
-                <ion-icon name="ios-lock-outline"></ion-icon>
+                <ion-icon name='ios-lock-outline'></ion-icon>
               </span>
               <span>
-                <div id="passwordTxt">Password</div>
+                <div id='passwordTxt'>Password</div>
               </span>
             </ion-label>
-            <ion-input type="password" name="password" class="inputTxt" required></ion-input>
+            <ion-input type='password' formControlName='passwordControl' [(ngModel)]='password' class='inputTxt' required></ion-input>
           </ion-item>
-        </div>
+          <p class='formErrorText' *ngIf='!passwordIsValid'>Password cannot be empty</p>
+        </form>
 
-        <ion-item class="loginBtn">
-          <button ion-button block color="secondary" #submit (click)="tryLogin()">Login</button>
+        <ion-item class='loginBtn'>
+          <button ion-button block color='secondary' #submit (click)='tryLogin()'>Login</button>
         </ion-item>
 
-        <hr class="loginHr">
-        <div (click)="goToSignupPage()" id="signupLink">Don't have an account? Sign up here</div>
+        <hr class='loginHr'>
+        <div (click)='goToSignupPage()' id='signupLink'>Don't have an account? Sign up here</div>
       </ion-card-content>
     </ion-card>
   </div>
