@@ -1,6 +1,11 @@
 page-login {
 }
 
+$inputUnderlineColors: (
+  primary: #ffc977,
+  secondary: rgb(255,0,0)
+);
+
 .login-bg {
   background-image: url(../assets/imgs/home_bg.png);
   background-size: cover;
@@ -32,9 +37,19 @@ page-login {
 
   position: absolute;
   top: 50%;
-  margin-top: -260px;
+  margin-top: -280px;
   left: 0;
   width: 100%;
+}
+
+.item-md.item-input .item-inner { 
+  border-bottom-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.list-md .item-input:last-child { 
+  border-bottom-color: transparent !important; 
+  box-shadow: none !important; 
 }
 
 .card {
@@ -78,6 +93,12 @@ page-login {
   box-shadow: 0 1px 0 0 #ffc977;
 }
 
+.item-input ion-input,
+.item-input ion-textarea {
+  border-bottom: 1px solid #ffc977;
+  box-shadow: 0 1px 0 0 #ffc977;
+}
+
 #inputTxt:focus + label {
   color: #ffc977;
 }
@@ -112,7 +133,6 @@ ion-header {
   color: #999
 }
 
-
 .content-md hr {
   background-color: #ffc977 ;
 }
@@ -144,6 +164,6 @@ ion-header {
   text-align: left;
   padding-left: 16px;
   color: red !important;
-  margin-top: 0px !important;
+  margin-top: 2px !important;
   font-size: 1.3rem !important;
 }

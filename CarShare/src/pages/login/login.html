@@ -29,7 +29,7 @@
                 <div id='emailTxt'>Email</div>
               </span>
             </ion-label>
-            <ion-input type='email' formControlName='emailControl' [(ngModel)]='email' class='inputTxt' required></ion-input>
+            <ion-input type='email' formControlName='emailControl' (input)="onChange($event)" [(ngModel)]='email' class='inputTxt' required></ion-input>
           </ion-item>
           <p class='formErrorText' *ngIf='!emailIsValid && !emailNotEmpty'>Please enter an email</p>
           <p class='formErrorText' *ngIf='!emailIsValid && emailIsInvalid'>Please enter a valid email</p>
@@ -42,13 +42,17 @@
                 <div id='passwordTxt'>Password</div>
               </span>
             </ion-label>
-            <ion-input type='password' formControlName='passwordControl' [(ngModel)]='password' class='inputTxt' required></ion-input>
+            <ion-input type='password' formControlName='passwordControl' (input)="onChange($event)"  [(ngModel)]='password' class='inputTxt' required></ion-input>
           </ion-item>
           <p class='formErrorText' *ngIf='!passwordIsValid'>Password cannot be empty</p>
+          <p class='formErrorText' *ngIf='requestFailed'>Your email or password was incorrect, please try again</p>
         </form>
 
         <ion-item class='loginBtn'>
-          <button ion-button block color='secondary' #submit (click)='tryLogin()'>Login</button>
+          <button ion-button block color='secondary' #submit (click)='tryLogin()' *ngIf='requestBeingSent'>
+            <ion-spinner name="bubbles"></ion-spinner>
+          </button>
+          <button ion-button block color='secondary' #submit (click)='tryLogin()' *ngIf='!requestBeingSent'>Login</button>
         </ion-item>
 
         <hr class='loginHr'>

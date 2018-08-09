@@ -4,6 +4,8 @@ import { SignupPage } from "../signup/signup";
 import { AngularFireAuth } from 'angularfire2/auth'
 import { FormControl, FormGroup, Validators, FormBuilder, EmailValidator } from '@angular/forms';
 
+
+
 /**
  * Generated class for the LoginPage page.
  *
@@ -20,8 +22,18 @@ export class LoginPage {
 
   @ViewChild('email') email = '';
   @ViewChild('password') password = '';
+  
 
-  loginForm : FormGroup;
+  pageToGoTo : any;
+  requestBeingSent : boolean = false;
+  requestFailed : boolean = false;
+
+  loginPushed : boolean = false;
+
+  loginForm = this.formBuilder.group({
+    emailControl: ['', Validators.compose([Validators.maxLength(70), Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$'), Validators.required])],
+    passwordControl: ['', [Validators.requiredTrue]]
+  })
 
   emailIsValid :boolean = true
   emailNotEmpty : boolean = true
@@ -30,11 +42,11 @@ export class LoginPage {
   passwordIsValid = true
   passwordNotEmpty : boolean = true
 
-  constructor(public formBuilder : FormBuilder, private fire: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams) {
-    this.loginForm = this.formBuilder.group({
-      emailControl: ['', Validators.compose([Validators.maxLength(70), Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$'), Validators.required])],
-      passwordControl: ['', [Validators.requiredTrue]]
-    })
+  constructor(public formBuilder : FormBuilder, public fire: AngularFireAuth,
+              public navCtrl: NavController, public navParams: NavParams) {
+                this.pageToGoTo = this.navParams.data.toPage;
+                // post a ride
+                // view my rides
   }
 
   goToSignupPage() {
@@ -44,48 +56,49 @@ export class LoginPage {
   tryLogin() {
     this.determineValidity();
 
-
     if (this.emailIsValid && this.passwordIsValid) {
+      this.requestBeingSent = true;
       this.fire.auth.signInWithEmailAndPassword(this.email, this.password)
+      // change login button icon to be a loading icon and non-clickable
       .then( resp => {
-        console.log('worked')
+        this.requestBeingSent = false;
+        this.password = ''
+        this.navCtrl.push(this.pageToGoTo);
       })
       .catch( err => {
-        console.log('didn\'t work');
+        this.requestBeingSent = false;
+        this.requestFailed = true;
+        this.password = '';
       });
+    }
+  }
+
+  onChange(e) {
+    if (this.loginPushed) {
+      this.determineValidity()
+    }
+
+    if (this.requestFailed && this.password !== undefined) {
+      this.requestFailed = false;
     }
   }
 
   determineValidity() {
     // Reset values when clicking submit
-    this.emailNotEmpty, this.emailIsInvalid, this.emailIsValid = false;
-    this.passwordIsValid, this.passwordNotEmpty = false;
+    this.loginPushed = true;
+
+    this.emailNotEmpty = false;
+    this.emailIsInvalid = false;
+    this.emailIsValid = false;
+    this.passwordIsValid = false;
+    this.passwordNotEmpty = false;
 
 
     this.emailIsValid = this.loginForm.controls['emailControl'].valid;
+    this.emailNotEmpty = this.email !== undefined && this.email !== '';
+    this.emailIsInvalid = this.emailNotEmpty && !this.emailIsValid ? true : false
 
-
-    // const emailCtrl = this.loginForm.value.emailControl;
-    // const passwordCtrl = this.loginForm.value.passwordControl;
-    
-    // this.emailIsValid = emailCtrl.valid;
-    // console.log('email is valid', this.emailIsInvalid)
-    // this.passwordIsValid = passwordCtrl.valid;
-    // console.log('password is valid', this.passwordIsValid)
-
-    // // Determine specifically what's wrong
-    // if (!this.emailIsValid) {
-    //   this.emailNotEmpty = emailCtrl.value !== ''
-    //   console.log('email not empty check', this.passwordNotEmpty)
-    //   // If the email isn't empty, then the email must be invalid
-    //   this.emailIsValid = this.emailNotEmpty ? false : true
-    //   console.log('email valid check', this.passwordNotEmpty)
-    // }
-
-    // if (!this.passwordIsValid) {
-    //   this.passwordNotEmpty = passwordCtrl.value !== ''
-    //   console.log('pw not empty check', this.passwordNotEmpty)
-    // }
-
+    this.passwordNotEmpty = this.password !== undefined && this.password !== '';
+    this.passwordIsValid = this.passwordNotEmpty;
   }
 }

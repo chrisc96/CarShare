@@ -13,6 +13,7 @@ import { SignupPage } from "../pages/signup/signup";
 import { FindARidePage } from "../pages/find-a-ride/find-a-ride";
 import { RideListingPage } from "../pages/ride-listing/ride-listing";
 import { ViewMyRidesPage } from "../pages/view-my-rides/view-my-rides";
+import { PostARidePage } from "../pages/post-a-ride/post-a-ride";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDGHRJ5SKA-krpmyGzfRAlHPS4yZL2lSqQ",
@@ -24,10 +25,10 @@ const firebaseConfig = {
 };
 
 @NgModule({
-  declarations: [MyApp, HomePage, LoginPage, SignupPage, FindARidePage, RideListingPage, ViewMyRidesPage],
+  declarations: [MyApp, HomePage, LoginPage, SignupPage, FindARidePage, RideListingPage, ViewMyRidesPage, PostARidePage],
   imports: [BrowserModule, IonicModule.forRoot(MyApp), AngularFireModule.initializeApp(firebaseConfig), AngularFireAuthModule],
   bootstrap: [IonicApp],
-  entryComponents: [MyApp, HomePage, LoginPage, SignupPage, FindARidePage, RideListingPage, ViewMyRidesPage],
+  entryComponents: [MyApp, HomePage, LoginPage, SignupPage, FindARidePage, RideListingPage, ViewMyRidesPage, PostARidePage],
   providers: [
     StatusBar,
     SplashScreen,
