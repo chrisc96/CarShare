@@ -4,6 +4,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Validators, FormBuilder } from '@angular/forms';
 import { LoginPage } from "../login/login";
 import { LoggedInProvider } from '../../providers/logged-in/logged-in'
+import { ToastController } from 'ionic-angular';
 
 /**
  * Generated class for the SignupPage page.
@@ -36,6 +37,7 @@ export class SignupPage {
 
   emailAlreadyInUse : boolean = false
 
+  whereToGo : any
 
   // Form validation
   signupForm = this.formBuilder.group({
@@ -48,9 +50,11 @@ export class SignupPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public formBuilder : FormBuilder,
-    public loginSystem : LoggedInProvider
+    public loginSystem : LoggedInProvider,
+    private toastCtrl: ToastController
   ) {
-
+    this.whereToGo = navParams.data.pageToGo;
+    console.log(this.whereToGo)
   }
 
   trySignup() {
@@ -65,9 +69,24 @@ export class SignupPage {
         this.clearAllFields();
         this.requestBeingSent = false;
 
-        // Go back to Login page to login with new credentials
-        this.navCtrl.push(LoginPage);
-      })
+        // Show account created successfully
+        let toast = this.toastCtrl.create({
+          message: 'Your account was created successfully',
+          duration: 1000,
+          position: 'top'
+        });
+      
+        toast.onDidDismiss(() => {
+          // Go back to Login page to login with new credentials
+          this.navCtrl.push(this.whereToGo)
+            .then(() => {
+              const index = this.navCtrl.getActive().index;
+              this.navCtrl.remove(index - 2, index - 1); // Removes the login and signup page
+            });
+        })
+
+        toast.present();
+    })
       .catch( err => {
         this.requestBeingSent = false;
         this.requestDidFail = true;

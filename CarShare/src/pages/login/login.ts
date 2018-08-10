@@ -53,7 +53,7 @@ export class LoginPage {
   }
 
   goToSignupPage() {
-    this.navCtrl.push(SignupPage);
+    this.navCtrl.push(SignupPage, {'pageToGo': this.pageToGoTo});
   }
 
   tryLogin() {
