@@ -29,7 +29,7 @@
                 <div id='emailTxt'>Email</div>
               </span>
             </ion-label>
-            <ion-input type='email' formControlName='emailControl' (input)="onChange($event)" [(ngModel)]='email' class='inputTxt' (keyup.enter)="tryLogin()" required></ion-input>
+            <ion-input type='email' formControlName='emailControl' (input)="onChange($event)" [(ngModel)]='email' class='inputTxt' (keyup.enter)="tryLogin()" autocomplete="new-password" required></ion-input>
           </ion-item>
           <p class='formErrorText' *ngIf='!emailIsValid && !emailNotEmpty'>Please enter an email</p>
           <p class='formErrorText' *ngIf='!emailIsValid && emailIsInvalid'>Please enter a valid email</p>
@@ -42,7 +42,7 @@
                 <div id='passwordTxt'>Password</div>
               </span>
             </ion-label>
-            <ion-input type='password' formControlName='passwordControl' (input)="onChange($event)"  [(ngModel)]='password' class='inputTxt' (keyup.enter)="tryLogin()" required></ion-input>
+            <ion-input type='password' formControlName='passwordControl' (input)="onChange($event)"  [(ngModel)]='password' class='inputTxt' (keyup.enter)="tryLogin()" autocomplete="new-password" required></ion-input>
           </ion-item>
           <p class='formErrorText' *ngIf='!passwordIsValid'>Password cannot be empty</p>
           <p class='formErrorText' *ngIf='requestDidFail'>Your email or password was incorrect, please try again</p>

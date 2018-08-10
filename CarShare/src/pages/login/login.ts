@@ -25,7 +25,7 @@ export class LoginPage {
   @ViewChild('email') email = '';
   @ViewChild('password') password = '';
 
-  loginButtonNotPushed : boolean = false;
+  loginButtonPressed : boolean = false;
 
   emailIsValid : boolean = true
   emailNotEmpty : boolean = true
@@ -57,9 +57,8 @@ export class LoginPage {
   }
 
   tryLogin() {
-    this.loginButtonNotPushed = true;
-    this.isEmailValid();
-    this.isPasswordValid();
+    this.loginButtonPressed = true;
+    this.beginFormValidation()
 
     if (this.emailIsValid && this.passwordIsValid) {
       this.requestBeingSent = true;
@@ -73,15 +72,15 @@ export class LoginPage {
       .catch( err => {
         this.requestBeingSent = false;
         this.requestDidFail = true;
-        this.password = '';
+        
+        this.password = ''; // User probably got password wrong, empty
       });
     }
   }
 
   onChange(e) {
-    if (this.loginButtonNotPushed) {
-      this.isEmailValid();
-      this.isPasswordValid();
+    if (this.loginButtonPressed) {
+      this.beginFormValidation()
     }
 
     // Means that the last request failed, but we're changing the value of the 
@@ -91,7 +90,12 @@ export class LoginPage {
     }
   }
 
-  isEmailValid() {
+  beginFormValidation() {
+    this.beginEmailValidation()
+    this.beginPasswordValidation();
+  }
+
+  beginEmailValidation() {
     // Reset fields
     this.emailNotEmpty = false;
     this.emailIsInvalid = false;
@@ -103,7 +107,7 @@ export class LoginPage {
     this.emailIsInvalid = this.emailNotEmpty && !this.emailIsValid ? true : false
   }
 
-  isPasswordValid() {
+  beginPasswordValidation() {
     // Reset fields
     this.passwordIsValid = false;
     this.passwordNotEmpty = false;

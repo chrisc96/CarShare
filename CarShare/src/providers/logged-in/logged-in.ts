@@ -35,4 +35,8 @@ export class LoggedInProvider {
   login = (email, password) => {
     return this.firebase.auth.signInAndRetrieveDataWithEmailAndPassword(email, password)
   }
+
+  signup = (email, password) => {
+    return this.firebase.auth.createUserWithEmailAndPassword(email, password)
+  }
 }
