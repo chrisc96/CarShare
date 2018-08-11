@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
-import { IonicPage, NavController, NavParams } from "ionic-angular";
+import { IonicPage, NavController, NavParams, MenuController } from "ionic-angular";
 import { RideListingPage } from "../ride-listing/ride-listing";
+import { NavigationMenuProvider } from "../../providers/navigation-menu/navigation-menu";
 
 /**
  * Generated class for the FindARidePage page.
@@ -15,9 +16,14 @@ import { RideListingPage } from "../ride-listing/ride-listing";
   templateUrl: "find-a-ride.html"
 })
 export class FindARidePage {
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
-  
+  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public navMenu : NavigationMenuProvider) { }
+
   goToRideListing() {
     this.navCtrl.push(RideListingPage);
+  }
+
+  ionViewWillEnter() {
+    this.menuCtrl.enable(true, 'navMenu');
+    this.navMenu.setActivePage(FindARidePage)
   }
 }

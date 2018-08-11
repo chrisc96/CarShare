@@ -17,6 +17,7 @@ import { RideListingPage } from "../pages/ride-listing/ride-listing";
 import { ViewMyRidesPage } from "../pages/view-my-rides/view-my-rides";
 import { PostARidePage } from "../pages/post-a-ride/post-a-ride";
 import { LoggedInProvider } from '../providers/logged-in/logged-in';
+import { NavigationMenuProvider } from '../providers/navigation-menu/navigation-menu';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDGHRJ5SKA-krpmyGzfRAlHPS4yZL2lSqQ",
@@ -68,6 +69,7 @@ const firebaseConfig = {
     LoggedInProvider,
     AngularFireAuth,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
+    NavigationMenuProvider,
   ]
 })
 export class AppModule {}

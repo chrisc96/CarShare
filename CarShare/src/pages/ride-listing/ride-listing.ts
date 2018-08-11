@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
+import { NavigationMenuProvider } from '../../providers/navigation-menu/navigation-menu';
 
 /**
  * Generated class for the RideListingPage page.
@@ -15,11 +16,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class RideListingPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl : MenuController, public navMenu : NavigationMenuProvider) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RideListingPage');
+  ionViewWillEnter() {
+    this.menuCtrl.enable(true, 'navMenu');
+    this.navMenu.setActivePage(RideListingPage)
   }
 
 }

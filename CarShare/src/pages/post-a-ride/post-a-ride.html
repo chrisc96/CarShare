@@ -5,11 +5,17 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>post-a-ride</ion-title>
+  <ion-navbar hideBackButton>
+    <span>
+      <!-- <ion-icon class='hamburgerToggle' (click)="toggleNav()" name="menu"></ion-icon> -->
+      <button ion-button menuToggle="navMenu">Toggle Right Menu</button>
+    </span>
+    <span>
+      <ion-title>
+        <div class='titleTxt'>Post a Listing</div>
+      </ion-title>
+    </span>
   </ion-navbar>
-
 </ion-header>
 
 

@@ -37,7 +37,7 @@ export class LoggedInProvider {
   }
 
   login = (email, password) => {
-    return this.fireAuth.auth.signInAndRetrieveDataWithEmailAndPassword(email, password)
+    return this.fireAuth.auth.signInWithEmailAndPassword(email, password)
   }
 
   signup(email, password) {

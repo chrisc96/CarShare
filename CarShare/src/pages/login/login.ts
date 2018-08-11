@@ -1,5 +1,5 @@
 import { Component, ViewChild } from "@angular/core";
-import { IonicPage, NavController, NavParams } from "ionic-angular";
+import { IonicPage, NavController, NavParams, MenuController } from "ionic-angular";
 import { SignupPage } from "../signup/signup";
 import { AngularFireAuth } from 'angularfire2/auth'
 import { Validators, FormBuilder } from '@angular/forms';
@@ -47,9 +47,14 @@ export class LoginPage {
     public fire: AngularFireAuth, 
     public navCtrl: NavController, 
     public navParams: NavParams, 
-    public loginSystem : LoggedInProvider
+    public loginSystem : LoggedInProvider,
+    public menuCtrl : MenuController
   ) {
     this.pageToGoTo = this.navParams.data.toPage;
+  }
+
+  ionViewWillEnter() {
+    this.menuCtrl.enable(false, 'navMenu');
   }
 
   goToSignupPage() {

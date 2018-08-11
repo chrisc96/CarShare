@@ -1,5 +1,5 @@
 import { Component, ViewChild } from "@angular/core";
-import { IonicPage, NavController, NavParams } from "ionic-angular";
+import { IonicPage, NavController, NavParams, MenuController } from "ionic-angular";
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Validators, FormBuilder } from '@angular/forms';
 import { LoginPage } from "../login/login";
@@ -70,9 +70,14 @@ export class SignupPage {
     public navParams: NavParams,
     public formBuilder: FormBuilder,
     public loginSystem: LoggedInProvider,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    public menuCtrl : MenuController
   ) {
     this.whereToGo = navParams.data.pageToGo;
+  }
+
+  ionViewWillEnter() {
+    this.menuCtrl.enable(true, 'navMenu');
   }
 
   trySignup(e) {
@@ -101,7 +106,7 @@ export class SignupPage {
             this.emailAlreadyInUse = true;
           }
           if (err.code === 'auth/weak-password') {
-            this.passwordWeak = true;gi
+            this.passwordWeak = true;
           }
           this.signupFailedClearFields()
       })
