@@ -24,6 +24,10 @@ export class SignupPage {
 
   @ViewChild('email') email : string = '';
   @ViewChild('password') password : string = '';
+  @ViewChild('passwordConfirm') passwordConfirm : string = ''
+  @ViewChild('firstName') firstName : string = '';
+  @ViewChild('lastName') lastName : string = '';
+  @ViewChild('mobileNumber') mobileNum : string = '';
 
   emailIsValid : boolean = true
   emailNotEmpty : boolean = true
@@ -32,17 +36,30 @@ export class SignupPage {
   passwordIsValid : boolean = true
   passwordNotEmpty : boolean = true
 
+  passwordConfirmIsValid : boolean = true
+  passwordConfirmNotEmpty : boolean = true
+  passwordsDontMatch : boolean = false
+
+  firstNameIsValid : boolean = true
+  lastNameIsValid : boolean = true
+  mobileNumIsValid : boolean = true
+
   requestBeingSent : boolean = false;
   requestDidFail : boolean = false;
 
   emailAlreadyInUse : boolean = false
+  passwordWeak : boolean = false;
 
   whereToGo : any
 
   // Form validation
   signupForm = this.formBuilder.group({
     emailControl: ['', Validators.compose([Validators.maxLength(70), Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$'), Validators.required])],
-    passwordControl: ['', [Validators.requiredTrue]]
+    passwordControl: ['', [Validators.requiredTrue]],
+    passwordControlConfirm: ['', [Validators.requiredTrue]],
+    firstNameControl : ['', [Validators.requiredTrue]],
+    lastNameControl: ['', [Validators.requiredTrue]],
+    mobileNumControl: ['', [Validators.requiredTrue]]
   })
 
   constructor(
@@ -54,7 +71,6 @@ export class SignupPage {
     private toastCtrl: ToastController
   ) {
     this.whereToGo = navParams.data.pageToGo;
-    console.log(this.whereToGo)
   }
 
   trySignup() {
@@ -66,37 +82,45 @@ export class SignupPage {
 
       this.loginSystem.signup(this.email, this.password)
       .then( resp => {
-        this.clearAllFields();
         this.requestBeingSent = false;
 
-        // Show account created successfully
-        let toast = this.toastCtrl.create({
-          message: 'Your account was created successfully',
-          duration: 1000,
-          position: 'top'
-        });
-      
-        toast.onDidDismiss(() => {
-          // Go back to Login page to login with new credentials
-          this.navCtrl.push(this.whereToGo)
-            .then(() => {
-              const index = this.navCtrl.getActive().index;
-              this.navCtrl.remove(index - 2, index - 1); // Removes the login and signup page
-            });
-        })
-
-        toast.present();
-    })
+        this.clearAllFields();
+        this.loginSystem.linkUsertoDB(resp)
+        this.accountCreatedToast();
+      })
       .catch( err => {
         this.requestBeingSent = false;
         this.requestDidFail = true;
         if (err.code === 'auth/email-already-in-use') {
           this.emailAlreadyInUse = true;
         }
+        if (err.code === 'auth/weak-password') {
+          this.passwordWeak = true;
+        }
 
         this.signupFailedClearFields()
-      });
+      })
     }
+  }
+
+  accountCreatedToast() {
+    // Show account created successfully
+    let toast = this.toastCtrl.create({
+      message: 'Your account was created successfully',
+      duration: 1000,
+      position: 'top'
+    });
+  
+    toast.onDidDismiss(() => {
+      // Go back to Login page to login with new credentials
+      this.navCtrl.push(this.whereToGo)
+        .then(() => {
+          const index = this.navCtrl.getActive().index;
+          this.navCtrl.remove(index - 2, index - 1); // Removes the login and signup page
+        });
+    })
+
+    toast.present();
   }
 
   onChange(e) {
@@ -104,25 +128,23 @@ export class SignupPage {
       this.beginFormValidation()
     }
     
-    // Means that the last request failed, but we're changing the value of the 
+    // Means that the last request to firebase failed, but we're changing the value of the 
     // password (after it's been set to '') so remove the text for bad login
     if (this.requestDidFail && this.password !== undefined) {
       this.requestDidFail = false;
       this.emailAlreadyInUse = false;
+      this.passwordWeak = false
     }
   }
   
   beginFormValidation() {
     this.beginEmailValidation()
     this.beginPasswordValidation();
+    this.beginNameValidation();
+    this.beginMobNumValidation();
   }
 
   beginEmailValidation() {
-    // Reset fields
-    this.emailNotEmpty = false;
-    this.emailIsInvalid = false;
-    this.emailIsValid = false;
-
     // Determine validity
     this.emailIsValid = this.signupForm.controls['emailControl'].valid;
     this.emailNotEmpty = this.email !== undefined && this.email !== '';
@@ -130,29 +152,51 @@ export class SignupPage {
   }
 
   beginPasswordValidation() {
-    // Reset fields
-    this.passwordIsValid = false;
-    this.passwordNotEmpty = false;
-
     // Determine validity
     this.passwordNotEmpty = this.password !== undefined && this.password !== '';
     this.passwordIsValid = this.passwordNotEmpty;
+
+    this.passwordConfirmNotEmpty = this.passwordConfirm !== undefined && this.passwordConfirm !== '';
+    this.passwordConfirmIsValid = this.passwordConfirmNotEmpty;
+
+    this.passwordsDontMatch = this.password !== this.passwordConfirm
+  }
+
+  beginNameValidation() {
+    this.firstNameIsValid = this.signupForm.get('firstNameControl').valid
+    this.lastNameIsValid = this.signupForm.get('lastNameControl').valid
+  }
+
+  beginMobNumValidation() {
+    this.mobileNumIsValid = this.signupForm.get('mobileNumControl').valid
   }
 
   allFieldsValid() {
-    return this.emailIsValid && this.passwordIsValid
-    // Add more here
+    return this.emailIsValid && this.passwordIsValid && this.passwordConfirmIsValid &&
+           !this.passwordsDontMatch;
+           // && this.firstNameIsValid && this.lastNameIsValid && 
+           // this.mobileNumIsValid;
   }
 
   clearAllFields() {
     this.email = '';
     this.password = '';
+    this.passwordConfirm = '';
+    this.firstName = '';
+    this.lastName = '';
+    this.mobileNum = '';
   }
 
+  // Reasons why firebase might reject the signup
   signupFailedClearFields() {
     if (this.emailAlreadyInUse) {
+      this.email = ''
       this.password = ''
-      // Add more here
+      this.passwordConfirm = ''
+    }
+    else if (this.passwordWeak) {
+      this.password = ''
+      this.passwordConfirm = ''
     }
   }
 }

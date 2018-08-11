@@ -40,7 +40,10 @@ const firebaseConfig = {
   ],
   imports: [
     BrowserModule, 
-    IonicModule.forRoot(MyApp), 
+    IonicModule.forRoot(MyApp, {
+      scrollAssist: false, 
+      autoFocusAssist: false
+    }),
     AngularFireModule.initializeApp(firebaseConfig), 
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,

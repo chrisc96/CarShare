@@ -1,5 +1,5 @@
 import { AngularFireAuth } from 'angularfire2/auth'
-import { AngularFireModule } from 'angularfire2';
+import { AngularFireModule, FirebaseApp } from 'angularfire2';
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
 import AuthProvider = firebase.auth.AuthProvider;
@@ -14,13 +14,17 @@ import AuthProvider = firebase.auth.AuthProvider;
 export class LoggedInProvider {
 
   private user: firebase.User;
+  private db : firebase.firestore.Firestore;
   
-  constructor(public firebase: AngularFireAuth) {
-    firebase.authState.subscribe(user => {
-			this.user = user;
-		});
-  }
+  constructor(public fireAuth: AngularFireAuth) {
+    this.db = firebase.firestore()
+    const settings = {timestampsInSnapshots: true}
+    this.db.settings(settings)
 
+    fireAuth.authState.subscribe(user => {
+			this.user = user;
+    });
+  }
 
   userLoggedIn() {
     return this.user !== undefined && this.user !== null
@@ -33,10 +37,19 @@ export class LoggedInProvider {
   }
 
   login = (email, password) => {
-    return this.firebase.auth.signInAndRetrieveDataWithEmailAndPassword(email, password)
+    return this.fireAuth.auth.signInAndRetrieveDataWithEmailAndPassword(email, password)
   }
 
   signup = (email, password) => {
-    return this.firebase.auth.createUserWithEmailAndPassword(email, password)
+    return this.fireAuth.auth.createUserWithEmailAndPassword(email, password)
+  }
+
+  linkUsertoDB = (resp) => {
+      console.log(resp)
+      this.user = resp.user
+      console.log(this.user)
+      this.db.collection('users').doc(this.user.uid).set({
+        email: this.user.email
+      })
   }
 }
