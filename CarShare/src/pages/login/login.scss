@@ -36,9 +36,6 @@ page-login {
       border-bottom-color: transparent !important;
       box-shadow: none !important;
   }
-  .card {
-      border-radius: 10px;
-  }
   #loginTxt {
       font-family: "Ribeye",cursive;
       font-size: 4rem;
@@ -117,6 +114,10 @@ page-login {
     outline: none !important;
   }
 
+  .card {
+      border-radius: 0px !important;
+  }
+  
   .card-md p {
       margin: 0 0 2px;
       color: rgb(153,153,153);

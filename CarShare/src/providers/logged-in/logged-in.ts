@@ -13,8 +13,8 @@ import AuthProvider = firebase.auth.AuthProvider;
 @Injectable()
 export class LoggedInProvider {
 
-  private user: firebase.User;
-  private db : firebase.firestore.Firestore;
+  public user: firebase.User;
+  public db : firebase.firestore.Firestore;
   
   constructor(public fireAuth: AngularFireAuth) {
     this.db = firebase.firestore()
@@ -22,7 +22,7 @@ export class LoggedInProvider {
     this.db.settings(settings)
 
     fireAuth.authState.subscribe(user => {
-			this.user = user;
+      this.user = user;
     });
   }
 
@@ -44,12 +44,14 @@ export class LoggedInProvider {
     return this.fireAuth.auth.createUserWithEmailAndPassword(email, password)
   }
 
-  linkUsertoDB = (resp) => {
-      console.log(resp)
-      this.user = resp.user
-      console.log(this.user)
+  linkUsertoDB(resp, firstName, lastName, contactNum) {
+      console.log(firstName, lastName, contactNum)
+      // this.user = resp.user
       this.db.collection('users').doc(this.user.uid).set({
-        email: this.user.email
+        email: this.user.email,
+        firstName: firstName,
+        lastName: lastName,
+        contactNum: contactNum
       })
   }
 }

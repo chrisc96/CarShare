@@ -5,6 +5,7 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { LoginPage } from "../login/login";
 import { LoggedInProvider } from '../../providers/logged-in/logged-in'
 import { ToastController } from 'ionic-angular';
+import { Slides } from 'ionic-angular';
 
 /**
  * Generated class for the SignupPage page.
@@ -20,54 +21,55 @@ import { ToastController } from 'ionic-angular';
 })
 export class SignupPage {
 
-  signupButtonPushed : boolean = false;
+  signupButtonPushed: boolean = false;
 
-  @ViewChild('email') email : string = '';
-  @ViewChild('password') password : string = '';
-  @ViewChild('passwordConfirm') passwordConfirm : string = ''
-  @ViewChild('firstName') firstName : string = '';
-  @ViewChild('lastName') lastName : string = '';
-  @ViewChild('mobileNumber') mobileNum : string = '';
+  @ViewChild('email') email: string = '';
+  @ViewChild('password') password: string = '';
+  @ViewChild('passwordConfirm') passwordConfirm: string = ''
+  @ViewChild('firstName') firstName: string = '';
+  @ViewChild('lastName') lastName: string = '';
+  @ViewChild('mobileNum') mobileNum: string = '';
+  @ViewChild(Slides) slides: Slides;
 
-  emailIsValid : boolean = true
-  emailNotEmpty : boolean = true
-  emailIsInvalid : boolean = true
+  emailIsValid: boolean = true
+  emailNotEmpty: boolean = true
+  emailIsInvalid: boolean = true
 
-  passwordIsValid : boolean = true
-  passwordNotEmpty : boolean = true
+  passwordIsValid: boolean = true
+  passwordNotEmpty: boolean = true
 
-  passwordConfirmIsValid : boolean = true
-  passwordConfirmNotEmpty : boolean = true
-  passwordsDontMatch : boolean = false
+  passwordConfirmIsValid: boolean = true
+  passwordConfirmNotEmpty: boolean = true
+  passwordsDontMatch: boolean = false
 
-  firstNameIsValid : boolean = true
-  lastNameIsValid : boolean = true
-  mobileNumIsValid : boolean = true
+  firstNameIsValid: boolean = true
+  lastNameIsValid: boolean = true
+  mobileNumIsValid: boolean = true
 
-  requestBeingSent : boolean = false;
-  requestDidFail : boolean = false;
+  requestBeingSent: boolean = false;
+  requestDidFail: boolean = false;
 
-  emailAlreadyInUse : boolean = false
-  passwordWeak : boolean = false;
+  emailAlreadyInUse: boolean = false
+  passwordWeak: boolean = false;
 
-  whereToGo : any
+  whereToGo: any
 
   // Form validation
   signupForm = this.formBuilder.group({
     emailControl: ['', Validators.compose([Validators.maxLength(70), Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$'), Validators.required])],
     passwordControl: ['', [Validators.requiredTrue]],
     passwordControlConfirm: ['', [Validators.requiredTrue]],
-    firstNameControl : ['', [Validators.requiredTrue]],
+    firstNameControl: ['', [Validators.requiredTrue]],
     lastNameControl: ['', [Validators.requiredTrue]],
     mobileNumControl: ['', [Validators.requiredTrue]]
   })
 
   constructor(
-    private fireAuth : AngularFireAuth,
+    private fireAuth: AngularFireAuth,
     public navCtrl: NavController,
     public navParams: NavParams,
-    public formBuilder : FormBuilder,
-    public loginSystem : LoggedInProvider,
+    public formBuilder: FormBuilder,
+    public loginSystem: LoggedInProvider,
     private toastCtrl: ToastController
   ) {
     this.whereToGo = navParams.data.pageToGo;
@@ -81,25 +83,36 @@ export class SignupPage {
       this.requestBeingSent = true;
 
       this.loginSystem.signup(this.email, this.password)
-      .then( resp => {
-        this.requestBeingSent = false;
+        .then(resp => {
+          this.loginSystem.linkUsertoDB(resp, this.firstName, this.lastName, this.mobileNum)
+          this.requestBeingSent = false;
+          this.clearAllFields();
+          this.accountCreatedToast();
+        })
+        .catch(err => {
+          console.log(err)
+          this.requestBeingSent = false;
+          this.requestDidFail = true;
+          if (err.code === 'auth/email-already-in-use') {
+            this.emailAlreadyInUse = true;
+          }
+          if (err.code === 'auth/weak-password') {
+            this.passwordWeak = true;
+          }
 
-        this.clearAllFields();
-        this.loginSystem.linkUsertoDB(resp)
-        this.accountCreatedToast();
-      })
-      .catch( err => {
-        this.requestBeingSent = false;
-        this.requestDidFail = true;
-        if (err.code === 'auth/email-already-in-use') {
-          this.emailAlreadyInUse = true;
-        }
-        if (err.code === 'auth/weak-password') {
-          this.passwordWeak = true;
-        }
+          this.signupFailedClearFields()
+        })
+    }
+    else {
+      // We should move the slide to where the first error is
 
-        this.signupFailedClearFields()
-      })
+      // Page 1 of signup slide:
+      if (!this.emailIsValid || !this.passwordIsValid || !this.passwordConfirmIsValid || this.passwordsDontMatch) {
+        this.goToPrevSlide()
+      }
+      else {
+        this.goToNextSlide()
+      }
     }
   }
 
@@ -110,7 +123,7 @@ export class SignupPage {
       duration: 1000,
       position: 'top'
     });
-  
+
     toast.onDidDismiss(() => {
       // Go back to Login page to login with new credentials
       this.navCtrl.push(this.whereToGo)
@@ -123,11 +136,20 @@ export class SignupPage {
     toast.present();
   }
 
+
+  goToNextSlide() {
+    this.slides.slideTo(1, 500);
+  }
+
+  goToPrevSlide() {
+    this.slides.slideTo(0, 500);
+  }
+
   onChange(e) {
     if (this.signupButtonPushed) {
       this.beginFormValidation()
     }
-    
+
     // Means that the last request to firebase failed, but we're changing the value of the 
     // password (after it's been set to '') so remove the text for bad login
     if (this.requestDidFail && this.password !== undefined) {
@@ -136,7 +158,7 @@ export class SignupPage {
       this.passwordWeak = false
     }
   }
-  
+
   beginFormValidation() {
     this.beginEmailValidation()
     this.beginPasswordValidation();
@@ -153,29 +175,24 @@ export class SignupPage {
 
   beginPasswordValidation() {
     // Determine validity
-    this.passwordNotEmpty = this.password !== undefined && this.password !== '';
-    this.passwordIsValid = this.passwordNotEmpty;
-
-    this.passwordConfirmNotEmpty = this.passwordConfirm !== undefined && this.passwordConfirm !== '';
-    this.passwordConfirmIsValid = this.passwordConfirmNotEmpty;
-
+    this.passwordIsValid = this.password !== undefined && this.password !== '';
+    this.passwordConfirmIsValid = this.passwordConfirm !== undefined && this.passwordConfirm !== '';
     this.passwordsDontMatch = this.password !== this.passwordConfirm
   }
 
   beginNameValidation() {
-    this.firstNameIsValid = this.signupForm.get('firstNameControl').valid
-    this.lastNameIsValid = this.signupForm.get('lastNameControl').valid
+    this.firstNameIsValid = this.firstName !== undefined && this.passwordConfirm !== '';
+    this.lastNameIsValid = this.lastName !== undefined && this.lastName !== '';
   }
 
   beginMobNumValidation() {
-    this.mobileNumIsValid = this.signupForm.get('mobileNumControl').valid
+    this.mobileNumIsValid = this.mobileNum !== undefined && this.mobileNum !== '';
   }
 
   allFieldsValid() {
     return this.emailIsValid && this.passwordIsValid && this.passwordConfirmIsValid &&
-           !this.passwordsDontMatch;
-           // && this.firstNameIsValid && this.lastNameIsValid && 
-           // this.mobileNumIsValid;
+      !this.passwordsDontMatch && this.firstNameIsValid && this.lastNameIsValid &&
+      this.mobileNumIsValid;
   }
 
   clearAllFields() {
@@ -198,5 +215,6 @@ export class SignupPage {
       this.password = ''
       this.passwordConfirm = ''
     }
+    this.goToPrevSlide()
   }
 }

@@ -14,65 +14,143 @@
 <ion-content class='signup-bg'>
   <div id='container'>
     <img class='logo' src='../../assets/imgs/carLogo.png'>
-    <ion-card>
-      <ion-card-header>
-        <h1 id='signupTxt'>Signup</h1>
-      </ion-card-header>
-      <ion-card-content>
+    <ion-slides pager>
+      <ion-slide>
+        <ion-card>
+          <ion-card-header>
+            <h1 id='signupTxt'>Signup</h1>
+          </ion-card-header>
+          <ion-card-content>
+            <form [formGroup]='signupForm'>
 
-        <form [formGroup]='signupForm'>  
-          <ion-item>
-              <ion-label floating>
-                <span>
-                  <ion-icon name='ios-mail-outline'></ion-icon>
-                </span>
-                <span>
-                  <div id='emailTxt'>Email</div>
-                </span>
-              </ion-label>
-              <ion-input type='email' formControlName='emailControl' (input)="onChange($event)" [(ngModel)]='email' class='inputTxt' (keyup.enter)="trySignup()" autocomplete="new-password" required></ion-input>
-            </ion-item>
+              <ion-item>
+                <ion-label floating>
+                  <span>
+                    <ion-icon name='ios-mail-outline'></ion-icon>
+                  </span>
+                  <span>
+                    <div id='emailTxt'>Email</div>
+                  </span>
+                </ion-label>
+                <ion-input type='email' formControlName='emailControl' (input)="onChange($event)" [(ngModel)]='email' class='inputTxt' (keyup.enter)="trySignup()"
+                  autocomplete="new-password" required></ion-input>
+              </ion-item>
 
-          <p class='formErrorText' *ngIf='!emailIsValid && !emailNotEmpty'>Please enter an email</p>
-          <p class='formErrorText' *ngIf='!emailIsValid && emailIsInvalid'>Please enter a valid email</p>
-          <p class="formErrorText" *ngIf='emailAlreadyInUse && requestDidFail'>This email address is already in use, please try again</p>
+              <p class='formErrorText' *ngIf='!emailIsValid && !emailNotEmpty'>Please enter an email</p>
+              <p class='formErrorText' *ngIf='!emailIsValid && emailIsInvalid'>Please enter a valid email</p>
+              <p class="formErrorText" *ngIf='emailAlreadyInUse && requestDidFail'>This email address is already in use, please try again</p>
 
-          <ion-item>
-            <ion-label floating>
-              <span>
-                <ion-icon name='ios-lock-outline'></ion-icon>
-              </span>
-              <span>
-                <div id='passwordTxt'>Password</div>
-              </span>
-            </ion-label>
-            <ion-input type='password' formControlName='passwordControl' (input)="onChange($event)"  [(ngModel)]='password' class='inputTxt' (keyup.enter)="trySignup()" autocomplete="new-password" required></ion-input>
-          </ion-item>
+              <ion-item>
+                <ion-label floating>
+                  <span>
+                    <ion-icon name='ios-lock-outline'></ion-icon>
+                  </span>
+                  <span>
+                    <div id='passwordTxt'>Password</div>
+                  </span>
+                </ion-label>
+                <ion-input type='password' formControlName='passwordControl' (input)="onChange($event)" [(ngModel)]='password' class='inputTxt'
+                  (keyup.enter)="trySignup()" autocomplete="new-password" required></ion-input>
+              </ion-item>
 
-          <p class='formErrorText' *ngIf='!passwordIsValid && !requestDidFail'>Password cannot be empty</p>
-          <p class='formErrorText' *ngIf='passwordWeak && requestDidFail'>Password is too weak, please try again</p>
+              <p class='formErrorText' *ngIf='!passwordIsValid && !requestDidFail'>Password cannot be empty</p>
+              <p class='formErrorText' *ngIf='passwordWeak && requestDidFail'>Password is too weak, please try again</p>
 
-          <ion-item>
-              <ion-label floating>
-                <span>
-                  <ion-icon name='ios-lock-outline'></ion-icon>
-                </span>
-                <span>
-                  <div id='passwordTxt'>Confirm Password</div>
-                </span>
-              </ion-label>
-              <ion-input type='password' formControlName='passwordControlConfirm' (input)="onChange($event)"  [(ngModel)]='passwordConfirm' class='inputTxt' (keyup.enter)="trySignup()" autocomplete="new-password" required></ion-input>
-            </ion-item>
-          <p class='formErrorText' *ngIf='passwordsDontMatch && !requestDidFail'>Password's must match</p>
-        </form>
+              <ion-item>
+                <ion-label floating>
+                  <span>
+                    <ion-icon name='ios-refresh-outline'></ion-icon>
+                  </span>
+                  <span>
+                    <div id='passwordTxt'>Confirm Password</div>
+                  </span>
+                </ion-label>
+                <ion-input type='password' formControlName='passwordControlConfirm' (input)="onChange($event)" [(ngModel)]='passwordConfirm'
+                  class='inputTxt' (keyup.enter)="trySignup()" autocomplete="new-password" required></ion-input>
+              </ion-item>
 
-        <ion-item class='signupBtn'>
-          <button ion-button block color='secondary' #submit *ngIf='requestBeingSent'>
-            <ion-spinner name="bubbles"></ion-spinner>
-          </button>
-          <button ion-button block color='secondary' #submit (click)='trySignup()' *ngIf='!requestBeingSent'>Signup</button>
-        </ion-item>
-      </ion-card-content>
-    </ion-card>
+              <p class='formErrorText' *ngIf='passwordsDontMatch && !requestDidFail'>Password's must match</p>
+
+              <ion-item>
+                <button ion-button block class='signupBtn' id="nextSlideBtn" color="secondary" (click)='goToNextSlide()' ion-button>
+                  <div id='nextStepTxt'>Next Step</div>
+                  <div id='nextIconContainer'>
+                    <ion-icon id='nextIcon' name="ios-arrow-forward-outline"></ion-icon>
+                  </div>
+                </button>
+              </ion-item>
+
+            </form>
+          </ion-card-content>
+        </ion-card>
+      </ion-slide>
+
+      <ion-slide>
+        <ion-card>
+          <ion-card-header>
+            <h1 id='signupTxt'>Signup</h1>
+          </ion-card-header>
+
+          <ion-card-content>
+            <form [formGroup]='signupForm'>
+
+              <ion-item>
+                <ion-label floating>
+                  <span>
+                    <ion-icon name='ios-person-outline'></ion-icon>
+                  </span>
+                  <span>
+                    <div id='nameTxt'>First Name</div>
+                  </span>
+                </ion-label>
+                <ion-input type='text' formControlName='firstNameControl' (input)='onChange($event)' [(ngModel)]='firstName' class='inputTxt'
+                  (keyup.enter)="trySignup()" autocomplete="new-password" required></ion-input>
+              </ion-item>
+
+              <p class='formErrorText' *ngIf='!firstNameIsValid && !requestDidFail'>First name cannot be empty</p>
+
+              <ion-item>
+                <ion-label floating>
+                  <span>
+                    <ion-icon name='ios-person-outline'></ion-icon>
+                  </span>
+                  <span>
+                    <div id='nameTxt'>Last Name</div>
+                  </span>
+                </ion-label>
+                <ion-input type='text' formControlName='lastNameControl' (input)='onChange($event)' [(ngModel)]='lastName' class='inputTxt'
+                  (keyup.enter)="trySignup()" autocomplete="new-password" required></ion-input>
+              </ion-item>
+
+              <p class='formErrorText' *ngIf='!lastNameIsValid && !requestDidFail'>Last name cannot be empty</p>
+
+              <ion-item>
+                <ion-label floating>
+                  <span>
+                    <ion-icon name='ios-call-outline'></ion-icon>
+                  </span>
+                  <span>
+                    <div id='phoneTxt'>Contact Number</div>
+                  </span>
+                </ion-label>
+                <ion-input type='text' formControlName='mobileNumControl' (input)='onChange($event)' [(ngModel)]='mobileNum' class='inputTxt'
+                  (keyup.enter)="trySignup()" autocomplete="new-password" required></ion-input>
+              </ion-item>
+
+              <p class='formErrorText' *ngIf='!mobileNumIsValid && !requestDidFail'>Mobile number cannot be empty</p>
+
+              <ion-item class='signupBtn'>
+                <button ion-button block color='secondary' #submit *ngIf='requestBeingSent'>
+                  <ion-spinner name="bubbles"></ion-spinner>
+                </button>
+                <button ion-button block color='secondary' #submit (click)='trySignup()' *ngIf='!requestBeingSent'>Signup</button>
+              </ion-item>
+
+            </form>
+
+          </ion-card-content>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
   </div>
 </ion-content>

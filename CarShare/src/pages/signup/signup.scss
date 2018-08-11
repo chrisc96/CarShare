@@ -36,9 +36,6 @@ page-signup {
         border-bottom-color: transparent !important;
         box-shadow: none !important;
     }
-    .card {
-        border-radius: 10px;
-    }
     #signupTxt {
         font-family: "Ribeye",cursive;
         font-size: 4rem;
@@ -46,7 +43,7 @@ page-signup {
     .card-header {
         padding-bottom: 0px;
     }
-    #emailTxt, #passwordTxt {
+    #emailTxt, #passwordTxt, #nameTxt, #phoneTxt {
         display: inline-block;
         vertical-align: middle;
         color: rgb(153,153,153);
@@ -93,6 +90,9 @@ page-signup {
         }
     }
     .logo {
+        @media screen and (max-height: 640px) {
+            width: 130px;
+        }
         width: 160px;
     }
     .item-input-has-focus .label-md[floating], .input-has-focus .label-md[floating] {
@@ -133,5 +133,20 @@ page-signup {
     }
     input:-webkit-autofill {
         -webkit-box-shadow: 0 0 0 30px white inset;
+    }
+
+    .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets {
+        display: none;
+    }
+
+    #nextIcon {
+        color: white;
+        font-size: 2.5rem;
+        padding-bottom: 2px;
+    }
+
+    #nextIconContainer {
+        position: absolute;
+        right: 0;
     }
 }
