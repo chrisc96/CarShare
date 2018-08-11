@@ -32,7 +32,7 @@
                     <div id='emailTxt'>Email</div>
                   </span>
                 </ion-label>
-                <ion-input type='email' formControlName='emailControl' (input)="onChange($event)" [(ngModel)]='email' class='inputTxt' (keyup.enter)="trySignup()"
+                <ion-input type='email' formControlName='emailControl' (input)="onChange($event)" [(ngModel)]='email' class='inputTxt'
                   autocomplete="new-password" required></ion-input>
               </ion-item>
 
@@ -50,7 +50,7 @@
                   </span>
                 </ion-label>
                 <ion-input type='password' formControlName='passwordControl' (input)="onChange($event)" [(ngModel)]='password' class='inputTxt'
-                  (keyup.enter)="trySignup()" autocomplete="new-password" required></ion-input>
+                 autocomplete="new-password" required></ion-input>
               </ion-item>
 
               <p class='formErrorText' *ngIf='!passwordIsValid && !requestDidFail'>Password cannot be empty</p>
@@ -66,7 +66,7 @@
                   </span>
                 </ion-label>
                 <ion-input type='password' formControlName='passwordControlConfirm' (input)="onChange($event)" [(ngModel)]='passwordConfirm'
-                  class='inputTxt' (keyup.enter)="trySignup()" autocomplete="new-password" required></ion-input>
+                  class='inputTxt' autocomplete="new-password" required></ion-input>
               </ion-item>
 
               <p class='formErrorText' *ngIf='passwordsDontMatch && !requestDidFail'>Password's must match</p>
@@ -104,7 +104,7 @@
                   </span>
                 </ion-label>
                 <ion-input type='text' formControlName='firstNameControl' (input)='onChange($event)' [(ngModel)]='firstName' class='inputTxt'
-                  (keyup.enter)="trySignup()" autocomplete="new-password" required></ion-input>
+                 autocomplete="new-password" required></ion-input>
               </ion-item>
 
               <p class='formErrorText' *ngIf='!firstNameIsValid && !requestDidFail'>First name cannot be empty</p>
@@ -119,7 +119,7 @@
                   </span>
                 </ion-label>
                 <ion-input type='text' formControlName='lastNameControl' (input)='onChange($event)' [(ngModel)]='lastName' class='inputTxt'
-                  (keyup.enter)="trySignup()" autocomplete="new-password" required></ion-input>
+                 autocomplete="new-password" required></ion-input>
               </ion-item>
 
               <p class='formErrorText' *ngIf='!lastNameIsValid && !requestDidFail'>Last name cannot be empty</p>
@@ -134,7 +134,7 @@
                   </span>
                 </ion-label>
                 <ion-input type='text' formControlName='mobileNumControl' (input)='onChange($event)' [(ngModel)]='mobileNum' class='inputTxt'
-                  (keyup.enter)="trySignup()" autocomplete="new-password" required></ion-input>
+                 autocomplete="new-password" required></ion-input>
               </ion-item>
 
               <p class='formErrorText' *ngIf='!mobileNumIsValid && !requestDidFail'>Mobile number cannot be empty</p>
@@ -143,7 +143,7 @@
                 <button ion-button block color='secondary' #submit *ngIf='requestBeingSent'>
                   <ion-spinner name="bubbles"></ion-spinner>
                 </button>
-                <button ion-button block color='secondary' #submit (click)='trySignup()' *ngIf='!requestBeingSent'>Signup</button>
+                <button ion-button block color='secondary' #submit (click)='trySignup($event)' *ngIf='!requestBeingSent'>Signup</button>
               </ion-item>
 
             </form>

@@ -75,7 +75,8 @@ export class SignupPage {
     this.whereToGo = navParams.data.pageToGo;
   }
 
-  trySignup() {
+  trySignup(e) {
+    e.preventDefault();
     this.signupButtonPushed = true
     this.beginFormValidation();
 
@@ -83,25 +84,27 @@ export class SignupPage {
       this.requestBeingSent = true;
 
       this.loginSystem.signup(this.email, this.password)
-        .then(resp => {
-          this.loginSystem.linkUsertoDB(resp, this.firstName, this.lastName, this.mobileNum)
+      .then((resp) => {
+        this.loginSystem.linkUsertoDB(resp, this.firstName, this.lastName, this.mobileNum).then(() => {
           this.requestBeingSent = false;
           this.clearAllFields();
           this.accountCreatedToast();
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err)
+        })
+      })
+      .catch((err) => {
           this.requestBeingSent = false;
           this.requestDidFail = true;
           if (err.code === 'auth/email-already-in-use') {
             this.emailAlreadyInUse = true;
           }
           if (err.code === 'auth/weak-password') {
-            this.passwordWeak = true;
+            this.passwordWeak = true;gi
           }
-
           this.signupFailedClearFields()
-        })
+      })
     }
     else {
       // We should move the slide to where the first error is
@@ -146,6 +149,7 @@ export class SignupPage {
   }
 
   onChange(e) {
+    e.preventDefault(); // ionic/html input changes fire twice
     if (this.signupButtonPushed) {
       this.beginFormValidation()
     }

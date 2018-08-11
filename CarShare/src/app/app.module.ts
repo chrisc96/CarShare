@@ -65,9 +65,9 @@ const firebaseConfig = {
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: ErrorHandler, useClass: IonicErrorHandler },
     LoggedInProvider,
-    AngularFireAuth
+    AngularFireAuth,
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
   ]
 })
 export class AppModule {}

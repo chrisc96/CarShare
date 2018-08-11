@@ -40,14 +40,13 @@ export class LoggedInProvider {
     return this.fireAuth.auth.signInAndRetrieveDataWithEmailAndPassword(email, password)
   }
 
-  signup = (email, password) => {
+  signup(email, password) {
     return this.fireAuth.auth.createUserWithEmailAndPassword(email, password)
   }
 
-  linkUsertoDB(resp, firstName, lastName, contactNum) {
-      console.log(firstName, lastName, contactNum)
-      // this.user = resp.user
-      this.db.collection('users').doc(this.user.uid).set({
+  linkUsertoDB = (resp, firstName, lastName, contactNum) => {
+      this.user = resp.user
+      return this.db.collection('users').doc(this.user.uid).set({
         email: this.user.email,
         firstName: firstName,
         lastName: lastName,
