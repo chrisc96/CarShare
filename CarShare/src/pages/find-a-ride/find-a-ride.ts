@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams, MenuController } from "ionic-angular";
 import { RideListingPage } from "../ride-listing/ride-listing";
 import { NavigationMenuProvider } from "../../providers/navigation-menu/navigation-menu";
-
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 /**
  * Generated class for the FindARidePage page.
  *
@@ -16,7 +16,16 @@ import { NavigationMenuProvider } from "../../providers/navigation-menu/navigati
   templateUrl: "find-a-ride.html"
 })
 export class FindARidePage {
-  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public navMenu: NavigationMenuProvider) { }
+
+  listings;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public navMenu: NavigationMenuProvider, public database : AngularFireDatabase) { 
+    this.database.list('listings/').valueChanges().subscribe(
+      data => {
+        this.listings = data
+      }
+    );
+  }
 
   goToMyListings() {
     this.navCtrl.push(RideListingPage);

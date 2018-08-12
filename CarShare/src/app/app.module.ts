@@ -7,6 +7,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 import { MyApp } from "./app.component";
 import { HomePage } from "../pages/home/home";
@@ -73,6 +74,7 @@ const firebaseConfig = {
     AngularFireAuth,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     NavigationMenuProvider,
+    AngularFireDatabase
   ]
 })
 export class AppModule { }

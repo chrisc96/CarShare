@@ -24,12 +24,12 @@ export class HomePage {
   }
 
   goToPostARide() {
-    if (!this.loginSystem.userLoggedIn()) {
+    //if (!this.loginSystem.userLoggedIn()) {
       this.navCtrl.push(LoginPage, { 'toPage': PostARidePage });
-    }
+    /*}
     else {
       this.navCtrl.push(PostARidePage);
-    }
+    }*/
   }
 
   goToViewMyRides() {

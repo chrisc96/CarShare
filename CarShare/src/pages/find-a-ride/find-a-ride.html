@@ -19,6 +19,9 @@
     <div class="content">
       <div class="btns">
         <button color="secondary" (click)="goToMyListings()" ion-button full>Ride Listing</button>
+        <ion-item *ngFor="let listing of listings">
+          {{listing}}
+        </ion-item>
       </div>
     </div>
   </div>
