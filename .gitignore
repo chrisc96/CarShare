@@ -2,3 +2,6 @@ node_modules/
 .directory
 /CarShare/package-lock.json
 /CarShare/www/build
+/CarShare/.sourcemaps
+/CarShare/.vs
+/CarShare/.vscode
