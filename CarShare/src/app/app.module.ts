@@ -15,11 +15,14 @@ import { LoginPage } from "../pages/login/login";
 import { SignupPage } from "../pages/signup/signup";
 import { FindARidePage } from "../pages/find-a-ride/find-a-ride";
 import { RideListingPage } from "../pages/ride-listing/ride-listing";
-import { ViewMyRidesPage } from "../pages/view-my-rides/view-my-rides";
 import { PostARidePage } from "../pages/post-a-ride/post-a-ride";
 import { LoggedInProvider } from '../providers/logged-in/logged-in';
 import { NavigationMenuProvider } from '../providers/navigation-menu/navigation-menu';
 import { MyListingsPage } from "../pages/my-listings/my-listings";
+import { AddCarToProfilePage } from "../pages/add-car-to-profile/add-car-to-profile";
+import { ProfilePage } from "../pages/profile/profile";
+import { RidesImTakingPage } from "../pages/rides-im-taking/rides-im-taking";
+import { ReviewRideShareRequestPage } from "../pages/review-ride-share-request/review-ride-share-request";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDGHRJ5SKA-krpmyGzfRAlHPS4yZL2lSqQ",
@@ -38,9 +41,12 @@ const firebaseConfig = {
     SignupPage,
     FindARidePage,
     RideListingPage,
-    ViewMyRidesPage,
     PostARidePage,
-    MyListingsPage
+    MyListingsPage,
+    AddCarToProfilePage,
+    ProfilePage,
+    RidesImTakingPage,
+    ReviewRideShareRequestPage
   ],
   imports: [
     BrowserModule,
@@ -63,9 +69,12 @@ const firebaseConfig = {
     SignupPage,
     FindARidePage,
     RideListingPage,
-    ViewMyRidesPage,
     PostARidePage,
-    MyListingsPage
+    MyListingsPage,
+    AddCarToProfilePage,
+    ProfilePage,
+    RidesImTakingPage,
+    ReviewRideShareRequestPage
   ],
   providers: [
     StatusBar,

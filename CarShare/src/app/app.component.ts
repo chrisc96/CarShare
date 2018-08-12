@@ -63,4 +63,8 @@ export class MyApp {
   checkActive(page) {
     return page.component == this.navMenu.activePage;
   }
+
+  goToProfile() {
+    
+  }
 }
