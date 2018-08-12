@@ -1,7 +1,7 @@
 <ion-menu id='navMenu' [content]='mycontent'>
     <ion-content>
         <div id='profileArea' (click)='goToProfile()'>
-
+            
         </div>
         <ion-list>
             <button menuClose ion-item *ngFor='let p of pages' [class.activeHighlight]='checkActive(p)' (click)='openPage(p)'>
