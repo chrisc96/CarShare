@@ -20,11 +20,11 @@ Ionic Android App
 * Page 11: Car shares I'm going on
 * Page 12: Add car to profile page (extra added)
 
-## Who's doing what:
+## What each person has left to do:
 
-Thomas: 2, 3, 5, 7, 10, 11
+Thomas: 2, 3, 6, 8, 10
 
-Chris: 5, 8, 9.1, 9.2, 12
+Chris: 7, 9.1, 9.2, 11, 12
 
 ## Current status
 
