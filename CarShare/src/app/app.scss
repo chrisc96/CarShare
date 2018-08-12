@@ -19,12 +19,46 @@
     background-color: rgb(246, 248, 246);
 }
 
-.hamburgerToggle {
-    font-size: 3rem;
-    vertical-align: middle;
-    padding-left: 8px;
+.titleTxt {
+    text-align: center;
 }
 
-.ion-title {
-    display: inline-block;
+.toolbar-background-md {
+    border-color: #b0b0b0;
+    background: #75AF74;
+}
+
+.bar-button {
+    color: #ffffff;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.toolbar-title-md {
+    color: #fff !important;
+    font-weight: 400 !important;
+}
+
+.toolbar-background {
+    background: #75af74;
+}
+
+.toolbar-title-ios {
+    font-weight: 400;
+    color: #fff;
+}
+
+.home-bg {
+    background-image: url(../assets/imgs/home_bg.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+  }
+
+  .content {
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }

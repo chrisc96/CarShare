@@ -12,7 +12,7 @@ import { MenuController } from 'ionic-angular';
   templateUrl: "home.html"
 })
 export class HomePage {
-  constructor(public navCtrl: NavController, public loginSystem : LoggedInProvider, public menuCtrl : MenuController) {
+  constructor(public navCtrl: NavController, public loginSystem: LoggedInProvider, public menuCtrl: MenuController) {
   }
 
   ionViewWillEnter() {
@@ -25,7 +25,7 @@ export class HomePage {
 
   goToPostARide() {
     if (!this.loginSystem.userLoggedIn()) {
-      this.navCtrl.push(LoginPage, {'toPage': PostARidePage});
+      this.navCtrl.push(LoginPage, { 'toPage': PostARidePage });
     }
     else {
       this.navCtrl.push(PostARidePage);
@@ -34,7 +34,7 @@ export class HomePage {
 
   goToViewMyRides() {
     if (!this.loginSystem.userLoggedIn()) {
-      this.navCtrl.push(LoginPage, {'toPage': ViewMyRidesPage});
+      this.navCtrl.push(LoginPage, { 'toPage': ViewMyRidesPage });
     }
     else {
       this.navCtrl.push(ViewMyRidesPage);

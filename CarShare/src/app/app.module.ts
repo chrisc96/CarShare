@@ -18,6 +18,7 @@ import { ViewMyRidesPage } from "../pages/view-my-rides/view-my-rides";
 import { PostARidePage } from "../pages/post-a-ride/post-a-ride";
 import { LoggedInProvider } from '../providers/logged-in/logged-in';
 import { NavigationMenuProvider } from '../providers/navigation-menu/navigation-menu';
+import { MyListingsPage } from "../pages/my-listings/my-listings";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDGHRJ5SKA-krpmyGzfRAlHPS4yZL2lSqQ",
@@ -30,22 +31,23 @@ const firebaseConfig = {
 
 @NgModule({
   declarations: [
-    MyApp, 
-    HomePage, 
+    MyApp,
+    HomePage,
     LoginPage,
-    SignupPage, 
-    FindARidePage, 
-    RideListingPage, 
-    ViewMyRidesPage, 
-    PostARidePage
+    SignupPage,
+    FindARidePage,
+    RideListingPage,
+    ViewMyRidesPage,
+    PostARidePage,
+    MyListingsPage
   ],
   imports: [
-    BrowserModule, 
+    BrowserModule,
     IonicModule.forRoot(MyApp, {
-      scrollAssist: false, 
+      scrollAssist: false,
       autoFocusAssist: false
     }),
-    AngularFireModule.initializeApp(firebaseConfig), 
+    AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFireStorageModule // imports firebase/storage only needed for storage features],
@@ -54,14 +56,15 @@ const firebaseConfig = {
     IonicApp
   ],
   entryComponents: [
-    MyApp, 
-    HomePage, 
-    LoginPage, 
-    SignupPage, 
-    FindARidePage, 
-    RideListingPage, 
-    ViewMyRidesPage, 
-    PostARidePage
+    MyApp,
+    HomePage,
+    LoginPage,
+    SignupPage,
+    FindARidePage,
+    RideListingPage,
+    ViewMyRidesPage,
+    PostARidePage,
+    MyListingsPage
   ],
   providers: [
     StatusBar,
@@ -72,4 +75,4 @@ const firebaseConfig = {
     NavigationMenuProvider,
   ]
 })
-export class AppModule {}
+export class AppModule { }

@@ -16,9 +16,9 @@ import { NavigationMenuProvider } from "../../providers/navigation-menu/navigati
   templateUrl: "find-a-ride.html"
 })
 export class FindARidePage {
-  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public navMenu : NavigationMenuProvider) { }
+  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public navMenu: NavigationMenuProvider) { }
 
-  goToRideListing() {
+  goToMyListings() {
     this.navCtrl.push(RideListingPage);
   }
 

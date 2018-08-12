@@ -24,4 +24,8 @@ export class RideListingPage {
     this.navMenu.setActivePage(RideListingPage)
   }
 
+  goBack() {
+    this.navCtrl.pop();
+  }
+
 }

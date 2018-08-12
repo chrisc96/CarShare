@@ -8,6 +8,8 @@ import { LoginPage } from "../pages/login/login";
 import { PostARidePage } from "../pages/post-a-ride/post-a-ride";
 import { RideListingPage } from "../pages/ride-listing/ride-listing";
 import { NavigationMenuProvider } from "../providers/navigation-menu/navigation-menu";
+import { FindARidePage } from "../pages/find-a-ride/find-a-ride";
+import { MyListingsPage } from "../pages/my-listings/my-listings";
 
 @Component({
   templateUrl: "app.html"
@@ -35,8 +37,9 @@ export class MyApp {
     });
 
     this.pages = [
-      { title: 'Post a listing', component: PostARidePage},
-      { title: 'My listings', component: RideListingPage}
+      { title: 'Find a ride', component: FindARidePage},
+      { title: 'Post a ride', component: PostARidePage},
+      { title: 'My listings', component: MyListingsPage}
     ]
   }
 

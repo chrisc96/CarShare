@@ -10,4 +10,4 @@ import { FindARidePage } from './find-a-ride';
     IonicPageModule.forChild(FindARidePage),
   ],
 })
-export class FindARidePageModule {}
+export class FindARidePageModule { }
