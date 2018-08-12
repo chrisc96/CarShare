@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { NavigationMenuProvider } from '../../providers/navigation-menu/navigation-menu';
+import { LoggedInProvider } from '../../providers/logged-in/logged-in';
 
 
 /**
@@ -17,7 +18,14 @@ import { NavigationMenuProvider } from '../../providers/navigation-menu/navigati
 })
 export class PostARidePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl : MenuController, public navMenu : NavigationMenuProvider) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams, 
+    public menuCtrl : MenuController, 
+    public navMenu : NavigationMenuProvider,
+    public loginSystem : LoggedInProvider
+  ) {
+    
   }
 
   ionViewWillEnter() {
