@@ -137,7 +137,7 @@ export class SignupPage {
       this.navCtrl.push(this.whereToGo)
         .then(() => {
           const index = this.navCtrl.getActive().index;
-          this.navCtrl.remove(index - 2, index - 1); // Removes the login and signup page
+          this.navCtrl.remove(index - 2, 2); // Removes the login and signup page
         });
     })
 

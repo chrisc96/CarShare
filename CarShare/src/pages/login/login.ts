@@ -72,7 +72,7 @@ export class LoginPage {
       .then( resp => {
         this.requestBeingSent = false; // finished sending request, set to false
         this.password = ''
-        this.navCtrl.push(this.pageToGoTo, {'userInfo': this.loginSystem.getUser()});
+        this.navCtrl.push(this.pageToGoTo);
       })
       .catch( err => {
         this.requestBeingSent = false;

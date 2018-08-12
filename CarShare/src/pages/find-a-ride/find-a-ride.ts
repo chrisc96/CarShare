@@ -19,7 +19,13 @@ export class FindARidePage {
 
   listings;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public navMenu: NavigationMenuProvider, public database : AngularFireDatabase) { 
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public menuCtrl: MenuController, 
+    public navMenu: NavigationMenuProvider,
+    public database : AngularFireDatabase
+  ) {
     this.database.list('listings/').valueChanges().subscribe(
       data => {
         this.listings = data

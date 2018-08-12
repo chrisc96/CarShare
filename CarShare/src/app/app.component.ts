@@ -10,6 +10,7 @@ import { RideListingPage } from "../pages/ride-listing/ride-listing";
 import { NavigationMenuProvider } from "../providers/navigation-menu/navigation-menu";
 import { FindARidePage } from "../pages/find-a-ride/find-a-ride";
 import { MyListingsPage } from "../pages/my-listings/my-listings";
+import { LoggedInProvider } from "../providers/logged-in/logged-in";
 
 @Component({
   templateUrl: "app.html"
@@ -20,13 +21,14 @@ export class MyApp {
 
   rootPage: any = HomePage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, component: any, requiresLogin: boolean}>;
 
   constructor(
     platform: Platform,
     statusBar: StatusBar,
     splashScreen: SplashScreen,
-    public navMenu : NavigationMenuProvider
+    public navMenu : NavigationMenuProvider,
+    public loginSystem: LoggedInProvider
   ) {
     
     platform.ready().then(() => {
@@ -37,15 +39,25 @@ export class MyApp {
     });
 
     this.pages = [
-      { title: 'Find a ride', component: FindARidePage},
-      { title: 'Post a ride', component: PostARidePage},
-      { title: 'My listings', component: MyListingsPage}
+      { title: 'Find a ride', component: FindARidePage, requiresLogin: false},
+      { title: 'Post a ride', component: PostARidePage, requiresLogin: true},
+      { title: 'My listings', component: MyListingsPage, requiresLogin: true}
     ]
   }
 
   openPage(page) {
-    this.navMenu.setActivePage(page);
-    this.nav.setRoot(page.component);
+    this.pages.forEach(element => {
+      if (page.component === element.component) {
+        // we need to check if the user is logged in
+        // if not, require a login and then go to the page first
+        if (element.requiresLogin && !this.loginSystem.userLoggedIn()) {
+          this.nav.push(LoginPage, { 'toPage': page.component });
+        }
+        else {
+          this.nav.setRoot(page.component);
+        }
+      }
+    });
   }
 
   checkActive(page) {
