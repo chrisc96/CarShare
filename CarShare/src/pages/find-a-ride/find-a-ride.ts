@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams, MenuController } from "ionic-angular";
 import { RideListingPage } from "../ride-listing/ride-listing";
 import { NavigationMenuProvider } from "../../providers/navigation-menu/navigation-menu";
-import { AngularFirestore, AngularFirestoreDocument, AngularFireStoreCollection } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { snapshotChanges } from "../../../node_modules/angularfire2/database";
 import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/map'
@@ -26,8 +26,8 @@ interface Listing {
 })
 export class FindARidePage {
 
-  listingsCollection: AngularFireStoreCollection<Listing>
-  listings: Observable<Listing[]> = []
+  listingsCollection: AngularFirestoreCollection<Listing>
+  listings: Observable<Listing[]>
 
   constructor(
     public navCtrl: NavController,
