@@ -6,7 +6,7 @@ import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection 
 import { snapshotChanges } from "../../../node_modules/angularfire2/database";
 import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/map'
-
+import { Listing } from '../listing'
 
 /**
  * Generated class for the FindARidePage page.
@@ -15,10 +15,6 @@ import 'rxjs/add/operator/map'
  * Ionic pages and navigation.
  */
 
-interface Listing {
-
-}
-
 @IonicPage()
 @Component({
   selector: "page-find-a-ride",
@@ -26,8 +22,8 @@ interface Listing {
 })
 export class FindARidePage {
 
-  listingsCollection: AngularFirestoreCollection<Listing>
-  listings: Observable<Listing[]>
+  listingsCollection: Observable<Listing[]>
+  listings: Listing[] = [];
 
   constructor(
     public navCtrl: NavController,
@@ -36,14 +32,19 @@ export class FindARidePage {
     public navMenu: NavigationMenuProvider,
     public afs: AngularFirestore
   ) {
-    this.listingsCollection = this.afs.collection('listings')
-    // this.listings = 
-    console.log(this.listingsCollection.snapshotChanges().subscribe(e => {
-      e.forEach(elem => {
-        console.log(elem.payload.doc.data());
-      });
-    })
-    );
+    this.listingsCollection = this.afs.collection('listings').snapshotChanges().map(
+      changes => {
+        return changes.map(a => {
+          const data = a.payload.doc.data() as Listing;
+          return data;
+        })
+      }
+    )
+    this.listingsCollection.subscribe(
+      (listing:Listing[]) => {
+        this.listings = listing;
+      }
+    )
   }
 
   goToMyListings() {

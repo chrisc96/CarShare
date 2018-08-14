@@ -17,12 +17,10 @@
 <ion-content class="home-bg">
   <div id="container">
     <div class="content">
-      <div class="btns">
         <button color="secondary" (click)="goToMyListings()" ion-button full>Ride Listing</button>
         <ion-item *ngFor="let listing of listings">
-          {{listing}}
+          {{listing.UserIDPoster}}
         </ion-item>
-      </div>
     </div>
   </div>
 </ion-content>
