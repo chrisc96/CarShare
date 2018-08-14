@@ -2,11 +2,9 @@ import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams, MenuController } from "ionic-angular";
 import { RideListingPage } from "../ride-listing/ride-listing";
 import { NavigationMenuProvider } from "../../providers/navigation-menu/navigation-menu";
-import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { snapshotChanges } from "../../../node_modules/angularfire2/database";
-import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/map'
 import { Listing } from '../listing'
+import { FirestoreProvider } from "../../providers/firestore/firestore";
 
 /**
  * Generated class for the FindARidePage page.
@@ -22,7 +20,6 @@ import { Listing } from '../listing'
 })
 export class FindARidePage {
 
-  listingsCollection: Observable<Listing[]>
   listings: Listing[] = [];
 
   constructor(
@@ -30,17 +27,9 @@ export class FindARidePage {
     public navParams: NavParams,
     public menuCtrl: MenuController,
     public navMenu: NavigationMenuProvider,
-    public afs: AngularFirestore
+    public firestore: FirestoreProvider
   ) {
-    this.listingsCollection = this.afs.collection('listings').snapshotChanges().map(
-      changes => {
-        return changes.map(a => {
-          const data = a.payload.doc.data() as Listing;
-          return data;
-        })
-      }
-    )
-    this.listingsCollection.subscribe(
+    this.firestore.getListingsObservable().subscribe(
       (listing:Listing[]) => {
         this.listings = listing;
       }

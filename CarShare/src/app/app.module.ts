@@ -23,6 +23,7 @@ import { AddCarToProfilePage } from "../pages/add-car-to-profile/add-car-to-prof
 import { ProfilePage } from "../pages/profile/profile";
 import { RidesImTakingPage } from "../pages/rides-im-taking/rides-im-taking";
 import { ReviewRideShareRequestPage } from "../pages/review-ride-share-request/review-ride-share-request";
+import { FirestoreProvider } from '../providers/firestore/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDGHRJ5SKA-krpmyGzfRAlHPS4yZL2lSqQ",
@@ -83,7 +84,8 @@ const firebaseConfig = {
     AngularFireAuth,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     NavigationMenuProvider,
-    AngularFireDatabase
+    AngularFireDatabase,
+    FirestoreProvider
   ]
 })
 export class AppModule { }
