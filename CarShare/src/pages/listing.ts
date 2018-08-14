@@ -1,5 +1,3 @@
-import { DateTime } from "../../node_modules/ionic-angular/umd";
-
 export class Listing {
     public constructor(public UserIDPoster: string,
                        public carID: string,
