@@ -16,17 +16,33 @@
 
 <ion-content class="home-bg">
   <div id="container">
-    <div class="content">
-        <ion-item *ngFor="let listing of listings">
-          <ion-item>{{ listing.UserIDPoster }}</ion-item>
-          <ion-item>{{ listing.carID }}</ion-item>
-          <ion-item>{{ listing.dateCreated }}</ion-item>
-          <ion-item>{{ listing.moreInfo }}</ion-item>
-          <ion-item>{{ listing.postedOnFacebok }}</ion-item>
-          <ion-item>{{ listing.when }}</ion-item>
-          <ion-item>{{ listing.whoWantsToCome }}</ion-item>
-          <ion-item>{{ listing.whosComing }}</ion-item>
-        </ion-item>
+    <div class="content" *ngIf="listings.length>0">
+        <ion-list *ngFor="let listing of listings">
+          <ion-item *ngIf="listing.UserIDPoster">
+            {{ listing.UserIDPoster }}
+          </ion-item>
+          <ion-item *ngIf="listing.carID">
+            {{ listing.carID }}
+          </ion-item>
+          <ion-item *ngIf="listing.dateCreated">
+            {{ listing.dateCreated }}
+          </ion-item>
+          <ion-item *ngIf="listing.moreInfo">
+            {{ listing.moreInfo }}
+          </ion-item>
+          <ion-item *ngIf="postedOnFacebook">
+            {{ listing.postedOnFacebok }}
+          </ion-item>
+          <ion-item *ngIf="listing.when">
+            {{ listing.when }}
+          </ion-item>
+          <ion-item *ngIf="listing.whoWantsToCome">
+            {{ listing.whoWantsToCome }}
+          </ion-item>
+          <ion-item *ngIf="listing.UserIDPoster">
+            {{ listing.whosComing }}
+          </ion-item>
+        </ion-list>
     </div>
   </div>
 </ion-content>
