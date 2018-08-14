@@ -17,9 +17,15 @@
 <ion-content class="home-bg">
   <div id="container">
     <div class="content">
-        <button color="secondary" (click)="goToMyListings()" ion-button full>Ride Listing</button>
         <ion-item *ngFor="let listing of listings">
-          {{listing.UserIDPoster}}
+          <ion-item>{{ listing.UserIDPoster }}</ion-item>
+          <ion-item>{{ listing.carID }}</ion-item>
+          <ion-item>{{ listing.dateCreated }}</ion-item>
+          <ion-item>{{ listing.moreInfo }}</ion-item>
+          <ion-item>{{ listing.postedOnFacebok }}</ion-item>
+          <ion-item>{{ listing.when }}</ion-item>
+          <ion-item>{{ listing.whoWantsToCome }}</ion-item>
+          <ion-item>{{ listing.whosComing }}</ion-item>
         </ion-item>
     </div>
   </div>
