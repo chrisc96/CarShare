@@ -22,7 +22,7 @@ Ionic Android App
 
 ## What each person has left to do:
 
-Thomas: 2, 3, 6, 8, 10
+Thomas: 2, 3, 6, 8
 
 Chris: 7, 9.1, 9.2, 11, 12
 
