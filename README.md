@@ -32,7 +32,7 @@ To Do:
 * 2, 3, 6, 7, 8, 9.1, 9.2, 11, 12
 
 In Progress:
-* 10 - Navigation bar
+* 7
 
 Already done:
 * 1 - Home page - Chris
