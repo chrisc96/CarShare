@@ -1,5 +1,5 @@
 import { Component, ViewChild } from "@angular/core";
-import { Nav, Platform } from "ionic-angular";
+import { Nav, Platform, NavController } from "ionic-angular";
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 
@@ -50,7 +50,6 @@ export class MyApp {
 
     this.loginSystem.getUserObservable().subscribe(user => {
       this.user = user;
-      console.log('fromOtherPage', this.user)
     })
   }
 
@@ -77,8 +76,18 @@ export class MyApp {
     return this.loginSystem.userLoggedIn()
   }
 
-  getName() {
-    // console.log(this.loginSystem.getUser())
-    return this.loginSystem.getUser().firstName
+  getFirstName() {
+    console.log('here')
+    return this.loginSystem.getUser().firstName;
+  }
+
+  goToLoginPage() {
+    this.nav.push(LoginPage, {'toPage': this.navMenu.activePage})
+  }
+
+  logout() {
+    this.loginSystem.logout().then(() => {
+      this.nav.push(HomePage)
+    })
   }
 }

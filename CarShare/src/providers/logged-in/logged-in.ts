@@ -89,4 +89,8 @@ export class LoggedInProvider {
   getUserObservable() {
     return this.userObservable;
   }
+
+  logout() {
+    return this.fireAuth.auth.signOut();
+  }
 }
