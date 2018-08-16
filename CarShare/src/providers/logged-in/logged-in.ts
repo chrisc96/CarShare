@@ -1,8 +1,13 @@
 import { AngularFireAuth } from 'angularfire2/auth'
-import { AngularFireModule, FirebaseApp } from 'angularfire2';
 import { Injectable } from '@angular/core';
+
 import * as firebase from 'firebase/app';
 import AuthProvider = firebase.auth.AuthProvider;
+import { Observable } from 'rxjs/Observable'
+import { User } from '../../pages/struct/User'
+import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFirestore } from 'angularfire2/firestore';
+
 
 /*
   Generated class for the LoggedInProvider provider.
@@ -13,17 +18,43 @@ import AuthProvider = firebase.auth.AuthProvider;
 @Injectable()
 export class LoggedInProvider {
 
-  public user: firebase.User;
-  public db : firebase.firestore.Firestore;
-  
-  constructor(public fireAuth: AngularFireAuth) {
-    this.db = firebase.firestore()
-    const settings = {timestampsInSnapshots: true}
-    this.db.settings(settings)
+  public user: User;
+  public db: firebase.firestore.Firestore;
 
-    fireAuth.authState.subscribe(user => {
-      this.user = user;
-    });
+  private userObservable: Observable<User>
+  private userObserver: any
+
+  constructor(public fireAuth: AngularFireAuth, public afs: AngularFirestore) {
+
+    const settings = { timestampsInSnapshots: true }
+
+    this.userObservable = Observable.create((observer) => {
+      this.userObserver = observer;
+      this.subscriptions()
+    })
+  }
+
+  subscriptions() {
+    // If any data changes in the /users collection, we realtime update the 'this.user' reference
+    this.fireAuth.authState.subscribe(user => {
+      if (user) {
+        // console.log('userSubscription', user)
+          this.afs.doc('users/' + user.uid).valueChanges().subscribe((userInfo: { firstName: string, lastName: string, contactNum: string }) => {
+            if (userInfo) {
+              console.log(userInfo)
+              this.user = new User(user.uid, user.email, userInfo.firstName, userInfo.lastName, userInfo.contactNum)
+              // console.log('userDatChanged', this.user)
+            }
+            else {
+              this.user = null
+            }
+            this.userObserver.next(this.user)
+          })
+      }
+      else {
+        this.user = null
+      }
+    })
   }
 
   userLoggedIn() {
@@ -45,12 +76,17 @@ export class LoggedInProvider {
   }
 
   linkUsertoDB = (resp, firstName, lastName, contactNum) => {
-      this.user = resp.user
-      return this.db.collection('users').doc(this.user.uid).set({
-        email: this.user.email,
-        firstName: firstName,
-        lastName: lastName,
-        contactNum: contactNum
-      })
+    // Give the user struct their own details
+    this.user = new User(resp.user.uid, resp.user.email, firstName, lastName, contactNum)
+    // Create a document for them with their personal details
+    return this.afs.collection('users').doc(this.user.uid).set({
+      firstName: firstName,
+      lastName: lastName,
+      contactNum: contactNum
+    })
+  }
+
+  getUserObservable() {
+    return this.userObservable;
   }
 }

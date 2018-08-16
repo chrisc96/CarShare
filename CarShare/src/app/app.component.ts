@@ -12,6 +12,8 @@ import { FindARidePage } from "../pages/find-a-ride/find-a-ride";
 import { MyListingsPage } from "../pages/my-listings/my-listings";
 import { LoggedInProvider } from "../providers/logged-in/logged-in";
 
+import { User } from '../pages/struct/User'
+
 @Component({
   templateUrl: "app.html"
 })
@@ -19,6 +21,7 @@ export class MyApp {
 
   @ViewChild(Nav) nav: Nav;
 
+  user: User;
   rootPage: any = HomePage;
 
   pages: Array<{title: string, component: any, requiresLogin: boolean}>;
@@ -39,10 +42,16 @@ export class MyApp {
     });
 
     this.pages = [
+      { title: 'Homepage', component: HomePage, requiresLogin: false},
       { title: 'Find a ride', component: FindARidePage, requiresLogin: false},
       { title: 'Post a ride', component: PostARidePage, requiresLogin: true},
       { title: 'My listings', component: MyListingsPage, requiresLogin: true}
     ]
+
+    this.loginSystem.getUserObservable().subscribe(user => {
+      this.user = user;
+      console.log('fromOtherPage', this.user)
+    })
   }
 
   openPage(page) {
@@ -64,7 +73,12 @@ export class MyApp {
     return page.component == this.navMenu.activePage;
   }
 
-  goToProfile() {
-    
+  checkLoggedIn() {
+    return this.loginSystem.userLoggedIn()
+  }
+
+  getName() {
+    // console.log(this.loginSystem.getUser())
+    return this.loginSystem.getUser().firstName
   }
 }

@@ -56,9 +56,59 @@
     background-position: center;
   }
 
-  .content {
+.content {
     text-align: center;
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+.navigationLoginBtn {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 100px;
+    height: 50px;
+}
+
+.navUserArea {
+    height: 100px;
+    position: relative;
+}
+
+.navUserOutline {
+    background-color:transparent;
+    height:75px;
+    width:75px;
+    border-radius:50%;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
+}
+
+.navProfileNoImg {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    -webkit-transform: translate(0%, -50%);
+    transform: translate(0, -50%);
+}
+
+.navUserIcon {
+    background: url('../assets/imgs/userBlank.png');
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+}
+
+.navUserIconArea {
+    float: left;
+    height: inherit;
+    width: 100px;
+}
+
+.navUserRHSArea {
+    height: 100%;
+    position: relative;
+    margin-left: 100px;
 }

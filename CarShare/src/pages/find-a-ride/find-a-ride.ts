@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, MenuController } from "ionic-angul
 import { RideListingPage } from "../ride-listing/ride-listing";
 import { NavigationMenuProvider } from "../../providers/navigation-menu/navigation-menu";
 import 'rxjs/add/operator/map'
-import { Listing } from '../listing'
+import { Listing } from '../struct/listing'
 import { FirestoreProvider } from "../../providers/firestore/firestore";
 
 /**

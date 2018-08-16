@@ -1,12 +1,23 @@
 <ion-menu id='navMenu' [content]='mycontent'>
     <ion-content>
         <div id='profileArea' (click)='goToProfile()'>
-            
+
         </div>
         <ion-list>
+            <div class='navUserArea'>
+                <div class='navUserIconArea'>
+                    <div class="navUserOutline navProfileNoImg">
+                        <div class='navUserIcon'></div>
+                    </div>
+                </div>
+                <div class='navUserRHSArea'>
+                    <div class='navHelloUser' *ngIf='checkLoggedIn()'>Hello {{this.getName()}}</div>
+                </div>
+            </div>
             <button menuClose ion-item *ngFor='let p of pages' [class.activeHighlight]='checkActive(p)' (click)='openPage(p)'>
                 {{p.title}}
             </button>
+            <button class='navigationLoginBtn' menuClose *ngIf='!checkLoggedIn()'>Login</button>
         </ion-list>
     </ion-content>
 </ion-menu>

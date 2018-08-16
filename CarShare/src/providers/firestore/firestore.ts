@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { Listing } from '../../pages/listing';
+import { Listing } from '../../pages/struct/listing';
 
 /*
   Generated class for the FirestoreProvider provider.
