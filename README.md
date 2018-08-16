@@ -35,6 +35,7 @@ In Progress:
 * 10 - Navigation bar
 
 Already done:
-* 1 - Home page
-* 4 - Login
-* 5 - Signup
+* 1 - Home page - Chris
+* 4 - Login - Chris
+* 5 - Signup - Chris/Thomas
+* 10 - Navigation Bar - Chris
