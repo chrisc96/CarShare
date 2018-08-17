@@ -24,9 +24,66 @@
           <button id='addACarBtn' ion-button block outline (click)='goToAddACarPage()'>Add a car</button>
         </div>
         <div id='carsExist' *ngIf='!userHasNoCars()'>
-          <div *ngFor='let car of cars'>
-            {{ car.make }}
-          </div>
+
+          <img class='logo' src='../../assets/imgs/carLogo.png'>
+          <ion-item>
+            <ion-label color="primary">
+              <ion-icon name="ios-car" class='postIcon'></ion-icon>
+              <div class='placeholderText'>Car to use:</div>
+            </ion-label>
+            <ion-select [(ngModel)]="car">
+              <div *ngFor='let car of cars'>
+                <ion-option value=car>{{car.make + ' ' + car.model}}</ion-option>
+              </div>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label color="primary">
+              <ion-icon name="ios-map-outline" class='postIcon'></ion-icon>
+              <div class='placeholderText'>Meeting Place:</div>
+            </ion-label>
+            <ion-input></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label color="primary">
+              <ion-icon name="ios-map-outline" class='postIcon'></ion-icon>
+              <div class='placeholderText'>Destination:</div>
+            </ion-label>
+            <ion-input></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label color="primary">
+              <ion-icon name="ios-calendar-outline" class='postIcon'></ion-icon>
+              <div class='placeholderText'>Departure Date:</div>
+            </ion-label>
+            <ion-datetime min="2018" max="2030" displayFormat="MMM DD,YYYY" pickerFormat="MMM DD,YYYY" [(ngModel)]="departureDate"></ion-datetime>
+          </ion-item>
+
+          <ion-item>
+            <ion-label color="primary">
+              <ion-icon name="ios-time-outline" class='postIcon'></ion-icon>
+              <div class='placeholderText'>Departure Time:</div>
+            </ion-label>
+            <ion-datetime displayFormat="H:mm" pickerFormat="HH:mm" [(ngModel)]="departureTime"></ion-datetime>
+          </ion-item>
+
+          <ion-item>
+            <ion-label color="primary">
+              <ion-icon name='ios-contacts-outline' class='postIcon'></ion-icon>
+              <div class='placeholderText'>No. Seats Available:</div>
+            </ion-label>
+            <ion-input min='0' max='10' type="number"></ion-input>
+          </ion-item>
+
+          <ion-item class='postBtn'>
+            <button ion-button block color='secondary' #submit *ngIf='requestBeingSent'>
+              <ion-spinner name="bubbles"></ion-spinner>
+            </button>
+            <button ion-button block color='secondary' #submit (click)='checkValues()' *ngIf='!requestBeingSent'>Post</button>
+          </ion-item>
         </div>
       </div>
     </div>

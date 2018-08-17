@@ -20,7 +20,13 @@ page-post-a-ride {
 
     #content {
         width: inherit;
+        height: -webkit-fit-content;
+        height: -moz-fit-content;
         height: fit-content;
+        position: relative;
+        top: 50%;
+        -webkit-transform: translateY(-60%);
+        transform: translateY(-60%);
     }
 
     #noCarsImage {
@@ -63,4 +69,50 @@ page-post-a-ride {
         margin-bottom: 20px;
     }
 
+    .text-input-md {
+        margin: 0;
+    }
+
+    .otherDetails {
+        width:100%;
+        height: fit-content;
+    }
+
+    .details {
+        height: 125px;
+    }
+
+    .label-md[stacked] {
+        font-size: 1.6rem;
+    }
+
+    textarea.text-input.text-input-md {
+        height: 100px;
+    }
+
+    .postIcon {
+        margin-right: 7px;
+        vertical-align: middle;
+        font-size: 1.4em;
+    }
+
+    .placeholderText {
+        vertical-align: middle;
+        display: inline-block;
+    }
+    #carsExist {
+        width: 90%;
+        margin: auto;
+    }
+
+    .logo {
+        width: 160px;
+        padding-bottom: 15px;
+    }
+
+    .item .item-button {
+        padding: 0 0.5em;
+        height: 35px;
+        font-size: 1.7rem;
+    }
 }

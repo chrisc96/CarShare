@@ -7,6 +7,9 @@ import { User } from '../struct/User'
 import { Car } from '../struct/Car'
 
 
+import { Time } from '../../../node_modules/@angular/common';
+
+
 /**
  * Generated class for the PostARidePage page.
  *
@@ -20,6 +23,11 @@ import { Car } from '../struct/Car'
   templateUrl: 'post-a-ride.html',
 })
 export class PostARidePage {
+
+  departureDate: String;
+  departureTime: String;
+
+  requestBeingSent : boolean = false;
 
   cars: Car[]
   carCount: number = 0
@@ -50,6 +58,11 @@ export class PostARidePage {
     if (this.cars) {
       return this.carCount == 0
     }
+  }
+
+  checkValues() {
+    console.log('date: ', this.departureDate)
+    console.log('time: ', this.departureTime)
   }
 
   goToAddACarPage() {
