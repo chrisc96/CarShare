@@ -15,7 +15,20 @@
 
 <ion-content class="home-bg">
   <div id="container">
-    <div class="content">
+    <div id="content">
+      <div *ngIf='dataReturned'>
+        <div id='noCarsContainer' *ngIf='userHasNoCars()'>
+          <div id='noCarsImage'></div>
+          <div id='noCarsTitle'>No cars on account</div>
+          <div id='noCarsSubText'>Add a car to your profile to be able to post a ride</div>
+          <button id='addACarBtn' ion-button block outline (click)='goToAddACarPage()'>Add a car</button>
+        </div>
+        <div id='carsExist' *ngIf='!userHasNoCars()'>
+          <div *ngFor='let car of cars'>
+            {{ car.make }}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </ion-content>

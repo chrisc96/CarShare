@@ -11,4 +11,56 @@ page-post-a-ride {
         margin-top: 56px;
     }
 
+      #container {
+        display: inline-flex;
+        height: 100%;
+        width: 100%;
+        text-align: center;
+    }
+
+    #content {
+        width: inherit;
+        height: fit-content;
+    }
+
+    #noCarsImage {
+        background: url(../../assets/imgs/noCars.png);
+        width: 100px;
+        height: 100px;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #noCarsContainer {
+        width: 75%;
+        margin-left: auto;
+        margin-right: auto;
+
+    }
+
+    #addACarBtn {
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        border-color: #ffc977;
+        color: #ffc977;
+    }
+
+    #noCarsTitle {
+        font-size: 2rem;
+        color: black;
+        font-weight: 300;
+        margin-bottom: 15px;
+    }
+
+    #noCarsSubText {
+        color: black;
+        font-size: 1.5rem;
+        font-weight: 300;
+        margin-bottom: 20px;
+    }
+
 }

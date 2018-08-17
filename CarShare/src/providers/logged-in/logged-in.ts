@@ -5,7 +5,6 @@ import * as firebase from 'firebase/app';
 import AuthProvider = firebase.auth.AuthProvider;
 import { Observable } from 'rxjs/Observable'
 import { User } from '../../pages/struct/User'
-import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFirestore } from 'angularfire2/firestore';
 
 
@@ -25,9 +24,6 @@ export class LoggedInProvider {
   private userObserver: any
 
   constructor(public fireAuth: AngularFireAuth, public afs: AngularFirestore) {
-
-    const settings = { timestampsInSnapshots: true }
-
     this.userObservable = Observable.create((observer) => {
       this.userObserver = observer;
       this.subscriptions()
@@ -38,12 +34,9 @@ export class LoggedInProvider {
     // If any data changes in the /users collection, we realtime update the 'this.user' reference
     this.fireAuth.authState.subscribe(user => {
       if (user) {
-        // console.log('userSubscription', user)
           this.afs.doc('users/' + user.uid).valueChanges().subscribe((userInfo: { firstName: string, lastName: string, contactNum: string }) => {
             if (userInfo) {
-              console.log(userInfo)
               this.user = new User(user.uid, user.email, userInfo.firstName, userInfo.lastName, userInfo.contactNum)
-              // console.log('userDatChanged', this.user)
             }
             else {
               this.user = null

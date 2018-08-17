@@ -19,6 +19,4 @@ export class User {
         this.lastName = lastName;
         this.contactNum = contactNum
     }
-
-    
 }

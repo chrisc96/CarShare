@@ -4,6 +4,7 @@ import { NavigationMenuProvider } from '../../providers/navigation-menu/navigati
 import { LoggedInProvider } from '../../providers/logged-in/logged-in';
 import { LoginPage } from '../login/login';
 import { PostARidePage } from '../post-a-ride/post-a-ride';
+import { User } from '../struct/User'
 
 /**
  * Generated class for the MyListingsPage page.
@@ -19,6 +20,8 @@ import { PostARidePage } from '../post-a-ride/post-a-ride';
 })
 export class MyListingsPage {
 
+  user: User
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -27,6 +30,9 @@ export class MyListingsPage {
     public loginSystem: LoggedInProvider
   ) {
 
+    this.loginSystem.getUserObservable().subscribe(user => {
+      this.user = user;
+    })
   }
 
   ionViewWillEnter() {
