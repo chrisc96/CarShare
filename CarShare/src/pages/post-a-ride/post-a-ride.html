@@ -4,6 +4,7 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
+
 <ion-toolbar>
   <button ion-button menuToggle left>
     <ion-icon name="menu"></ion-icon>
@@ -17,24 +18,26 @@
   <div id="container">
     <div id="content">
       <div *ngIf='dataReturned'>
+
+
         <div id='noCarsContainer' *ngIf='userHasNoCars()'>
           <div id='noCarsImage'></div>
           <div id='noCarsTitle'>No cars on account</div>
           <div id='noCarsSubText'>Add a car to your profile to be able to post a ride</div>
           <button id='addACarBtn' ion-button block outline (click)='goToAddACarPage()'>Add a car</button>
         </div>
-        <div id='carsExist' *ngIf='!userHasNoCars()'>
 
-          <img class='logo' src='../../assets/imgs/carLogo.png'>
+
+        <div id='carsExist' *ngIf='!userHasNoCars()'>
           <ion-item>
-            <ion-label color="primary">
+            <ion-label class='carSelectText' color="primary">
               <ion-icon name="ios-car" class='postIcon'></ion-icon>
               <div class='placeholderText'>Car to use:</div>
             </ion-label>
-            <ion-select [(ngModel)]="car">
-              <div *ngFor='let car of cars'>
-                <ion-option value=car>{{car.make + ' ' + car.model}}</ion-option>
-              </div>
+            <ion-select [(ngModel)]="selectedCar" name="selectedCar">
+              <ion-option *ngFor='let car of cars;let index = index;'>
+                <ion-option value="car-{{index}}">{{car.make + ' ' + car.model}}</ion-option>
+              </ion-option>>
             </ion-select>
           </ion-item>
 
@@ -43,7 +46,7 @@
               <ion-icon name="ios-map-outline" class='postIcon'></ion-icon>
               <div class='placeholderText'>Meeting Place:</div>
             </ion-label>
-            <ion-input></ion-input>
+            <ion-input #meetingPlace class='formControl' autocorrect='off' spellcheck='off' autocapitalize='off' ></ion-input>
           </ion-item>
 
           <ion-item>
@@ -51,7 +54,7 @@
               <ion-icon name="ios-map-outline" class='postIcon'></ion-icon>
               <div class='placeholderText'>Destination:</div>
             </ion-label>
-            <ion-input></ion-input>
+            <ion-input #destPlace class='formControl' autocorrect='off' spellcheck='off' autocapitalize='off' ></ion-input>
           </ion-item>
 
           <ion-item>
@@ -76,6 +79,14 @@
               <div class='placeholderText'>No. Seats Available:</div>
             </ion-label>
             <ion-input min='0' max='10' type="number"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>
+              <ion-icon class='postIcon' name="ios-briefcase-outline"></ion-icon>
+              <div class='placeholderText'>Storage Available?</div>
+            </ion-label>
+            <ion-checkbox item-end [(ngModel)]="storageAvail"></ion-checkbox>
           </ion-item>
 
           <ion-item class='postBtn'>

@@ -73,6 +73,10 @@ page-post-a-ride {
         margin: 0;
     }
 
+    .text-input {
+        font-size: 1.4rem;
+    }
+
     .otherDetails {
         width:100%;
         height: fit-content;
@@ -93,26 +97,40 @@ page-post-a-ride {
     .postIcon {
         margin-right: 7px;
         vertical-align: middle;
-        font-size: 1.4em;
+        font-size: 2.5rem;
+        color: #488aff;
     }
 
     .placeholderText {
         vertical-align: middle;
         display: inline-block;
+        color: #488aff;
+        font-size: 1.4rem;
     }
     #carsExist {
         width: 90%;
         margin: auto;
     }
 
-    .logo {
-        width: 160px;
-        padding-bottom: 15px;
-    }
-
     .item .item-button {
         padding: 0 0.5em;
         height: 35px;
         font-size: 1.7rem;
+    }
+
+    .datetime-text {
+        font-size: 1.4rem;
+        float: left;
+    }
+
+    ion-select {
+        padding-left: 0!important;
+        max-width: 100%;
+    }
+
+    .carSelectText {
+        margin-right: 0px;
+        min-width: 110px !important;
+        max-width: 110px !important;
     }
 }

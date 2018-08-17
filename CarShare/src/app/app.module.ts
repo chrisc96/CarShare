@@ -24,6 +24,8 @@ import { ProfilePage } from "../pages/profile/profile";
 import { RidesImTakingPage } from "../pages/rides-im-taking/rides-im-taking";
 import { ReviewRideShareRequestPage } from "../pages/review-ride-share-request/review-ride-share-request";
 import { FirestoreProvider } from '../providers/firestore/firestore';
+import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyDGHRJ5SKA-krpmyGzfRAlHPS4yZL2lSqQ",
@@ -58,7 +60,11 @@ const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
-    AngularFireStorageModule // imports firebase/storage only needed for storage features],
+    AngularFireStorageModule, // imports firebase/storage only needed for storage features],
+    AgmCoreModule.forRoot({
+      apiKey: "AIzaSyBlFRuN8KbZssVHaIcC-gnCIA4pTVrYu_w",
+      libraries: ["places"]
+    })
   ],
   bootstrap: [
     IonicApp
@@ -85,7 +91,8 @@ const firebaseConfig = {
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     NavigationMenuProvider,
     AngularFireDatabase,
-    FirestoreProvider
+    FirestoreProvider,
+    GoogleMapsAPIWrapper
   ]
 })
 export class AppModule { }
