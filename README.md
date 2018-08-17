@@ -22,7 +22,7 @@ Ionic Android App
 
 ## What each person has left to do:
 
-Thomas: 2, 3, 6, 8, 10
+Thomas: 2, 3, 6, 8
 
 Chris: 7, 9.1, 9.2, 11, 12
 
@@ -32,9 +32,10 @@ To Do:
 * 2, 3, 6, 7, 8, 9.1, 9.2, 11, 12
 
 In Progress:
-* 10 - Navigation bar
+* 7
 
 Already done:
-* 1 - Home page
-* 4 - Login
-* 5 - Signup
+* 1 - Home page - Chris
+* 4 - Login - Chris
+* 5 - Signup - Chris/Thomas
+* 10 - Navigation Bar - Chris
