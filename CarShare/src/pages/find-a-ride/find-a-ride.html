@@ -19,28 +19,28 @@
     <div class="content" *ngIf="listings.length>0">
         <ion-list *ngFor="let listing of listings">
           <ion-item *ngIf="listing.UserIDPoster">
-            {{ listing.UserIDPoster }}
+            Posted by: {{ listing.UserIDPoster }}
           </ion-item>
           <ion-item *ngIf="listing.carID">
-            {{ listing.carID }}
+            Car: {{ listing.carID }}
           </ion-item>
           <ion-item *ngIf="listing.dateCreated">
-            {{ listing.dateCreated }}
+            Date Created: {{ listing.dateCreated }}
           </ion-item>
           <ion-item *ngIf="listing.moreInfo">
-            {{ listing.moreInfo }}
+            Additional Info: {{ listing.moreInfo }}
           </ion-item>
           <ion-item *ngIf="postedOnFacebook">
-            {{ listing.postedOnFacebok }}
+            On Facebook: {{ listing.postedOnFacebok }}
           </ion-item>
           <ion-item *ngIf="listing.when">
-            {{ listing.when }}
+            Travel Time: {{ listing.when }}
           </ion-item>
           <ion-item *ngIf="listing.whoWantsToCome">
-            {{ listing.whoWantsToCome }}
+            Want to ride: {{ listing.whoWantsToCome }}
           </ion-item>
-          <ion-item *ngIf="listing.UserIDPoster">
-            {{ listing.whosComing }}
+          <ion-item *ngIf="listing.whosComing">
+            Sharing ride: {{ listing.whosComing }}
           </ion-item>
         </ion-list>
     </div>
