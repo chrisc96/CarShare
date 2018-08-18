@@ -1,5 +1,5 @@
 import { Component, ViewChild } from "@angular/core";
-import { Nav, Platform } from "ionic-angular/umd";
+import { Nav, Platform } from "ionic-angular";
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 
@@ -21,16 +21,16 @@ export class MyApp {
 
   rootPage: any = HomePage;
 
-  pages: Array<{title: string, component: any, requiresLogin: boolean}>;
+  pages: Array<{ title: string, component: any, requiresLogin: boolean }>;
 
   constructor(
     platform: Platform,
     statusBar: StatusBar,
     splashScreen: SplashScreen,
-    public navMenu : NavigationMenuProvider,
+    public navMenu: NavigationMenuProvider,
     public loginSystem: LoggedInProvider
   ) {
-    
+
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -39,9 +39,10 @@ export class MyApp {
     });
 
     this.pages = [
-      { title: 'Find a ride', component: FindARidePage, requiresLogin: false},
-      { title: 'Post a ride', component: PostARidePage, requiresLogin: true},
-      { title: 'My listings', component: MyListingsPage, requiresLogin: true}
+      { title: 'Homepage', component: HomePage, requiresLogin: false},
+      { title: 'Find a ride', component: FindARidePage, requiresLogin: false },
+      { title: 'Post a ride', component: PostARidePage, requiresLogin: true },
+      { title: 'My listings', component: MyListingsPage, requiresLogin: true }
     ]
   }
 
@@ -65,6 +66,24 @@ export class MyApp {
   }
 
   goToProfile() {
-    
+
+  }
+
+  checkLoggedIn() {
+    return this.loginSystem.userLoggedIn()
+  }
+
+  getFirstName() {
+    return this.loginSystem.getUser().firstName;
+  }
+
+  goToLoginPage() {
+    this.nav.push(LoginPage, { 'toPage': this.navMenu.activePage })
+  }
+
+  logout() {
+    this.loginSystem.logout().then(() => {
+      this.nav.push(HomePage)
+    });
   }
 }

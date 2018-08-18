@@ -133,4 +133,20 @@ page-post-a-ride {
         min-width: 110px !important;
         max-width: 110px !important;
     }
+
+    .select-md {
+        width: 100%;
+    }
+
+    .item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+        border-bottom-color: #f53d3d;
+        border-bottom-width: 2px;
+        -webkit-box-shadow: none!important;
+    }
+
+    .item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+        border-bottom-color: #32db64;
+        border-bottom-width: 2px;
+        -webkit-box-shadow: none!important;
+    }
 }

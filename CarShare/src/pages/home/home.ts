@@ -1,10 +1,10 @@
 import { Component } from "@angular/core";
-import { NavController } from "ionic-angular/umd";
+import { NavController } from "ionic-angular";
 import { LoginPage } from "../login/login";
 import { FindARidePage } from "../find-a-ride/find-a-ride";
 import { PostARidePage } from "../post-a-ride/post-a-ride"
 import { LoggedInProvider } from "../../providers/logged-in/logged-in";
-import { MenuController } from 'ionic-angular/umd';
+import { MenuController } from 'ionic-angular';
 import { MyListingsPage } from "../my-listings/my-listings";
 
 @Component({

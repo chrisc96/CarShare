@@ -1,7 +1,6 @@
 import { Component, ViewChild } from "@angular/core";
-import { IonicPage, NavController, NavParams, MenuController } from "ionic-angular/umd";
+import { IonicPage, NavController, NavParams, MenuController } from "ionic-angular";
 import { SignupPage } from "../signup/signup";
-import { AngularFireAuth } from 'angularfire2/auth'
 import { Validators, FormBuilder } from '@angular/forms';
 import { LoggedInProvider } from '../../providers/logged-in/logged-in'
 
@@ -44,7 +43,6 @@ export class LoginPage {
 
   constructor(
     public formBuilder : FormBuilder,
-    public fire: AngularFireAuth, 
     public navCtrl: NavController, 
     public navParams: NavParams, 
     public loginSystem : LoggedInProvider,

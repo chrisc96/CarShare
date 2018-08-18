@@ -1,11 +1,11 @@
 import { Component, ViewChild } from "@angular/core";
-import { IonicPage, NavController, NavParams, MenuController } from "ionic-angular/umd";
+import { IonicPage, NavController, NavParams, MenuController } from "ionic-angular";
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Validators, FormBuilder } from '@angular/forms';
 import { LoginPage } from "../login/login";
 import { LoggedInProvider } from '../../providers/logged-in/logged-in'
-import { ToastController } from 'ionic-angular/umd';
-import { Slides } from 'ionic-angular/umd';
+import { ToastController } from 'ionic-angular';
+import { Slides } from 'ionic-angular';
 
 /**
  * Generated class for the SignupPage page.
