@@ -110,6 +110,7 @@ page-post-a-ride {
     #carsExist {
         width: 90%;
         margin: auto;
+        background-color: white;
     }
 
     .item .item-button {
@@ -148,5 +149,14 @@ page-post-a-ride {
         border-bottom-color: #32db64;
         border-bottom-width: 2px;
         -webkit-box-shadow: none!important;
+    }
+
+    .formErrorText {
+        text-align: left;
+        padding-left: 16px;
+        color: red !important;
+        margin-top: 8px !important;
+        font-size: 1.3rem !important;
+        margin-bottom: 0;
     }
 }

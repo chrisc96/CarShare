@@ -42,27 +42,27 @@
           </ion-item>
 
           <ion-item>
-              <ion-label>
-                <ion-icon class='postIcon' name="ios-briefcase-outline"></ion-icon>
-                <div class='placeholderText'>Space for bags?</div>
-              </ion-label>
-              <ion-checkbox item-end formControlName='storageAvailable' [(ngModel)]="storageAvail"></ion-checkbox>
-            </ion-item>
+            <ion-label>
+              <ion-icon class='postIcon' name="ios-briefcase-outline"></ion-icon>
+              <div class='placeholderText'>Space for bags?</div>
+            </ion-label>
+            <ion-checkbox item-end formControlName='storageAvailable' [(ngModel)]="storageAvail"></ion-checkbox>
+          </ion-item>
 
           <ion-item>
-              <ion-label color="primary">
-                <ion-icon name='ios-contacts-outline' class='postIcon'></ion-icon>
-                <div class='placeholderText'>No. Seats Available:</div>
-              </ion-label>
-              <ion-input formControlName='seatsControl' min='0' max='10' type="number" [(ngModel)]="noSeats"></ion-input>
-            </ion-item>
+            <ion-label color="primary">
+              <ion-icon name='ios-contacts-outline' class='postIcon'></ion-icon>
+              <div class='placeholderText'>No. Seats Available:</div>
+            </ion-label>
+            <ion-input formControlName='seatsControl' min='0' max='10' type="number" [(ngModel)]="noSeats"></ion-input>
+          </ion-item>
 
           <ion-item>
             <ion-label color="primary">
               <ion-icon name="ios-map-outline" class='postIcon'></ion-icon>
               <div class='placeholderText'>Meeting Place:</div>
             </ion-label>
-            <ion-input formControlName='meetingPlaceControl' #meetingPlace class='formControl' autocorrect='off' spellcheck='off' autocapitalize='off' ></ion-input>
+            <ion-input formControlName='meetingPlaceControl' #meetingPlace class='formControl' autocorrect='off' spellcheck='off' autocapitalize='off'></ion-input>
           </ion-item>
 
           <ion-item>
@@ -70,7 +70,7 @@
               <ion-icon name="ios-map-outline" class='postIcon'></ion-icon>
               <div class='placeholderText'>Destination:</div>
             </ion-label>
-            <ion-input formControlName='destPlaceControl' #destPlace class='formControl' autocorrect='off' spellcheck='off' autocapitalize='off' ></ion-input>
+            <ion-input formControlName='destPlaceControl' #destPlace class='formControl' autocorrect='off' spellcheck='off' autocapitalize='off'></ion-input>
           </ion-item>
 
           <ion-item>
@@ -78,7 +78,8 @@
               <ion-icon name="ios-calendar-outline" class='postIcon'></ion-icon>
               <div class='placeholderText'>Departure Date:</div>
             </ion-label>
-            <ion-datetime formControlName='dateControl' min="2018" max="2030" displayFormat="MMM DD,YYYY" pickerFormat="MMM DD,YYYY" [(ngModel)]="departureDate"></ion-datetime>
+            <ion-datetime formControlName='dateControl' min="2018" max="2030" displayFormat="MMM DD,YYYY" pickerFormat="MMM DD,YYYY"
+              [(ngModel)]="departureDate"></ion-datetime>
           </ion-item>
 
           <ion-item>
@@ -89,11 +90,13 @@
             <ion-datetime formControlName='timeControl' displayFormat="H:mm" pickerFormat="HH:mm" [(ngModel)]="departureTime"></ion-datetime>
           </ion-item>
 
+          <p class="formErrorText" *ngIf='!allFieldsValid() && postBtnPressed'>All fields are required</p>
+
           <ion-item class='postBtn'>
             <button ion-button block color='secondary' #submit *ngIf='requestBeingSent'>
               <ion-spinner name="bubbles"></ion-spinner>
             </button>
-            <button ion-button block color='secondary' #submit (click)='tryPost()' *ngIf='!requestBeingSent'>Post</button>
+            <button ion-button block color='secondary' #submit (click)='tryPost($event)' *ngIf='!requestBeingSent'>Post</button>
           </ion-item>
         </form>
       </div>

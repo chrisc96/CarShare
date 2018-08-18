@@ -28,6 +28,8 @@ export class PostARidePage {
 
   @ViewChildren('meetingPlace') meetingPlace: QueryList<TextInput>;
   @ViewChildren('destPlace') destinationPlace: QueryList<TextInput>;
+  meetingPlaceValue: TextInput
+  destinationPlaceValue : TextInput
 
   departureDate: String;
   departureTime: String;
@@ -41,6 +43,7 @@ export class PostARidePage {
   dataReturned : boolean = false;
 
   requestBeingSent : boolean = false
+  postBtnPressed : boolean = false
 
   postRideForm = this.formBuilder.group({
     carControl: ['', [Validators.required]],
@@ -69,13 +72,9 @@ export class PostARidePage {
       this.cars = car;
       this.carCount = this.cars.length
       this.dataReturned = true
+      this.setupAutocompleteForMeeting()
+      this.setupAutocompleteForDest()
     })
-  }
-
-
-  ionViewDidLoad() {
-    this.setupAutocompleteForMeeting()
-    this.setupAutocompleteForDest()
   }
 
   setupAutocompleteForMeeting() {
@@ -97,12 +96,12 @@ export class PostARidePage {
           })
         })
       })
-    });
+    })
   }
 
   setupAutocompleteForDest() {
-    this.destinationPlace.changes.subscribe((comps: QueryList<TextInput>) => {
       this.mapsAPILoader.load().then(() => {
+        this.destinationPlace.changes.subscribe((comps: QueryList<TextInput>) => {
         let autocomplete = new google.maps.places.Autocomplete(comps.first._elementRef.nativeElement.getElementsByTagName('input')[0], {
           types: ['address']
         });
@@ -133,28 +132,44 @@ export class PostARidePage {
     }
   }
 
-  tryPost() {
+  tryPost(e) {
+    this.postBtnPressed = true
     if (this.allFieldsValid()) {
       this.requestBeingSent = true
       this.sanitiseInputs()
 
-      let car : Car = this.cars[this.carIndex] 
+      let car : Car = this.cars[this.carIndex]
       let from : String = this.meetingPlace.first.value;
       let to : String = this.destinationPlace.first.value;
       this.afs.createListing(car, this.departureDate, this.departureTime, this.noSeats, this.storageAvail, from, to)
         .then(resp => {
           this.requestBeingSent = false
+          this.postBtnPressed = false
 
           this.clearFields();
           this.listingCreatedToast();
         })
         .catch(err => {
+          
           // Figure this out, what can go wrong?
         })
     }
   }
 
   allFieldsValid() {
+    // console.log('car', this.carIndex, ' valid: ', this.postRideForm.controls['carControl'].valid)
+    // console.log('noSeats', this.noSeats)
+    // console.log('storageAvail', this.storageAvail)
+    // console.log('departureDate', this.departureDate)
+    // console.log('departureTime', this.departureTime)
+    // if (this.meetingPlaceValue !== undefined) {
+    //   console.log('this.postRideForm.controls[meetingPlaceControl].valid',this.postRideForm.controls['meetingPlaceControl'].valid)
+    // }
+    // if (this.destinationPlaceValue !== undefined) {
+    //   console.log('this.postRideForm.controls[destPlaceControl].valid', this.postRideForm.controls['destPlaceControl'].valid)
+    // }
+    // console.log('-------------------------------------------------------------')
+
     return this.postRideForm.controls['carControl'].valid &&
       this.postRideForm.controls['meetingPlaceControl'].valid &&
       this.postRideForm.controls['destPlaceControl'].valid &&
@@ -171,10 +186,10 @@ export class PostARidePage {
   clearFields() {
     this.postRideForm.controls['carControl'].setValue(undefined);
     this.carIndex = -1;
-    this.noSeats = undefined
+    this.noSeats = null
     this.storageAvail = false
-    this.departureDate = undefined
-    this.departureTime = undefined
+    this.departureDate = null
+    this.departureTime = null
     this.meetingPlace.first.value = ''
     this.destinationPlace.first.value = ''
   }
