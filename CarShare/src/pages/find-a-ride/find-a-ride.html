@@ -42,6 +42,8 @@
           <ion-item *ngIf="listing.whosComing">
             Sharing ride: {{ listing.whosComing }}
           </ion-item>
+
+          <button ion-button block color='secondary' (click)='goToListing(listing.id)' *ngIf='listing.UserIDPoster'>Go To Listing</button>
         </ion-list>
     </div>
   </div>

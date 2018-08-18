@@ -1,5 +1,5 @@
 import { Component, ViewChild } from "@angular/core";
-import { IonicPage, NavController, NavParams, MenuController } from "ionic-angular";
+import { IonicPage, NavController, NavParams, MenuController } from "ionic-angular/umd";
 import { SignupPage } from "../signup/signup";
 import { AngularFireAuth } from 'angularfire2/auth'
 import { Validators, FormBuilder } from '@angular/forms';

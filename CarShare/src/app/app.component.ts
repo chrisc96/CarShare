@@ -1,17 +1,16 @@
 import { Component, ViewChild } from "@angular/core";
-import { Nav, Platform } from "ionic-angular";
+import { Nav, Platform } from "ionic-angular/umd";
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 
 import { HomePage } from "../pages/home/home";
 import { LoginPage } from "../pages/login/login";
 import { PostARidePage } from "../pages/post-a-ride/post-a-ride";
+import { RideListingPage } from "../pages/ride-listing/ride-listing";
 import { NavigationMenuProvider } from "../providers/navigation-menu/navigation-menu";
 import { FindARidePage } from "../pages/find-a-ride/find-a-ride";
 import { MyListingsPage } from "../pages/my-listings/my-listings";
 import { LoggedInProvider } from "../providers/logged-in/logged-in";
-
-import { User } from '../pages/struct/User'
 
 @Component({
   templateUrl: "app.html"
@@ -20,7 +19,6 @@ export class MyApp {
 
   @ViewChild(Nav) nav: Nav;
 
-  user: User;
   rootPage: any = HomePage;
 
   pages: Array<{title: string, component: any, requiresLogin: boolean}>;
@@ -41,15 +39,10 @@ export class MyApp {
     });
 
     this.pages = [
-      { title: 'Homepage', component: HomePage, requiresLogin: false},
       { title: 'Find a ride', component: FindARidePage, requiresLogin: false},
       { title: 'Post a ride', component: PostARidePage, requiresLogin: true},
       { title: 'My listings', component: MyListingsPage, requiresLogin: true}
     ]
-
-    this.loginSystem.getUserObservable().subscribe(user => {
-      this.user = user;
-    })
   }
 
   openPage(page) {
@@ -71,21 +64,7 @@ export class MyApp {
     return page.component == this.navMenu.activePage;
   }
 
-  checkLoggedIn() {
-    return this.loginSystem.userLoggedIn()
-  }
-
-  getFirstName() {
-    return this.loginSystem.getUser().firstName;
-  }
-
-  goToLoginPage() {
-    this.nav.push(LoginPage, {'toPage': this.navMenu.activePage})
-  }
-
-  logout() {
-    this.loginSystem.logout().then(() => {
-      this.nav.push(HomePage)
-    })
+  goToProfile() {
+    
   }
 }

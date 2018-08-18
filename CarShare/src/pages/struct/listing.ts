@@ -1,5 +1,6 @@
 export class Listing {
-    public constructor(public UserIDPoster: string,
+    public constructor(public id: string,
+                       public UserIDPoster: string,
                        public carID: string,
                        public dateCreated: Date,
                        public moreInfo: string,

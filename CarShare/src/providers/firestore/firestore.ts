@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { Listing } from '../../pages/struct/listing';
+import { Listing } from '../../pages/struct/Listing';
 import { Car } from '../../pages/struct/Car';
 import { User } from '../../pages/struct/User';
 import { LoggedInProvider } from '../logged-in/logged-in';
@@ -31,10 +31,16 @@ export class FirestoreProvider {
     this.listingsObservable = this.afs.collection('listings').snapshotChanges().map(
       changes => {
         return changes.map(changeAction => {
-          return changeAction.payload.doc.data() as Listing;
+          var data = changeAction.payload.doc.data() as Listing;
+          data.id = changeAction.payload.doc.id;
+          return data;
         })
       }
     )
+
+    this.listingsObservable.subscribe(listing => {
+      this.listings = listing;
+    })
 
     const uobserv = this.loginSystem.getUserObservable() // Get user observable to unwrap
     this.carsByUserIDObservable = uobserv.switchMap(user => {
@@ -49,6 +55,18 @@ export class FirestoreProvider {
 
   public getListingsObservable() {
     return this.listingsObservable;
+  }
+
+  public getListing(listingId) {
+    var listing = null;
+
+    this.listings.forEach(l => {
+      if(l.id === listingId) {
+        listing = l;
+      }
+    });
+    
+    return listing;
   }
 
   public getCarsByUIDObservable() {

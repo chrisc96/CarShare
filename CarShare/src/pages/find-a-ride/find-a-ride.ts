@@ -34,8 +34,8 @@ export class FindARidePage {
     })
   }
 
-  goToMyListings() {
-    this.navCtrl.push(RideListingPage);
+  goToListing(listingId) {
+    this.navCtrl.push(RideListingPage, listingId);
   }
 
   ionViewWillEnter() {
