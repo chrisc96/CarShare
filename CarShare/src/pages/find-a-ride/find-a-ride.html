@@ -18,23 +18,20 @@
   <div id="container">
     <div class="content" *ngIf="listings.length>0">
         <ion-list *ngFor="let listing of listings">
-          <ion-item *ngIf="listing.UserIDPoster">
-            Posted by: {{ listing.UserIDPoster }}
+          <ion-item *ngIf="listing.departureDate">
+            Departs At: {{ listing.departureDate }} {{ listing.departureTime }}
           </ion-item>
-          <ion-item *ngIf="listing.carID">
-            Car: {{ listing.carID }}
+          <ion-item *ngIf="listing.destination">
+            Destination: {{ listing.destination }}
           </ion-item>
-          <ion-item *ngIf="listing.dateCreated">
-            Date Created: {{ listing.dateCreated }}
+          <ion-item *ngIf="listing.meetingPoint">
+            Meeting Point: {{ listing.meetingPoint }}
           </ion-item>
-          <ion-item *ngIf="listing.moreInfo">
-            Additional Info: {{ listing.moreInfo }}
+          <ion-item *ngIf="listing.seatsAvailable">
+            Seats Available: {{ listing.seatsAvailable }}
           </ion-item>
-          <ion-item *ngIf="postedOnFacebook">
-            On Facebook: {{ listing.postedOnFacebok }}
-          </ion-item>
-          <ion-item *ngIf="listing.when">
-            Travel Time: {{ listing.when }}
+          <ion-item *ngIf="listing.storageSpace">
+            Storage Space: {{ listing.storageSpace }}
           </ion-item>
           <ion-item *ngIf="listing.whoWantsToCome">
             Want to ride: {{ listing.whoWantsToCome }}
@@ -43,7 +40,7 @@
             Sharing ride: {{ listing.whosComing }}
           </ion-item>
 
-          <button ion-button block color='secondary' (click)='goToListing(listing.id)' *ngIf='listing.UserIDPoster'>Go To Listing</button>
+          <button ion-button block color='secondary' (click)='goToListing(listing.id)' *ngIf='listing.id'>Go To Listing</button>
         </ion-list>
     </div>
   </div>

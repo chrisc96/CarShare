@@ -1,11 +1,14 @@
 export class Listing {
     public constructor(public id: string,
-                       public UserIDPoster: string,
-                       public carID: string,
-                       public dateCreated: Date,
-                       public moreInfo: string,
-                       public postedOnFacebok: boolean,
-                       public when: Date,
+                       public carDocumentID: string,
+                       public depatureDate: string,
+                       public departureTime: string,
+                       public destination: string,
+                       public meetingPoint: string,
+                       public seatsAvailable: string,
+                       public storageSpace: boolean,
+                       public timeCreated: Date,
+                       public userDocumentID: string,
                        public whoWantsToCome: string[],
                        public whosComing: string[]) {
     }
