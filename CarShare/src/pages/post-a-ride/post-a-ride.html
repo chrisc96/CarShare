@@ -34,8 +34,8 @@
               <ion-icon name="ios-car" class='postIcon'></ion-icon>
               <div class='placeholderText'>Car to use:</div>
             </ion-label>
-            <ion-select formControlName='carControl' [(ngModel)]="selectedCar">
-              <ion-option *ngFor='let car of cars'>
+            <ion-select formControlName='carControl'>
+              <ion-option *ngFor='let car of cars; let i = index' (ionSelect)="carIndex = i">
                 {{car.make + ' ' + car.model}}
               </ion-option>>
             </ion-select>

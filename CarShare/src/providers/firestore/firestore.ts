@@ -5,9 +5,15 @@ import { Car } from '../../pages/struct/Car';
 import { User } from '../../pages/struct/User';
 import { LoggedInProvider } from '../logged-in/logged-in';
 
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/toPromise';
+
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/first';
+import 'rxjs/add/operator/mergeMap'
+import * as firebase from 'firebase';
+
 
 /*
   Generated class for the FirestoreProvider provider.
@@ -47,7 +53,16 @@ export class FirestoreProvider {
       return this.afs.collection('cars', ref => ref.where('userID', '==', user.uid)).snapshotChanges().map(
         changes => {
           return changes.map(changeAction => {
-            return changeAction.payload.doc.data() as Car;
+            const data = changeAction.payload.doc.data() as Car;
+
+            // Data to store in car object
+            const documentID = changeAction.payload.doc.id
+            const make = data.make
+            const model = data.model
+            const rego = data.rego
+            const uid = data.uid
+            const year = data.year
+            return new Car(documentID, make, model, rego, uid, year);
           })
         })
     })
@@ -72,4 +87,26 @@ export class FirestoreProvider {
   public getCarsByUIDObservable() {
     return this.carsByUserIDObservable
   }
+
+  public createListing = (car, departDate, departTime, noSeats, storageAvail, from, to) : Promise<firebase.firestore.DocumentReference> => {
+    
+    return this.loginSystem.getUserObservable().first().toPromise().then(user => {
+      let uid = user.uid;
+      let carDocID = car.docID;
+      return this.afs.collection('listings').add({
+        timeCreated: firebase.firestore.FieldValue.serverTimestamp(),
+        meetingPoint: from,
+        destination: to,
+        userDocumentID: uid,
+        carDocumentID: carDocID,
+        departureDate: departDate,
+        departureTime: departTime,
+        seatsAvailable: noSeats,
+        storageSpace: storageAvail,
+        whoWantsToCome: [],
+        whosComing: []
+      })
+    })
+  }
+  
 }

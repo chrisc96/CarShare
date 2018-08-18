@@ -1,15 +1,15 @@
 /// <reference types="@types/googlemaps" />
 
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, TextInput } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, TextInput, ToastController } from 'ionic-angular';
 import { NavigationMenuProvider } from '../../providers/navigation-menu/navigation-menu';
 import { LoggedInProvider } from '../../providers/logged-in/logged-in';
 import { FirestoreProvider } from '../../providers/firestore/firestore';
 import { Car } from '../struct/Car'
 import { Validators, FormBuilder } from '@angular/forms';
-
 import { NgZone, QueryList, ViewChildren } from '@angular/core';
 import { MapsAPILoader } from '@agm/core';
+import { MyListingsPage } from '../my-listings/my-listings';
 
 
 /**
@@ -25,19 +25,22 @@ import { MapsAPILoader } from '@agm/core';
   templateUrl: 'post-a-ride.html',
 })
 export class PostARidePage {
-  
+
   @ViewChildren('meetingPlace') meetingPlace: QueryList<TextInput>;
   @ViewChildren('destPlace') destinationPlace: QueryList<TextInput>;
 
-  selectedCar: String;
   departureDate: String;
   departureTime: String;
-  noSeats : number;
-  storageAvail : boolean = false;
-
+  noSeats: number;
+  storageAvail: boolean = false;
+  
+  carIndex: number = -1;
   cars: Car[]
   carCount: number = 0
-  dataReturned: boolean = false
+
+  dataReturned : boolean = false;
+
+  requestBeingSent : boolean = false
 
   postRideForm = this.formBuilder.group({
     carControl: ['', [Validators.required]],
@@ -56,9 +59,10 @@ export class PostARidePage {
     public navMenu: NavigationMenuProvider,
     public loginSystem: LoggedInProvider,
     public afs: FirestoreProvider,
-    public formBuilder : FormBuilder,
+    public formBuilder: FormBuilder,
     private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private toastCtrl: ToastController,
   ) {
 
     this.afs.carsByUserIDObservable.subscribe(car => {
@@ -70,6 +74,11 @@ export class PostARidePage {
 
 
   ionViewDidLoad() {
+    this.setupAutocompleteForMeeting()
+    this.setupAutocompleteForDest()
+  }
+
+  setupAutocompleteForMeeting() {
     this.meetingPlace.changes.subscribe((comps: QueryList<TextInput>) => {
       this.mapsAPILoader.load().then(() => {
         let autocomplete = new google.maps.places.Autocomplete(comps.first._elementRef.nativeElement.getElementsByTagName('input')[0], {
@@ -78,7 +87,6 @@ export class PostARidePage {
 
         autocomplete.addListener('place_changed', () => {
           this.ngZone.run(() => {
-            console.log('here')
             let place: google.maps.places.PlaceResult = autocomplete.getPlace();
             if (place.geometry === undefined || place.geometry === null) {
               return
@@ -90,7 +98,9 @@ export class PostARidePage {
         })
       })
     });
+  }
 
+  setupAutocompleteForDest() {
     this.destinationPlace.changes.subscribe((comps: QueryList<TextInput>) => {
       this.mapsAPILoader.load().then(() => {
         let autocomplete = new google.maps.places.Autocomplete(comps.first._elementRef.nativeElement.getElementsByTagName('input')[0], {
@@ -125,36 +135,67 @@ export class PostARidePage {
 
   tryPost() {
     if (this.allFieldsValid()) {
-      console.log('all valid')
+      this.requestBeingSent = true
       this.sanitiseInputs()
-      
+
+      let car : Car = this.cars[this.carIndex] 
+      let from : String = this.meetingPlace.first.value;
+      let to : String = this.destinationPlace.first.value;
+      this.afs.createListing(car, this.departureDate, this.departureTime, this.noSeats, this.storageAvail, from, to)
+        .then(resp => {
+          this.requestBeingSent = false
+
+          this.clearFields();
+          this.listingCreatedToast();
+        })
+        .catch(err => {
+          // Figure this out, what can go wrong?
+        })
     }
   }
 
   allFieldsValid() {
-    // console.log('car', this.postRideForm.controls['carControl'].valid, 'value: ', this.postRideForm.controls['carControl'].value)
-    // console.log('meeting place', this.postRideForm.controls['meetingPlaceControl'].valid, 'value: ', this.postRideForm.controls['meetingPlaceControl'].value)
-    // console.log('dest place', this.postRideForm.controls['destPlaceControl'].valid, 'value: ', this.postRideForm.controls['destPlaceControl'].value)
-    // console.log('date: ', this.postRideForm.controls['dateControl'].valid, 'value: ', this.postRideForm.controls['dateControl'].value)
-    // console.log('time: ', this.postRideForm.controls['timeControl'].valid, 'value: ', this.postRideForm.controls['timeControl'].value)
-    // console.log('noSeats: ', this.postRideForm.controls['seatsControl'].valid, 'value: ', this.postRideForm.controls['seatsControl'].value)
-    // console.log('storage: ', this.postRideForm.controls['storageAvailable'].valid, 'value: ', this.postRideForm.controls['storageAvailable'].value)
-
     return this.postRideForm.controls['carControl'].valid &&
-    this.postRideForm.controls['meetingPlaceControl'].valid &&
-    this.postRideForm.controls['destPlaceControl'].valid &&
-    this.postRideForm.controls['dateControl'].valid &&
-    this.postRideForm.controls['timeControl'].valid &&
-    this.postRideForm.controls['seatsControl'].valid &&
-    this.postRideForm.controls['storageAvailable'].valid
+      this.postRideForm.controls['meetingPlaceControl'].valid &&
+      this.postRideForm.controls['destPlaceControl'].valid &&
+      this.postRideForm.controls['dateControl'].valid &&
+      this.postRideForm.controls['timeControl'].valid &&
+      this.postRideForm.controls['seatsControl'].valid &&
+      this.postRideForm.controls['storageAvailable'].valid
   }
 
   sanitiseInputs() {
     this.postRideForm.controls['carControl'].setValue(this.postRideForm.controls['carControl'].value.trim())
   }
 
+  clearFields() {
+    this.postRideForm.controls['carControl'].setValue(undefined);
+    this.carIndex = -1;
+    this.noSeats = undefined
+    this.storageAvail = false
+    this.departureDate = undefined
+    this.departureTime = undefined
+    this.meetingPlace.first.value = ''
+    this.destinationPlace.first.value = ''
+  }
+
+  listingCreatedToast() {
+    // Show account created successfully
+    let toast = this.toastCtrl.create({
+      message: 'Your ride listing has been posted!',
+      duration: 1000,
+      position: 'top'
+    });
+
+    toast.onDidDismiss(() => {
+      // Go back to Login page to login with new credentials
+      this.navCtrl.push(MyListingsPage)
+    })
+
+    toast.present();
+  }
+
   goToAddACarPage() {
 
   }
-
 }
