@@ -197,6 +197,12 @@ export class PostARidePage {
     toast.present();
   }
 
+  onChange(e) {
+    if (e.toString().trim() === 'Add new car') {
+      this.goToAddACarPage();
+    }
+  }
+
   goToAddACarPage() {
     this.navCtrl.push(AddCarToProfilePage, { toPage: PostARidePage })
   }
