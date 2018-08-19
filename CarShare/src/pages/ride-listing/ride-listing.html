@@ -38,10 +38,10 @@
       <ion-item *ngIf="listing.storageSpace">
         Storage Space: {{ listing.storageSpace }}
       </ion-item>
-      <ion-item *ngIf="listing.whoWantsToCome">
+      <ion-item *ngIf="listing.whoWantsToCome.length > 0">
         Want to ride: {{ listing.whoWantsToCome }}
       </ion-item>
-      <ion-item *ngIf="listing.whosComing">
+      <ion-item *ngIf="listing.whosComing.length > 0">
         Sharing ride: {{ listing.whosComing }}
       </ion-item>
     </div>
