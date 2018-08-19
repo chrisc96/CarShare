@@ -1,8 +1,6 @@
 import { Component, ViewChild } from "@angular/core";
 import { IonicPage, NavController, NavParams, MenuController } from "ionic-angular";
-import { AngularFireAuth } from 'angularfire2/auth';
 import { Validators, FormBuilder } from '@angular/forms';
-import { LoginPage } from "../login/login";
 import { LoggedInProvider } from '../../providers/logged-in/logged-in'
 import { ToastController } from 'ionic-angular';
 import { Slides } from 'ionic-angular';
@@ -65,7 +63,6 @@ export class SignupPage {
   })
 
   constructor(
-    private fireAuth: AngularFireAuth,
     public navCtrl: NavController,
     public navParams: NavParams,
     public formBuilder: FormBuilder,

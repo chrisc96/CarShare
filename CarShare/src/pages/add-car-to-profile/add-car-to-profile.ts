@@ -48,10 +48,10 @@ export class AddCarToProfilePage {
       this.requestBeingSent = true
       // Send req
 
-      let make = this.addCarForm.controls['make'].value
-      let model = this.addCarForm.controls['model'].value
-      let rego = this.addCarForm.controls['rego'].value
-      let year = this.addCarForm.controls['year'].value
+      const make = this.addCarForm.controls['make'].value
+      const model = this.addCarForm.controls['model'].value
+      const rego = this.addCarForm.controls['rego'].value
+      const year = this.addCarForm.controls['year'].value
 
       this.afs.createCar(make, model, rego, year)
         .then(resp => {
@@ -68,11 +68,6 @@ export class AddCarToProfilePage {
   }
 
   allFieldsValid() {
-    // console.log('make', this.addCarForm.controls['make'].value, ' Valid: ', this.addCarForm.controls['make'].valid)
-    // console.log('model', this.addCarForm.controls['model'].value, ' Valid: ', this.addCarForm.controls['model'].valid)
-    // console.log('rego', this.addCarForm.controls['rego'].value, ' Valid: ', this.addCarForm.controls['rego'].valid)
-    // console.log('year', this.addCarForm.controls['year'].value, ' Valid: ', this.addCarForm.controls['year'].valid)
-
     return this.addCarForm.controls['make'].valid &&
       this.addCarForm.controls['model'].valid &&
       this.addCarForm.controls['rego'].valid &&
@@ -80,16 +75,16 @@ export class AddCarToProfilePage {
   }
 
   clearFields() {
-    let make = this.addCarForm.controls['make'].setValue(null) 
-    let model = this.addCarForm.controls['model'].setValue(null) 
-    let rego = this.addCarForm.controls['rego'].setValue(null)
-    let year = this.addCarForm.controls['year'].setValue(null)
+    this.addCarForm.controls['make'].setValue(null) 
+    this.addCarForm.controls['model'].setValue(null) 
+    this.addCarForm.controls['rego'].setValue(null)
+    this.addCarForm.controls['year'].setValue(null)
   }
 
   sanitiseInputs() {
-    let make = this.addCarForm.controls['make'].setValue(this.addCarForm.controls['make'].value.trim()) 
-    let model = this.addCarForm.controls['model'].setValue(this.addCarForm.controls['model'].value.trim()) 
-    let rego = this.addCarForm.controls['rego'].setValue(this.addCarForm.controls['rego'].value.trim())
+    this.addCarForm.controls['make'].setValue(this.addCarForm.controls['make'].value.trim()) 
+    this.addCarForm.controls['model'].setValue(this.addCarForm.controls['model'].value.trim()) 
+    this.addCarForm.controls['rego'].setValue(this.addCarForm.controls['rego'].value.trim())
   }
 
   carCreatedToast() {

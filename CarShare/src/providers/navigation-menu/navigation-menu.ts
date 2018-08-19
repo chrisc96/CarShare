@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 /*
@@ -12,12 +11,9 @@ export class NavigationMenuProvider {
 
   activePage: any
 
-  constructor() {
-    
-  }
+  constructor() {}
 
   public setActivePage(page) {
     this.activePage = page;
   }
-
 }

@@ -2,7 +2,6 @@ import { AngularFireAuth } from 'angularfire2/auth'
 import { Injectable } from '@angular/core';
 
 import * as firebase from 'firebase';
-import AuthProvider = firebase.auth.AuthProvider;
 import { Observable } from 'rxjs/Observable'
 import { User } from '../../pages/struct/user'
 import { AngularFirestore } from 'angularfire2/firestore';
@@ -50,15 +49,7 @@ export class LoggedInProvider {
     })
   }
 
-  userLoggedIn() {
-    return this.user !== undefined && this.user !== null
-  }
-
-  getUser() {
-    if (this.userLoggedIn()) {
-      return this.user;
-    }
-  }
+  // Actual functions
 
   login = (email, password) => {
     return this.fireAuth.auth.signInWithEmailAndPassword(email, password)
@@ -79,11 +70,26 @@ export class LoggedInProvider {
     })
   }
 
+  logout() {
+    return this.fireAuth.auth.signOut();
+  }
+
+
+  // Helpers
+
   getUserObservable() {
     return this.userObservable;
   }
 
-  logout() {
-    return this.fireAuth.auth.signOut();
+  userLoggedIn() {
+    return this.user !== undefined && this.user !== null
+  }
+
+  getUser() {
+    if (this.userLoggedIn()) {
+      return this.user;
+    }
   }
 }
+
+

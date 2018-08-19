@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Listing } from '../../pages/struct/listing';
 import { Car } from '../../pages/struct/car';
-import { User } from '../../pages/struct/user';
 import { LoggedInProvider } from '../logged-in/logged-in';
 
 import { Observable } from 'rxjs/Observable';
@@ -25,8 +24,6 @@ import * as firebase from 'firebase';
 export class FirestoreProvider {
 
   listingsObservable : Observable<Listing[]>;
-  listings: Listing[]
-
   carsByUserIDObservable: Observable<Car[]>;
 
   constructor(public afs: AngularFirestore, public loginSystem : LoggedInProvider) {
@@ -42,10 +39,7 @@ export class FirestoreProvider {
       }
     )
 
-    this.listingsObservable.subscribe(listing => {
-      this.listings = listing;
-    })
-
+    // Setup observables on the cars that this user has
     const uobserv = this.loginSystem.getUserObservable() // Get user observable to unwrap
     this.carsByUserIDObservable = uobserv.switchMap(user => {
       return this.afs.collection('cars', ref => ref.where('userID', '==', user.uid)).snapshotChanges().map(changes => {
@@ -62,29 +56,6 @@ export class FirestoreProvider {
             return new Car(documentID, make, model, rego, uid, year);
           })
         })
-    })
-
-    // We want to also see their fname, last name for each listing
-    this.listingsObservable.switchMap(listing => {
-      return listing.map(val => {
-        const data = val;
-        console.log('listing: ', listing)
-      })
-      // return this.afs.collection('cars', ref => ref.where('userID', '==', user.uid)).snapshotChanges().map(
-      //   changes => {
-      //     return changes.map(changeAction => {
-      //       const data = changeAction.payload.doc.data() as Car;
-
-      //       // Data to store in car object
-      //       const documentID = changeAction.payload.doc.id
-      //       const make = data.make
-      //       const model = data.model
-      //       const rego = data.rego
-      //       const uid = data.uid
-      //       const year = data.year
-      //       return new Car(documentID, make, model, rego, uid, year);
-      //     })
-      //   })
     })
   }
 
@@ -128,5 +99,4 @@ export class FirestoreProvider {
       })
     })
   }
-  
 }
