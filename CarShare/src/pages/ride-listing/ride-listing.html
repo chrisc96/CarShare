@@ -23,30 +23,27 @@
 <ion-content class="home-bg">
   <div id="container">
     <div class="content">
-        <ion-item *ngIf="listing.UserIDPoster">
-            Posted by: {{ listing.UserIDPoster }}
-          </ion-item>
-          <ion-item *ngIf="listing.carID">
-            Car: {{ listing.carID }}
-          </ion-item>
-          <ion-item *ngIf="listing.dateCreated">
-            Date Created: {{ listing.dateCreated }}
-          </ion-item>
-          <ion-item *ngIf="listing.moreInfo">
-            Additional Info: {{ listing.moreInfo }}
-          </ion-item>
-          <ion-item *ngIf="postedOnFacebook">
-            On Facebook: {{ listing.postedOnFacebok }}
-          </ion-item>
-          <ion-item *ngIf="listing.when">
-            Travel Time: {{ listing.when }}
-          </ion-item>
-          <ion-item *ngIf="listing.whoWantsToCome">
-            Want to ride: {{ listing.whoWantsToCome }}
-          </ion-item>
-          <ion-item *ngIf="listing.whosComing">
-            Sharing ride: {{ listing.whosComing }}
-          </ion-item>
+      <ion-item *ngIf="listing.departureDate">
+        Departs At: {{ listing.departureDate }} {{ listing.departureTime }}
+      </ion-item>
+      <ion-item *ngIf="listing.destination">
+        Destination: {{ listing.destination }}
+      </ion-item>
+      <ion-item *ngIf="listing.meetingPoint">
+        Meeting Point: {{ listing.meetingPoint }}
+      </ion-item>
+      <ion-item *ngIf="listing.seatsAvailable">
+        Seats Available: {{ listing.seatsAvailable }}
+      </ion-item>
+      <ion-item *ngIf="listing.storageSpace">
+        Storage Space: {{ listing.storageSpace }}
+      </ion-item>
+      <ion-item *ngIf="listing.whoWantsToCome.length > 0">
+        Want to ride: {{ listing.whoWantsToCome }}
+      </ion-item>
+      <ion-item *ngIf="listing.whosComing.length > 0">
+        Sharing ride: {{ listing.whosComing }}
+      </ion-item>
     </div>
   </div>
 </ion-content>
