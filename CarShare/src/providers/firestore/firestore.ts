@@ -27,18 +27,6 @@ export class FirestoreProvider {
   carsByUserIDObservable: Observable<Car[]>;
 
   constructor(public afs: AngularFirestore, public loginSystem : LoggedInProvider) {
-
-    // Create the observable on all listings
-    this.listingsObservable = this.afs.collection('listings').snapshotChanges().map(
-      changes => {
-        return changes.map(changeAction => {
-          var data = changeAction.payload.doc.data() as Listing;
-          data.id = changeAction.payload.doc.id;
-          return data;
-        })
-      }
-    )
-
     // Setup observables on the cars that this user has
     const uobserv = this.loginSystem.getUserObservable() // Get user observable to unwrap
     this.carsByUserIDObservable = uobserv.switchMap(user => {
@@ -60,6 +48,17 @@ export class FirestoreProvider {
   }
 
   public getListingsObservable() {
+    // Create the observable on all listings
+    this.listingsObservable = this.afs.collection('listings').snapshotChanges().map(
+      changes => {
+        return changes.map(changeAction => {
+          var data = changeAction.payload.doc.data() as Listing;
+          data.id = changeAction.payload.doc.id;
+          return data;
+        })
+      }
+    )
+
     return this.listingsObservable;
   }
 
