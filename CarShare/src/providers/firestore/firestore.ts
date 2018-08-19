@@ -28,8 +28,6 @@ export class FirestoreProvider {
   listings: Listing[]
 
   carsByUserIDObservable: Observable<Car[]>;
-  carObserver: any
-  carsByUID : Car[]
 
   constructor(public afs: AngularFirestore, public loginSystem : LoggedInProvider) {
 
@@ -50,8 +48,7 @@ export class FirestoreProvider {
 
     const uobserv = this.loginSystem.getUserObservable() // Get user observable to unwrap
     this.carsByUserIDObservable = uobserv.switchMap(user => {
-      return this.afs.collection('cars', ref => ref.where('userID', '==', user.uid)).snapshotChanges().map(
-        changes => {
+      return this.afs.collection('cars', ref => ref.where('userID', '==', user.uid)).snapshotChanges().map(changes => {
           return changes.map(changeAction => {
             const data = changeAction.payload.doc.data() as Car;
 
@@ -66,22 +63,33 @@ export class FirestoreProvider {
           })
         })
     })
+
+    // We want to also see their fname, last name for each listing
+    this.listingsObservable.switchMap(listing => {
+      return listing.map(val => {
+        const data = val;
+        console.log('listing: ', listing)
+      })
+      // return this.afs.collection('cars', ref => ref.where('userID', '==', user.uid)).snapshotChanges().map(
+      //   changes => {
+      //     return changes.map(changeAction => {
+      //       const data = changeAction.payload.doc.data() as Car;
+
+      //       // Data to store in car object
+      //       const documentID = changeAction.payload.doc.id
+      //       const make = data.make
+      //       const model = data.model
+      //       const rego = data.rego
+      //       const uid = data.uid
+      //       const year = data.year
+      //       return new Car(documentID, make, model, rego, uid, year);
+      //     })
+      //   })
+    })
   }
 
   public getListingsObservable() {
     return this.listingsObservable;
-  }
-
-  public getListing(listingId) {
-    var listing = null;
-
-    this.listings.forEach(l => {
-      if(l.id === listingId) {
-        listing = l;
-      }
-    });
-    
-    return listing;
   }
 
   public getCarsByUIDObservable() {

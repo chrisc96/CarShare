@@ -18,12 +18,10 @@ import { Listing } from '../struct/listing';
 })
 export class RideListingPage {
 
-  listingId : string
   listing: Listing
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl : MenuController, public navMenu : NavigationMenuProvider, public firestore : FirestoreProvider) {
-    this.listingId = navParams.data;
-    this.listing = this.firestore.getListing(this.listingId);
+    this.listing = navParams.data;
   }
 
   ionViewWillEnter() {
