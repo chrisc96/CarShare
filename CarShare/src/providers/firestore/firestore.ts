@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { Listing } from '../../pages/struct/Listing';
-import { Car } from '../../pages/struct/Car';
-import { User } from '../../pages/struct/User';
+import { Listing } from '../../pages/struct/listing';
+import { Car } from '../../pages/struct/car';
+import { User } from '../../pages/struct/user';
 import { LoggedInProvider } from '../logged-in/logged-in';
 
 import { Observable } from 'rxjs/Observable';
@@ -89,7 +89,6 @@ export class FirestoreProvider {
   }
 
   public createListing = (car, departDate, departTime, noSeats, storageAvail, from, to) : Promise<firebase.firestore.DocumentReference> => {
-    
     return this.loginSystem.getUserObservable().first().toPromise().then(user => {
       let uid = user.uid;
       let carDocID = car.docID;
@@ -105,6 +104,19 @@ export class FirestoreProvider {
         storageSpace: storageAvail,
         whoWantsToCome: [],
         whosComing: []
+      })
+    })
+  }
+
+  public createCar = (carMake, carModel, carRego, carYear) : Promise<firebase.firestore.DocumentReference> => {
+    return this.loginSystem.getUserObservable().first().toPromise().then(user => {
+      let uid = user.uid;
+      return this.afs.collection('cars').add({
+        make: carMake,
+        model: carModel,
+        rego: carRego,
+        userID: uid,
+        year: carYear,
       })
     })
   }

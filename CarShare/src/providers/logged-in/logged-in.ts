@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import AuthProvider = firebase.auth.AuthProvider;
 import { Observable } from 'rxjs/Observable'
-import { User } from '../../pages/struct/User'
+import { User } from '../../pages/struct/user'
 import { AngularFirestore } from 'angularfire2/firestore';
 
 

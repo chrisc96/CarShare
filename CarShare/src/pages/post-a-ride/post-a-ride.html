@@ -20,7 +20,7 @@
       <div *ngIf='dataReturned'>
 
 
-        <div id='noCarsContainer' *ngIf='userHasNoCars()'>
+        <div id='noCarsContainer' [hidden]='!userHasNoCars()'>
           <div id='noCarsImage'></div>
           <div id='noCarsTitle'>No cars on account</div>
           <div id='noCarsSubText'>Add a car to your profile to be able to post a ride</div>
@@ -28,7 +28,7 @@
         </div>
 
 
-        <form id='carsExist' [formGroup]='postRideForm' *ngIf='!userHasNoCars()'>
+        <form id='carsExist' [formGroup]='postRideForm' [hidden]='userHasNoCars()'>
           <ion-item>
             <ion-label class='carSelectText' color="primary">
               <ion-icon name="ios-car" class='postIcon'></ion-icon>

@@ -4,4 +4,61 @@ page-add-car-to-profile {
         margin-top: 56px;
     }
 
+    #container {
+        display: inline-flex;
+        height: 100%;
+        width: 100%;
+        text-align: center;
+    }
+
+    #content {
+        width: inherit;
+        height: -webkit-fit-content;
+        height: -moz-fit-content;
+        height: fit-content;
+        position: relative;
+        top: 50%;
+        -webkit-transform: translateY(-60%);
+        transform: translateY(-60%);
+    }
+
+    .addCarIcon {
+        margin-right: 7px;
+        vertical-align: middle;
+        font-size: 2.5rem;
+        color: #488aff;
+    }
+
+    .placeholderText {
+        vertical-align: middle;
+        display: inline-block;
+        color: #488aff;
+        font-size: 1.4rem;
+    }
+
+    .item .item-button {
+        padding: 0 0.5em;
+        height: 35px;
+        font-size: 1.7rem;
+    }
+
+    #cardContainer {
+        width: 90%;
+        margin: auto;
+        background-color: white;
+    }
+
+    .formErrorText {
+        text-align: left;
+        padding-left: 16px;
+        color: red !important;
+        margin-top: 8px !important;
+        font-size: 1.3rem !important;
+        margin-bottom: 0;
+    }
+
+    .logo {
+        width: 160px;
+        margin-bottom: 15px;
+    }
 }

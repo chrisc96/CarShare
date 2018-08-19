@@ -5,11 +5,12 @@ import { IonicPage, NavController, NavParams, MenuController, TextInput, ToastCo
 import { NavigationMenuProvider } from '../../providers/navigation-menu/navigation-menu';
 import { LoggedInProvider } from '../../providers/logged-in/logged-in';
 import { FirestoreProvider } from '../../providers/firestore/firestore';
-import { Car } from '../struct/Car'
+import { Car } from '../struct/car'
 import { Validators, FormBuilder } from '@angular/forms';
 import { NgZone, QueryList, ViewChildren } from '@angular/core';
 import { MapsAPILoader } from '@agm/core';
 import { MyListingsPage } from '../my-listings/my-listings';
+import { AddCarToProfilePage } from '../add-car-to-profile/add-car-to-profile';
 
 
 /**
@@ -29,21 +30,21 @@ export class PostARidePage {
   @ViewChildren('meetingPlace') meetingPlace: QueryList<TextInput>;
   @ViewChildren('destPlace') destinationPlace: QueryList<TextInput>;
   meetingPlaceValue: TextInput
-  destinationPlaceValue : TextInput
+  destinationPlaceValue: TextInput
 
   departureDate: String;
   departureTime: String;
   noSeats: number;
   storageAvail: boolean = false;
-  
+
   carIndex: number = -1;
   cars: Car[]
   carCount: number = 0
 
-  dataReturned : boolean = false;
+  dataReturned: boolean = false;
 
-  requestBeingSent : boolean = false
-  postBtnPressed : boolean = false
+  requestBeingSent: boolean = false
+  postBtnPressed: boolean = false
 
   postRideForm = this.formBuilder.group({
     carControl: ['', [Validators.required]],
@@ -63,9 +64,9 @@ export class PostARidePage {
     public loginSystem: LoggedInProvider,
     public afs: FirestoreProvider,
     public formBuilder: FormBuilder,
+    private toastCtrl: ToastController,
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
-    private toastCtrl: ToastController,
   ) {
 
     this.afs.carsByUserIDObservable.subscribe(car => {
@@ -100,8 +101,8 @@ export class PostARidePage {
   }
 
   setupAutocompleteForDest() {
+    this.destinationPlace.changes.subscribe((comps: QueryList<TextInput>) => {
       this.mapsAPILoader.load().then(() => {
-        this.destinationPlace.changes.subscribe((comps: QueryList<TextInput>) => {
         let autocomplete = new google.maps.places.Autocomplete(comps.first._elementRef.nativeElement.getElementsByTagName('input')[0], {
           types: ['address']
         });
@@ -138,9 +139,9 @@ export class PostARidePage {
       this.requestBeingSent = true
       this.sanitiseInputs()
 
-      let car : Car = this.cars[this.carIndex]
-      let from : String = this.meetingPlace.first.value;
-      let to : String = this.destinationPlace.first.value;
+      let car: Car = this.cars[this.carIndex]
+      let from: String = this.meetingPlace.first.value;
+      let to: String = this.destinationPlace.first.value;
       this.afs.createListing(car, this.departureDate, this.departureTime, this.noSeats, this.storageAvail, from, to)
         .then(resp => {
           this.requestBeingSent = false
@@ -150,26 +151,12 @@ export class PostARidePage {
           this.listingCreatedToast();
         })
         .catch(err => {
-          
           // Figure this out, what can go wrong?
         })
     }
   }
 
   allFieldsValid() {
-    // console.log('car', this.carIndex, ' valid: ', this.postRideForm.controls['carControl'].valid)
-    // console.log('noSeats', this.noSeats)
-    // console.log('storageAvail', this.storageAvail)
-    // console.log('departureDate', this.departureDate)
-    // console.log('departureTime', this.departureTime)
-    // if (this.meetingPlaceValue !== undefined) {
-    //   console.log('this.postRideForm.controls[meetingPlaceControl].valid',this.postRideForm.controls['meetingPlaceControl'].valid)
-    // }
-    // if (this.destinationPlaceValue !== undefined) {
-    //   console.log('this.postRideForm.controls[destPlaceControl].valid', this.postRideForm.controls['destPlaceControl'].valid)
-    // }
-    // console.log('-------------------------------------------------------------')
-
     return this.postRideForm.controls['carControl'].valid &&
       this.postRideForm.controls['meetingPlaceControl'].valid &&
       this.postRideForm.controls['destPlaceControl'].valid &&
@@ -211,6 +198,6 @@ export class PostARidePage {
   }
 
   goToAddACarPage() {
-
+    this.navCtrl.push(AddCarToProfilePage, { toPage: PostARidePage })
   }
 }

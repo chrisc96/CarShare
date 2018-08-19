@@ -4,15 +4,63 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<ion-toolbar>
+  <button ion-button menuToggle left>
+    <ion-icon name="menu"></ion-icon>
+  </button>
+  <ion-title>
+    Add a car
+  </ion-title>
+</ion-toolbar>
 
-  <ion-navbar>
-    <ion-title>addCarToProfile</ion-title>
-  </ion-navbar>
+<ion-content class="home-bg">
+  <div id="container">
+    <div id="content">
+      <img class='logo' src='../../assets/imgs/carLogo.png'>
+      <form id='cardContainer' [formGroup]='addCarForm'>
 
-</ion-header>
+        <ion-item>
+          <ion-label color="primary">
+            <ion-icon name='ios-car-outline' class='addCarIcon'></ion-icon>
+            <div class='placeholderText'>Make:</div>
+          </ion-label>
+          <ion-input formControlName='make'></ion-input>
+        </ion-item>
 
+        <ion-item>
+          <ion-label color="primary">
+            <ion-icon name='ios-car-outline' class='addCarIcon'></ion-icon>
+            <div class='placeholderText'>Model:</div>
+          </ion-label>
+          <ion-input formControlName='model'></ion-input>
+        </ion-item>
 
-<ion-content padding>
+        <ion-item>
+          <ion-label color="primary">
+            <ion-icon name='ios-car-outline' class='addCarIcon'></ion-icon>
+            <div class='placeholderText'>Car Registration:</div>
+          </ion-label>
+          <ion-input formControlName='rego'></ion-input>
+        </ion-item>
 
+        <ion-item>
+          <ion-label color="primary">
+            <ion-icon name='ios-car-outline' class='addCarIcon'></ion-icon>
+            <div class='placeholderText'>Year:</div>
+          </ion-label>
+          <ion-input formControlName='year' min='1900' type="number"></ion-input>
+        </ion-item>
+
+        <p class="formErrorText" *ngIf='!allFieldsValid() && addCarBtnPressed'>All fields are required</p>
+
+        <ion-item class='addCarBtn'>
+          <button ion-button block color='secondary' *ngIf='requestBeingSent'>
+            <ion-spinner name="bubbles"></ion-spinner>
+          </button>
+          <button ion-button block color='secondary' (click)='tryAddCar($event)' *ngIf='!requestBeingSent'>Post</button>
+        </ion-item>
+
+      </form>
+    </div>
+  </div>
 </ion-content>
