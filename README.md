@@ -18,7 +18,11 @@ Ionic Android App
 * Page 9.2: View your ride listings (with rides existing)
 * Page 10: Navigation bar
 * Page 11: Car shares I'm going on
-* Page 12: Add car to profile page (extra added)
+* Page 12: Add car to profile
+* Page 13: User details (+ edit) page
+* Page 14: Car details (+ edit) page
+* Page 15: Edit my listing page
+* Page 16: Post to facebook page
 
 ## What each person has left to do:
 
@@ -40,3 +44,10 @@ Already done:
 * 4 - Login - Chris
 * 5 - Signup - Chris/Thomas
 * 10 - Navigation Bar - Chris
+
+Minor Todos:
+* Add a loading bar while cars are being pulled in post a ride (instead of the empty screen shown)
+* Remove car collection and make sure cars are being added to a users collection. Also will need to change the way the cars are pulled down in Post A Ride
+* Improve UX.
+* Implement searching on 'find a ride' page
+* Implement filtering on 'find a ride' page
