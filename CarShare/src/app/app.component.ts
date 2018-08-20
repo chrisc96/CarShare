@@ -45,7 +45,7 @@ export class MyApp {
       { title: 'Post a ride', component: PostARidePage, requiresLogin: true },
       { title: 'My listings', component: MyListingsPage, requiresLogin: true },
       { title: 'Review share requests', component: ReviewRideShareRequestPage, requiresLogin: false },
-      { title: 'Profile', component: ProfilePage, requiresLogin: false }
+      { title: 'Profile', component: ProfilePage, requiresLogin: true }
     ]
   }
 

@@ -1,26 +1,38 @@
 page-profile {
-    .content #container {
-        position: absolute;
-        margin-top: 80px;
-        left: 0;
+    #container {
+        display: inline-flex;
+        height: 100%;
         width: 100%;
         text-align: center;
+    }
 
-        @media screen and (min-width:650px) {
-            position: relative;
-            margin-left: auto;
-            margin-right: auto;
-            width: 60%;
-        }
-        @media screen and (min-width:950px) {
-            width: 55%;
-        }
-        @media screen and (min-width:1200px) {
-            width: 38%;
-        }
-        @media screen and (min-width:1700px) {
-            width: 30%;
-        }
+    #content {
+        width: inherit;
+        height: -webkit-fit-content;
+        height: -moz-fit-content;
+        height: fit-content;
+        position: relative;
+        top: 50%;
+        -webkit-transform: translateY(-60%);
+        transform: translateY(-60%);
+    }
+
+    .text-input-md {
+        margin: 0;
+    }
+
+    .text-input {
+        font-size: 1.4rem;
+    }
+
+    textarea.text-input.text-input-md {
+        height: 100px;
+    }
+
+    #display {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .editIcon {
@@ -28,5 +40,18 @@ page-profile {
         vertical-align: middle;
         font-size: 2.5rem;
         color: #488aff;
+    }
+
+    .placeholderText {
+        vertical-align: middle;
+        display: inline-block;
+        color: #488aff;
+        font-size: 1.4rem;
+    }
+
+    .item .item-button {
+        padding: 0 0.5em;
+        height: 35px;
+        font-size: 1.7rem;
     }
 }

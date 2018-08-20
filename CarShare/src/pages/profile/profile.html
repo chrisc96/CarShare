@@ -15,23 +15,25 @@
   
   <ion-content class="home-bg">
     <div id="container">
-      <div class="content"> 
-        <div class="display" *ngIf="user && !editingMode">
-          <ion-item *ngIf="user.firstName">
-            First Name: {{ user.firstName }}
-          </ion-item>
-          <ion-item *ngIf="user.lastName">
-            Last Name: {{ user.lastName }}
-          </ion-item>
-          <ion-item *ngIf="user.contactNum">
-            Contact Number: {{ user.contactNum }}
-          </ion-item>
+      <div id="content"> 
+        <div id="display">
+          <div *ngIf="user && !editingMode">
+            <ion-item *ngIf="user.firstName">
+              First Name: {{ user.firstName }}
+            </ion-item>
+            <ion-item *ngIf="user.lastName">
+              Last Name: {{ user.lastName }}
+            </ion-item>
+            <ion-item *ngIf="user.contactNum">
+              Contact Number: {{ user.contactNum }}
+            </ion-item>
 
-          <button ion-button block color='secondary' (click)='editDetails()' >Edit</button>
-        </div>
+            <ion-item class="editBtn">
+              <button ion-button block color='secondary' (click)='editDetails()' >Edit</button>
+            </ion-item>
+          </div>
 
-        <div class="edit" *ngIf="user && editingMode">
-          <form [formGroup]='editDetailsForm'>
+          <form id='edit' [formGroup]='editDetailsForm' *ngIf="user && editingMode">
             <ion-item>
               <ion-label color="primary">
                 <ion-icon name="contact" class='editIcon'></ion-icon>
@@ -56,11 +58,11 @@
                 <ion-input formControlName='contactNumControl' [(ngModel)]='contactNum' class='formControl'></ion-input>
               </ion-item>
 
-            <ion-item class='postBtn'>
+            <ion-item class='submitBtn'>
               <button ion-button block color='secondary' #submit *ngIf='requestBeingSent'>
                 <ion-spinner name="bubbles"></ion-spinner>
               </button>
-              <button ion-button block color='secondary' #submit (click)='tryEdit($event)' *ngIf='!requestBeingSent'>Edit</button>
+              <button ion-button block color='secondary' #submit (click)='tryEdit($event)' *ngIf='!requestBeingSent'>Submit</button>
             </ion-item>
           </form>
         </div>
