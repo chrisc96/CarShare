@@ -10,6 +10,7 @@ import { NavigationMenuProvider } from "../providers/navigation-menu/navigation-
 import { FindARidePage } from "../pages/find-a-ride/find-a-ride";
 import { MyListingsPage } from "../pages/my-listings/my-listings";
 import { LoggedInProvider } from "../providers/logged-in/logged-in";
+import { ReviewRideShareRequestPage} from "../pages/review-ride-share-request/review-ride-share-request";
 
 @Component({
   templateUrl: "app.html"
@@ -41,7 +42,8 @@ export class MyApp {
       { title: 'Homepage', component: HomePage, requiresLogin: false},
       { title: 'Find a ride', component: FindARidePage, requiresLogin: false },
       { title: 'Post a ride', component: PostARidePage, requiresLogin: true },
-      { title: 'My listings', component: MyListingsPage, requiresLogin: true }
+      { title: 'My listings', component: MyListingsPage, requiresLogin: true },
+      { title: 'Review share requests', component: ReviewRideShareRequestPage, requiresLogin: true }
     ]
   }
 

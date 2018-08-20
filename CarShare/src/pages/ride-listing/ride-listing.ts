@@ -33,4 +33,7 @@ export class RideListingPage {
     this.navCtrl.pop();
   }
 
+  requestToShare() {
+    
+  }
 }

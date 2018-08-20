@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
+import { NavigationMenuProvider } from "../../providers/navigation-menu/navigation-menu";
+
 
 /**
  * Generated class for the ReviewRideShareRequestPage page.
@@ -15,11 +17,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ReviewRideShareRequestPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public navMenu: NavigationMenuProvider, public menuCtrl: MenuController) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ReviewRideShareRequestPage');
+  ionViewWillEnter() {
+    this.menuCtrl.enable(true, 'navMenu');
+    this.navMenu.setActivePage(ReviewRideShareRequestPage)
   }
 
 }
