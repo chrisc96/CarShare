@@ -43,7 +43,7 @@ export class ProfilePage {
     this.editBtnPressed = true;
     this.requestBeingSent = true;
 
-    this.firestore.updateUser(this.firstName, this.lastName, this.contactNum)
+    this.firestore.updateUser(this.firstName, this.lastName, this.contactNum, this.user.uid)
       .then(resp => {
         this.requestBeingSent = false;
         this.editBtnPressed = false;
