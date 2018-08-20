@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
+import { NavigationMenuProvider } from '../../providers/navigation-menu/navigation-menu';
+import { FirestoreProvider } from '../../providers/firestore/firestore';
+import { User } from '../struct/user'
 
 /**
  * Generated class for the ProfilePage page.
@@ -15,11 +18,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ProfilePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  user: User
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public navMenu: NavigationMenuProvider, public firestore: FirestoreProvider) {
+    this.firestore.getUserObservable().subscribe(user => {
+      this.user = user;
+    })
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
+  ionViewWillEnter() {
+    this.menuCtrl.enable(true, 'navMenu');
+    this.navMenu.setActivePage(ProfilePage)
   }
-
 }

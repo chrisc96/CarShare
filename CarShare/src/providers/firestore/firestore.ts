@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Listing } from '../../pages/struct/listing';
 import { Car } from '../../pages/struct/car';
+import { User } from '../../pages/struct/user';
 import { LoggedInProvider } from '../logged-in/logged-in';
 
 import { Observable } from 'rxjs/Observable';
@@ -25,11 +26,12 @@ export class FirestoreProvider {
 
   listingsObservable : Observable<Listing[]>;
   carsByUserIDObservable: Observable<Car[]>;
+  userObservable : Observable<User>
 
   constructor(public afs: AngularFirestore, public loginSystem : LoggedInProvider) {
     // Setup observables on the cars that this user has
-    const uobserv = this.loginSystem.getUserObservable() // Get user observable to unwrap
-    this.carsByUserIDObservable = uobserv.switchMap(user => {
+    this.userObservable = this.loginSystem.getUserObservable() // Get user observable to unwrap
+    this.carsByUserIDObservable = this.userObservable .switchMap(user => {
       return this.afs.collection('cars', ref => ref.where('userID', '==', user.uid)).snapshotChanges().map(changes => {
           return changes.map(changeAction => {
             const data = changeAction.payload.doc.data() as Car;
@@ -60,6 +62,10 @@ export class FirestoreProvider {
     )
 
     return this.listingsObservable;
+  }
+
+  public getUserObservable() {
+    return this.userObservable;
   }
 
   public getCarsByUIDObservable() {

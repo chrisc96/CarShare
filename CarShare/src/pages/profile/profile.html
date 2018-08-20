@@ -4,15 +4,27 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>profilePage</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-
-</ion-content>
+<ion-toolbar>
+    <button ion-button menuToggle left>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Profile
+    </ion-title>
+  </ion-toolbar>
+  
+  <ion-content class="home-bg">
+    <div id="container">
+      <div class="content" *ngIf="user">
+        <ion-item *ngIf="user.firstName">
+          First Name: {{ user.firstName }}
+        </ion-item>
+        <ion-item *ngIf="user.lastName">
+          Last Name: {{ user.lastName }}
+        </ion-item>
+        <ion-item *ngIf="user.contactNum">
+          Contact Number: {{ user.contactNum }}
+        </ion-item>
+      </div>
+    </div>
+  </ion-content>
