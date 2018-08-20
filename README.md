@@ -4,6 +4,10 @@ Ionic Android App
 * CarShare helps people to locate other people wanting to carpool.
 * We're using AngularJS, Typescript and SASS all encompassed by the Ionic framework. Also using Firebase and some Web APIs.
 
+## Current Progress
+
+6/16 pages done
+
 ## Page List:
 
 * Page 1: Home page
@@ -24,28 +28,30 @@ Ionic Android App
 * Page 15: Edit my listing page
 * Page 16: Post to facebook page
 
-## What each person has left to do:
-
-Thomas: 2, 3, 6, 8
-
-Chris: 7, 9.1, 9.2, 11, 12
-
 ## Current status
 
 To Do:
-* 2, 3, 6, 7, 8, 9.1, 9.2, 11, 12
+* 2, 3, 6, 8, 9.1, 9.2, 11, 13, 14, 15, 16
 
-In Progress:
-* 7 - Chris
+#### What each person has left to do:
+
+Thomas: 2, 3, 6, 8, 13, 16
+
+Chris: 9.1, 9.2, 11, 14, 15
+
+#### In Progress:
 * 2 - Thomas
+* 3 - Thomas
 
-Already done:
+#### Already done:
 * 1 - Home page - Chris
 * 4 - Login - Chris
 * 5 - Signup - Chris/Thomas
 * 10 - Navigation Bar - Chris
+* 7 - Post a ride page - Chris
+* 12 - Add car page - Chris
 
-Minor Todos:
+#### Minor Todos:
 * Add a loading bar while cars are being pulled in post a ride (instead of the empty screen shown)
 * Remove car collection and make sure cars are being added to a users collection. Also will need to change the way the cars are pulled down in Post A Ride
 * Improve UX.
