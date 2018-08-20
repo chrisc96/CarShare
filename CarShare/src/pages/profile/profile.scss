@@ -4,6 +4,8 @@ page-profile {
         margin-top: 80px;
         left: 0;
         width: 100%;
+        text-align: center;
+
         @media screen and (min-width:650px) {
             position: relative;
             margin-left: auto;
@@ -19,5 +21,12 @@ page-profile {
         @media screen and (min-width:1700px) {
             width: 30%;
         }
+    }
+
+    .editIcon {
+        margin-right: 7px;
+        vertical-align: middle;
+        font-size: 2.5rem;
+        color: #488aff;
     }
 }

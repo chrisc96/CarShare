@@ -15,16 +15,55 @@
   
   <ion-content class="home-bg">
     <div id="container">
-      <div class="content" *ngIf="user">
-        <ion-item *ngIf="user.firstName">
-          First Name: {{ user.firstName }}
-        </ion-item>
-        <ion-item *ngIf="user.lastName">
-          Last Name: {{ user.lastName }}
-        </ion-item>
-        <ion-item *ngIf="user.contactNum">
-          Contact Number: {{ user.contactNum }}
-        </ion-item>
+      <div class="content"> 
+        <div class="display" *ngIf="user && !editingMode">
+          <ion-item *ngIf="user.firstName">
+            First Name: {{ user.firstName }}
+          </ion-item>
+          <ion-item *ngIf="user.lastName">
+            Last Name: {{ user.lastName }}
+          </ion-item>
+          <ion-item *ngIf="user.contactNum">
+            Contact Number: {{ user.contactNum }}
+          </ion-item>
+
+          <button ion-button block color='secondary' (click)='editDetails()' >Edit</button>
+        </div>
+
+        <div class="edit" *ngIf="user && editingMode">
+          <form [formGroup]='editDetailsForm'>
+            <ion-item>
+              <ion-label color="primary">
+                <ion-icon name="contact" class='editIcon'></ion-icon>
+                <div class='placeholderText'>First Name:</div>
+              </ion-label>
+              <ion-input formControlName='firstNameControl' [(ngModel)]='firstName' class='formControl'></ion-input>
+            </ion-item>
+      
+            <ion-item>
+              <ion-label color="primary">
+                <ion-icon name="contact" class='editIcon'></ion-icon>
+                <div class='placeholderText'>Last Name:</div>
+              </ion-label>
+              <ion-input formControlName='lastNameControl' [(ngModel)]='lastName' class='formControl'></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label color="primary">
+                  <ion-icon name="call" class='editIcon'></ion-icon>
+                  <div class='placeholderText'>Contact Number:</div>
+                </ion-label>
+                <ion-input formControlName='contactNumControl' [(ngModel)]='contactNum' class='formControl'></ion-input>
+              </ion-item>
+
+            <ion-item class='postBtn'>
+              <button ion-button block color='secondary' #submit *ngIf='requestBeingSent'>
+                <ion-spinner name="bubbles"></ion-spinner>
+              </button>
+              <button ion-button block color='secondary' #submit (click)='tryEdit($event)' *ngIf='!requestBeingSent'>Edit</button>
+            </ion-item>
+          </form>
+        </div>
       </div>
     </div>
   </ion-content>

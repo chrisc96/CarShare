@@ -44,6 +44,8 @@
       <ion-item *ngIf="listing.whosComing.length > 0">
         Sharing ride: {{ listing.whosComing }}
       </ion-item>
+
+      <button ion-button block color='secondary' (click)='requestToShare()' >Request to Share</button>
     </div>
   </div>
 </ion-content>

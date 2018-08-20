@@ -72,6 +72,17 @@ export class FirestoreProvider {
     return this.carsByUserIDObservable
   }
 
+  public updateUser (firstName, lastName, contactNum) {
+    return this.loginSystem.getUserObservable().first().toPromise().then(user => {
+      let uid = user.uid;
+      return this.afs.doc<User>('users/' + uid).update({
+        firstName: firstName,
+        lastName: lastName,
+        contactNum: contactNum
+      })
+    })
+  }
+
   public createListing = (car, departDate, departTime, noSeats, storageAvail, from, to) : Promise<firebase.firestore.DocumentReference> => {
     return this.loginSystem.getUserObservable().first().toPromise().then(user => {
       let uid = user.uid;
