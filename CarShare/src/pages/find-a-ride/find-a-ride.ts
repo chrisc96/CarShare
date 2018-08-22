@@ -30,7 +30,6 @@ export class FindARidePage {
     public listingsProvider: FirestoreListingsProvider
   ) {
     this.listingsProvider.getListingsObservable().subscribe(listing => {
-        console.log(listing)
         this.listings = listing;
     })
   }
