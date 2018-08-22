@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Listing } from '../../pages/struct/listing';
-import { Car } from '../../pages/struct/car';
 import { User } from '../../pages/struct/user';
 import { FirestoreUsersProvider } from '../../providers/firestore-users/firestore-users'
 
@@ -27,6 +26,7 @@ import { Time } from '@angular/common';
 export class FirestoreListingsProvider {
 
   allListingsObservable: Observable<any[]>;
+  userListingsObservable: Observable<Listing[]>;
   listings: Listing[];
 
   constructor(public afs: AngularFirestore, public usersProvider: FirestoreUsersProvider) {
@@ -43,6 +43,18 @@ export class FirestoreListingsProvider {
       })
     }).mergeMap(observables => combineLatest(observables))
 
+    var user = this.usersProvider.getUser()
+
+    this.userListingsObservable = this.afs.collection('listings', ref => ref.where('userDocumentID', '==', user.uid)).snapshotChanges().map(listings => {
+      return listings.map((listing) => {
+        const project_data = listing.payload.doc.data() as Listing;
+        const carID = project_data.carDocumentID;
+
+        return combineLatest(this.afs.doc('cars/' + carID).valueChanges(), (data1) => {
+          return {...project_data, ...data1};
+        })                 
+      })
+    }).mergeMap(observables => combineLatest(observables))
   }
 
   public createListing = (car, departDate, departTime, noSeats, storageAvail, from, to): Promise<firebase.firestore.DocumentReference> => {
@@ -73,8 +85,11 @@ export class FirestoreListingsProvider {
     })
   }
 
+  public getUserListingsObservable() {
+    return this.userListingsObservable;
+  }
 
-  public getListingsObservable() {
+  public getAllListingsObservable() {
     return this.allListingsObservable;
   }
 }

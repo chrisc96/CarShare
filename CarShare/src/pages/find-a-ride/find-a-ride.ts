@@ -29,7 +29,7 @@ export class FindARidePage {
     public navMenu: NavigationMenuProvider,
     public listingsProvider: FirestoreListingsProvider
   ) {
-    this.listingsProvider.getListingsObservable().subscribe(listings => {
+    this.listingsProvider.getAllListingsObservable().subscribe(listings => {
         this.listings = listings;
     })
   }
