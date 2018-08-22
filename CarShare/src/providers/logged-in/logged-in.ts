@@ -38,9 +38,9 @@ export class LoggedInProvider {
       return combineLatest(of(null), of(null)); 
      }
    })
-   .map((pakcagedInfo: Array<any>) => {
-     const user = pakcagedInfo[1];
-     const userInfo = pakcagedInfo[0];
+   .map((packagedInfo: Array<any>) => {
+     const user = packagedInfo[1];
+     const userInfo = packagedInfo[0];
      if(!user || !userInfo) {
        return null;
      }
