@@ -29,8 +29,8 @@ export class FindARidePage {
     public navMenu: NavigationMenuProvider,
     public listingsProvider: FirestoreListingsProvider
   ) {
-    this.listingsProvider.getListingsObservable().subscribe(listing => {
-        this.listings = listing;
+    this.listingsProvider.getListingsObservable().subscribe(listings => {
+        this.listings = listings;
     })
   }
 

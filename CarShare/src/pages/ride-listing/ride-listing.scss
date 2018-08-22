@@ -1,24 +1,31 @@
 page-ride-listing {
-    .content #container {
-        position: absolute;
-        top: 50%;
-        margin-top: 80px;
-        left: 0;
+    #container {
+        display: inline-flex;
+        height: 100%;
         width: 100%;
-        @media screen and (min-width:650px) {
-            position: relative;
-            margin-left: auto;
-            margin-right: auto;
-            width: 60%;
-        }
-        @media screen and (min-width:950px) {
-            width: 55%;
-        }
-        @media screen and (min-width:1200px) {
-            width: 38%;
-        }
-        @media screen and (min-width:1700px) {
-            width: 30%;
-        }
+        text-align: center;
+    }
+
+    #content {
+        width: inherit;
+        height: -webkit-fit-content;
+        height: -moz-fit-content;
+        height: fit-content;
+        position: relative;
+        top: 50%;
+        -webkit-transform: translateY(-60%);
+        transform: translateY(-60%);
+    }
+
+    #listingDetails {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .item .item-button {
+        padding: 0 0.5em;
+        height: 35px;
+        font-size: 1.7rem;
     }
 }
