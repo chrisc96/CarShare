@@ -44,8 +44,7 @@ export class MyApp {
       { title: 'Find a ride', component: FindARidePage, requiresLogin: false },
       { title: 'Post a ride', component: PostARidePage, requiresLogin: true },
       { title: 'My listings', component: MyListingsPage, requiresLogin: true },
-      { title: 'Review share requests', component: ReviewRideShareRequestPage, requiresLogin: false },
-      { title: 'Profile', component: ProfilePage, requiresLogin: true }
+      { title: 'Review share requests', component: ReviewRideShareRequestPage, requiresLogin: false }
     ]
   }
 
@@ -73,7 +72,9 @@ export class MyApp {
   }
 
   checkLoggedIn() {
-    return this.loginSystem.userLoggedIn()
+    var val = this.loginSystem.userLoggedIn()
+    // console.log('here', val)
+    return val;
   }
 
   getFirstName() {

@@ -1,10 +1,10 @@
 <ion-menu id='navMenu' [content]='mycontent'>
     <ion-content>
-        <div id='profileArea' (click)='goToProfile()'>
+        <div id='profileArea'>
 
         </div>
         <ion-list>
-            <div class='navUserArea'>
+            <div class='navUserArea' [style.cursor]="checkLoggedIn() ? 'pointer' : 'auto' ">
                 <div class='navUserIconArea'>
                     <div class="navUserOutline navProfileNoImg">
                         <div class='navUserIcon'></div>

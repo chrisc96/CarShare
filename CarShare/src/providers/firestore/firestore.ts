@@ -30,9 +30,11 @@ export class FirestoreProvider {
 
   constructor(public afs: AngularFirestore, public loginSystem : LoggedInProvider) {
     // Setup observables on the cars that this user has
-    this.userObservable = this.loginSystem.getUserObservable() // Get user observable to unwrap
-    this.carsByUserIDObservable = this.userObservable .switchMap(user => {
-      return this.afs.collection('cars', ref => ref.where('userID', '==', user.uid)).snapshotChanges().map(changes => {
+    // Get user observable to unwrap
+    this.userObservable = this.loginSystem.getUserObservable();
+    this.carsByUserIDObservable = this.userObservable.switchMap(user => {
+      if (user) {
+        return this.afs.collection('cars', ref => ref.where('userID', '==', user.uid)).snapshotChanges().map(changes => {
           return changes.map(changeAction => {
             const data = changeAction.payload.doc.data() as Car;
 
@@ -46,6 +48,10 @@ export class FirestoreProvider {
             return new Car(documentID, make, model, rego, uid, year);
           })
         })
+       }
+       else {
+        return [];
+       }
     })
   }
 

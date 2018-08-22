@@ -119,11 +119,12 @@
     font-weight: 300;
     vertical-align: middle;
     text-align: left;
-    position: relative;
     padding-left: 5px;
-    height: inherit;
-    transform: translateY(40%);
-    -webkit-transform: translateY(40%);
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    -webkit-transform: translate(0%, -50%);
+    transform: translate(0, -50%);
 }
 
 .navLogoutText {

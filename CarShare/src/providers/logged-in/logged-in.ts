@@ -2,10 +2,14 @@ import { AngularFireAuth } from 'angularfire2/auth'
 import { Injectable } from '@angular/core';
 
 import * as firebase from 'firebase';
-import { Observable } from 'rxjs/Observable'
+import { Observable } from "rxjs/Observable"
 import { User } from '../../pages/struct/user'
 import { AngularFirestore } from 'angularfire2/firestore';
+import { combineLatest } from 'rxjs';
+import { of } from 'rxjs';
 
+
+type UserInfo = { firstName: string, lastName: string, contactNum: string };
 
 /*
   Generated class for the LoggedInProvider provider.
@@ -16,37 +20,37 @@ import { AngularFirestore } from 'angularfire2/firestore';
 @Injectable()
 export class LoggedInProvider {
 
-  public user: User;
+  public user: User | null;
   public db: firebase.firestore.Firestore;
 
   private userObservable: Observable<User>
-  private userObserver: any
 
   constructor(public fireAuth: AngularFireAuth, public afs: AngularFirestore) {
-    this.userObservable = Observable.create((observer) => {
-      this.userObserver = observer;
-      this.subscriptions()
-    })
+    this.subscriptions()
   }
 
   subscriptions() {
-    // If any data changes in the /users collection, we realtime update the 'this.user' reference
-    this.fireAuth.authState.subscribe(user => {
-      if (user) {
-          this.afs.doc('users/' + user.uid).valueChanges().subscribe((userInfo: { firstName: string, lastName: string, contactNum: string }) => {
-            if (userInfo) {
-              this.user = new User(user.uid, user.email, userInfo.firstName, userInfo.lastName, userInfo.contactNum)
-            }
-            else {
-              this.user = null
-            }
-            this.userObserver.next(this.user)
-          })
-      }
-      else {
-        this.user = null
-      }
-    })
+   this.userObservable = this.fireAuth.authState.flatMap(user => {
+     if (user) {
+      return combineLatest(this.afs.doc('users/' + user.uid).valueChanges(), of(user))
+     }
+     else {
+      return combineLatest(of(null), of(null)); 
+     }
+   })
+   .map((pakcagedInfo: Array<any>) => {
+     const user = pakcagedInfo[1];
+     const userInfo = pakcagedInfo[0];
+     if(!user || !userInfo) {
+       return null;
+     }
+
+     return new User(user.uid, user.email, userInfo.firstName, userInfo.lastName, userInfo.contactNum);
+   });
+
+   this.userObservable.subscribe(user => {
+    this.user = user;
+   });
   }
 
   // Actual functions
@@ -74,15 +78,14 @@ export class LoggedInProvider {
     return this.fireAuth.auth.signOut();
   }
 
-
   // Helpers
-
-  getUserObservable() {
-    return this.userObservable;
-  }
 
   userLoggedIn() {
     return this.user !== undefined && this.user !== null
+  }
+
+  getUserObservable() {
+    return this.userObservable;
   }
 
   getUser() {
