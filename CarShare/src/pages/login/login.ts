@@ -49,7 +49,6 @@ export class LoginPage {
     public menuCtrl : MenuController
   ) {
     this.pageToGoTo = this.navParams.data.toPage;
-    console.log('test logged in different')
   }
 
   ionViewWillEnter() {

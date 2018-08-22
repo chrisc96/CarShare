@@ -4,7 +4,7 @@
 
         </div>
         <ion-list>
-            <div class='navUserArea' [style.cursor]="checkLoggedIn() ? 'pointer' : 'auto' ">
+            <div menuClose="navMenu" class='navUserArea' [style.cursor]="checkLoggedIn() ? 'pointer' : 'auto' " (click)='goToProfile()'>
                 <div class='navUserIconArea'>
                     <div class="navUserOutline navProfileNoImg">
                         <div class='navUserIcon'></div>
@@ -15,17 +15,17 @@
                     <div class='navHelloUser' *ngIf='!checkLoggedIn()'>Hello, Guest!</div>
                 </div>
             </div>
-            <button menuClose ion-item *ngFor='let p of pages' [class.activeHighlight]='checkActive(p)' (click)='openPage(p)'>
+            <button menuClose="navMenu" ion-item *ngFor='let p of pages' [class.activeHighlight]='checkActive(p)' (click)='openPage(p)'>
                 {{p.title}}
             </button>
             
-            <button class='navigationLoginBtn' menuClose *ngIf='!checkLoggedIn()' (click)='goToLoginPage()'>
+            <button class='navigationLoginBtn' menuClose="navMenu" *ngIf='!checkLoggedIn()' (click)='goToLoginPage()'>
                 <div class='navLogoutText'>
                     Login
                 </div>
                 <ion-icon class='navIcon' name="ios-log-in-outline"></ion-icon>
             </button>
-            <button class='navigationLoginBtn' menuClose *ngIf='checkLoggedIn()' (click)='logout()'>
+            <button class='navigationLoginBtn' menuClose="navMenu" *ngIf='checkLoggedIn()' (click)='logout()'>
                 <div class='navLogoutText'>
                     Logout
                 </div>

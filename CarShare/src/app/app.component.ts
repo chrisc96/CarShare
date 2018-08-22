@@ -68,12 +68,13 @@ export class MyApp {
   }
 
   goToProfile() {
-
+    if (this.checkLoggedIn() && this.nav.getActive().component !== ProfilePage) {
+      this.nav.push(ProfilePage)
+    }
   }
 
   checkLoggedIn() {
     var val = this.loginSystem.userLoggedIn()
-    // console.log('here', val)
     return val;
   }
 
