@@ -3,7 +3,7 @@ import { NavController } from "ionic-angular";
 import { LoginPage } from "../login/login";
 import { FindARidePage } from "../find-a-ride/find-a-ride";
 import { PostARidePage } from "../post-a-ride/post-a-ride"
-import { LoggedInProvider } from "../../providers/logged-in/logged-in";
+import { FirestoreUsersProvider } from "../../providers/firestore-users/firestore-users";
 import { MenuController } from 'ionic-angular';
 import { MyListingsPage } from "../my-listings/my-listings";
 
@@ -12,7 +12,7 @@ import { MyListingsPage } from "../my-listings/my-listings";
   templateUrl: "home.html"
 })
 export class HomePage {
-  constructor(public navCtrl: NavController, public loginSystem: LoggedInProvider, public menuCtrl: MenuController) {
+  constructor(public navCtrl: NavController, public usersProvider: FirestoreUsersProvider, public menuCtrl: MenuController) {
   }
 
   ionViewWillEnter() {
@@ -24,7 +24,7 @@ export class HomePage {
   }
 
   goToPostARide() {
-    if (!this.loginSystem.userLoggedIn()) {
+    if (!this.usersProvider.userLoggedIn()) {
       this.navCtrl.push(LoginPage, { 'toPage': PostARidePage });
     }
     else {
@@ -33,7 +33,7 @@ export class HomePage {
   }
 
   goToMyListings() {
-    if (!this.loginSystem.userLoggedIn()) {
+    if (!this.usersProvider.userLoggedIn()) {
       this.navCtrl.push(LoginPage, { 'toPage': MyListingsPage });
     }
     else {

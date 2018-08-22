@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
-import { FirestoreProvider } from '../../providers/firestore/firestore';
+import { FirestoreCarsProvider } from '../../providers/firestore-cars/firestore-cars';
 
 /**
  * Generated class for the AddCarToProfilePage page.
@@ -34,7 +34,7 @@ export class AddCarToProfilePage {
     public navParams: NavParams,
     public formBuilder: FormBuilder,
     private toastCtrl: ToastController,
-    public afs: FirestoreProvider
+    public carsProvider: FirestoreCarsProvider
   ) {
     this.goTo = navParams.get('toPage');
   }
@@ -53,7 +53,7 @@ export class AddCarToProfilePage {
       const rego = this.addCarForm.controls['rego'].value
       const year = this.addCarForm.controls['year'].value
 
-      this.afs.createCar(make, model, rego, year)
+      this.carsProvider.createCar(make, model, rego, year)
         .then(resp => {
           this.requestBeingSent = false
           this.addCarBtnPressed = false

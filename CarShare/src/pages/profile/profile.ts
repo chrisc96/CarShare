@@ -1,9 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController, ToastController } from 'ionic-angular';
 import { NavigationMenuProvider } from '../../providers/navigation-menu/navigation-menu';
-import { FirestoreProvider } from '../../providers/firestore/firestore';
 import { User } from '../struct/user';
 import { FormBuilder } from '@angular/forms';
+import { FirestoreUsersProvider } from '../../providers/firestore-users/firestore-users';
+import { FirestoreListingsProvider } from '../../providers/firestore-listings/firestore-listings';
 
 /**
  * Generated class for the ProfilePage page.
@@ -34,12 +35,13 @@ export class ProfilePage {
     public navParams: NavParams,
     public menuCtrl: MenuController,
     public navMenu: NavigationMenuProvider,
-    public firestore: FirestoreProvider,
+    public usersProvider: FirestoreUsersProvider,
+    public listingsProvider: FirestoreListingsProvider,
     public formBuilder: FormBuilder,
     private toastCtrl: ToastController
   ) {
 
-    this.firestore.getUserObservable().subscribe(user => {
+    this.usersProvider.getUserObservable().subscribe(user => {
       this.user = user;
     })
   }
@@ -54,7 +56,7 @@ export class ProfilePage {
     this.editBtnPressed = true;
     this.requestBeingSent = true;
 
-    this.firestore.updateUser(this.firstName, this.lastName, this.contactNum, this.user.uid)
+    this.listingsProvider.updateUser(this.firstName, this.lastName, this.contactNum, this.user.uid)
       .then(resp => {
         this.requestBeingSent = false;
         this.editBtnPressed = false;

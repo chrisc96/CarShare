@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { NavigationMenuProvider } from '../../providers/navigation-menu/navigation-menu';
-import { LoggedInProvider } from '../../providers/logged-in/logged-in';
+import { FirestoreUsersProvider } from "../../providers/firestore-users/firestore-users";
 import { LoginPage } from '../login/login';
 import { PostARidePage } from '../post-a-ride/post-a-ride';
 
@@ -24,7 +24,7 @@ export class MyListingsPage {
     public navParams: NavParams,
     public menuCtrl: MenuController, 
     public navMenu: NavigationMenuProvider,
-    public loginSystem: LoggedInProvider
+    public usersProvider: FirestoreUsersProvider
   ) {
 
   }
@@ -35,7 +35,7 @@ export class MyListingsPage {
   }
 
   goToPostARide() {
-    if (!this.loginSystem.userLoggedIn()) {
+    if (!this.usersProvider.userLoggedIn()) {
       this.navCtrl.push(LoginPage, {'toPage': PostARidePage });
     }
     else {

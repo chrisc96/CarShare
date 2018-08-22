@@ -2,7 +2,7 @@ import { Component, ViewChild } from "@angular/core";
 import { IonicPage, NavController, NavParams, MenuController } from "ionic-angular";
 import { SignupPage } from "../signup/signup";
 import { Validators, FormBuilder } from '@angular/forms';
-import { LoggedInProvider } from '../../providers/logged-in/logged-in'
+import { FirestoreUsersProvider } from "../../providers/firestore-users/firestore-users";
 
 
 /**
@@ -45,7 +45,7 @@ export class LoginPage {
     public formBuilder : FormBuilder,
     public navCtrl: NavController, 
     public navParams: NavParams, 
-    public loginSystem : LoggedInProvider,
+    public usersProvider : FirestoreUsersProvider,
     public menuCtrl : MenuController
   ) {
     this.pageToGoTo = this.navParams.data.toPage;
@@ -66,7 +66,7 @@ export class LoginPage {
     if (this.emailIsValid && this.passwordIsValid) {
       this.requestBeingSent = true;
       
-      this.loginSystem.login(this.email, this.password)
+      this.usersProvider.login(this.email, this.password)
       .then( resp => {
         this.requestBeingSent = false; // finished sending request, set to false
         this.password = ''

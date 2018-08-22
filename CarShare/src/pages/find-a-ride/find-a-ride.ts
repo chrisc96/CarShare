@@ -4,7 +4,7 @@ import { RideListingPage } from "../ride-listing/ride-listing";
 import { NavigationMenuProvider } from "../../providers/navigation-menu/navigation-menu";
 import 'rxjs/add/operator/map'
 import { Listing } from '../struct/listing'
-import { FirestoreProvider } from "../../providers/firestore/firestore";
+import { FirestoreListingsProvider } from "../../providers/firestore-listings/firestore-listings";
 
 /**
  * Generated class for the FindARidePage page.
@@ -27,9 +27,9 @@ export class FindARidePage {
     public navParams: NavParams,
     public menuCtrl: MenuController,
     public navMenu: NavigationMenuProvider,
-    public firestore: FirestoreProvider
+    public listingsProvider: FirestoreListingsProvider
   ) {
-    this.firestore.getListingsObservable().subscribe(listing => {
+    this.listingsProvider.getListingsObservable().subscribe(listing => {
         console.log(listing)
         this.listings = listing;
     })

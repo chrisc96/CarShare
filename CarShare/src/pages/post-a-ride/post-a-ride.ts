@@ -3,14 +3,15 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController, TextInput, ToastController } from 'ionic-angular';
 import { NavigationMenuProvider } from '../../providers/navigation-menu/navigation-menu';
-import { LoggedInProvider } from '../../providers/logged-in/logged-in';
-import { FirestoreProvider } from '../../providers/firestore/firestore';
+import { FirestoreUsersProvider } from "../../providers/firestore-users/firestore-users";
 import { Car } from '../struct/car'
 import { Validators, FormBuilder } from '@angular/forms';
 import { NgZone, QueryList, ViewChildren } from '@angular/core';
 import { MapsAPILoader } from '@agm/core';
 import { MyListingsPage } from '../my-listings/my-listings';
 import { AddCarToProfilePage } from '../add-car-to-profile/add-car-to-profile';
+import { FirestoreCarsProvider } from '../../providers/firestore-cars/firestore-cars';
+import { FirestoreListingsProvider } from '../../providers/firestore-listings/firestore-listings';
 
 
 /**
@@ -61,15 +62,16 @@ export class PostARidePage {
     public navParams: NavParams,
     public menuCtrl: MenuController,
     public navMenu: NavigationMenuProvider,
-    public loginSystem: LoggedInProvider,
-    public afs: FirestoreProvider,
+    public usersProvider: FirestoreUsersProvider,
+    public carsProvider : FirestoreCarsProvider,
+    public listingsProvider: FirestoreListingsProvider,
     public formBuilder: FormBuilder,
     private toastCtrl: ToastController,
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
   ) {
 
-    this.afs.carsByUserIDObservable.subscribe(car => {
+    this.carsProvider.carsByUserIDObservable.subscribe(car => {
       this.cars = car;
       this.carCount = this.cars.length
       this.dataReturned = true
@@ -142,7 +144,7 @@ export class PostARidePage {
       let car: Car = this.cars[this.carIndex]
       let from: String = this.meetingPlace.first.value;
       let to: String = this.destinationPlace.first.value;
-      this.afs.createListing(car, this.departureDate, this.departureTime, this.noSeats, this.storageAvail, from, to)
+      this.listingsProvider.createListing(car, this.departureDate, this.departureTime, this.noSeats, this.storageAvail, from, to)
         .then(resp => {
           this.requestBeingSent = false
           this.postBtnPressed = false

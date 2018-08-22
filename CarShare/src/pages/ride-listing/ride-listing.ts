@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { NavigationMenuProvider } from '../../providers/navigation-menu/navigation-menu';
-import { FirestoreProvider } from '../../providers/firestore/firestore';
 import { Listing } from '../struct/listing';
 
 /**
@@ -20,7 +19,7 @@ export class RideListingPage {
 
   listing: Listing
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl : MenuController, public navMenu : NavigationMenuProvider, public firestore : FirestoreProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl : MenuController, public navMenu : NavigationMenuProvider) {
     this.listing = navParams.data;
   }
 

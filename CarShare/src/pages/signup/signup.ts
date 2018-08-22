@@ -1,7 +1,7 @@
 import { Component, ViewChild } from "@angular/core";
 import { IonicPage, NavController, NavParams, MenuController } from "ionic-angular";
 import { Validators, FormBuilder } from '@angular/forms';
-import { LoggedInProvider } from '../../providers/logged-in/logged-in'
+import { FirestoreUsersProvider } from '../../providers/firestore-users/firestore-users'
 import { ToastController } from 'ionic-angular';
 import { Slides } from 'ionic-angular';
 
@@ -66,7 +66,7 @@ export class SignupPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public formBuilder: FormBuilder,
-    public loginSystem: LoggedInProvider,
+    public usersProvider: FirestoreUsersProvider,
     private toastCtrl: ToastController,
     public menuCtrl : MenuController
   ) {
@@ -85,9 +85,9 @@ export class SignupPage {
     if (this.allFieldsValid()) {
       this.requestBeingSent = true;
 
-      this.loginSystem.signup(this.email, this.password)
+      this.usersProvider.signup(this.email, this.password)
       .then((resp) => {
-        this.loginSystem.linkUsertoDB(resp, this.firstName, this.lastName, this.mobileNum).then(() => {
+        this.usersProvider.linkUsertoDB(resp, this.firstName, this.lastName, this.mobileNum).then(() => {
           this.requestBeingSent = false;
           this.clearAllFields();
           this.accountCreatedToast();

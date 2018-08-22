@@ -9,8 +9,8 @@ import { PostARidePage } from "../pages/post-a-ride/post-a-ride";
 import { NavigationMenuProvider } from "../providers/navigation-menu/navigation-menu";
 import { FindARidePage } from "../pages/find-a-ride/find-a-ride";
 import { MyListingsPage } from "../pages/my-listings/my-listings";
-import { LoggedInProvider } from "../providers/logged-in/logged-in";
-import { ReviewRideShareRequestPage} from "../pages/review-ride-share-request/review-ride-share-request";
+import { FirestoreUsersProvider } from "../providers/firestore-users/firestore-users";
+import { ReviewRideShareRequestPage } from "../pages/review-ride-share-request/review-ride-share-request";
 import { ProfilePage } from "../pages/profile/profile";
 
 @Component({
@@ -29,7 +29,7 @@ export class MyApp {
     statusBar: StatusBar,
     splashScreen: SplashScreen,
     public navMenu: NavigationMenuProvider,
-    public loginSystem: LoggedInProvider
+    public usersProvider: FirestoreUsersProvider
   ) {
 
     platform.ready().then(() => {
@@ -40,7 +40,7 @@ export class MyApp {
     });
 
     this.pages = [
-      { title: 'Homepage', component: HomePage, requiresLogin: false},
+      { title: 'Homepage', component: HomePage, requiresLogin: false },
       { title: 'Find a ride', component: FindARidePage, requiresLogin: false },
       { title: 'Post a ride', component: PostARidePage, requiresLogin: true },
       { title: 'My listings', component: MyListingsPage, requiresLogin: true },
@@ -53,7 +53,7 @@ export class MyApp {
       if (page.component === element.component) {
         // we need to check if the user is logged in
         // if not, require a login and then go to the page first
-        if (element.requiresLogin && !this.loginSystem.userLoggedIn()) {
+        if (element.requiresLogin && !this.usersProvider.userLoggedIn()) {
           this.nav.push(LoginPage, { 'toPage': page.component });
         }
         else {
@@ -74,12 +74,12 @@ export class MyApp {
   }
 
   checkLoggedIn() {
-    var val = this.loginSystem.userLoggedIn()
+    var val = this.usersProvider.userLoggedIn()
     return val;
   }
 
   getFirstName() {
-    return this.loginSystem.getUser().firstName;
+    return this.usersProvider.getUser().firstName;
   }
 
   goToLoginPage() {
@@ -87,7 +87,7 @@ export class MyApp {
   }
 
   logout() {
-    this.loginSystem.logout().then(() => {
+    this.usersProvider.logout().then(() => {
       this.nav.push(HomePage)
     });
   }
