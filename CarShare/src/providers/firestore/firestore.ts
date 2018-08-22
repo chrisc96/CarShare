@@ -13,6 +13,9 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/first';
 import 'rxjs/add/operator/mergeMap'
 import * as firebase from 'firebase';
+import { combineLatest } from 'rxjs';
+import { of } from 'rxjs';
+import { Time } from '@angular/common';
 
 
 /*
@@ -24,11 +27,14 @@ import * as firebase from 'firebase';
 @Injectable()
 export class FirestoreProvider {
 
-  listingsObservable : Observable<Listing[]>;
+  listingsObservable: Observable<any[]>;
   carsByUserIDObservable: Observable<Car[]>;
-  userObservable : Observable<User>
+  userObservable: Observable<User>
 
-  constructor(public afs: AngularFirestore, public loginSystem : LoggedInProvider) {
+
+  listings: Listing[];
+
+  constructor(public afs: AngularFirestore, public loginSystem: LoggedInProvider) {
     // Setup observables on the cars that this user has
     // Get user observable to unwrap
     this.userObservable = this.loginSystem.getUserObservable();
@@ -48,25 +54,27 @@ export class FirestoreProvider {
             return new Car(documentID, make, model, rego, uid, year);
           })
         })
-       }
-       else {
+      }
+      else {
         return [];
-       }
+      }
     })
+
+    this.listingsObservable = this.afs.collection('listings').snapshotChanges().map(listings => {
+      return listings.map((listing) => {
+        const project_data = listing.payload.doc.data() as Listing;
+        const carID = project_data.carDocumentID;
+        const userID = project_data.userDocumentID;
+
+        return combineLatest(this.afs.doc('cars/' + carID).valueChanges(), this.afs.doc('users/' + userID).valueChanges(), (data1, data2) => {
+          return {...project_data, ...data1, ...data2};
+        })                 
+      })
+    }).mergeMap(observables => combineLatest(observables))
+    
   }
 
   public getListingsObservable() {
-    // Create the observable on all listings
-    this.listingsObservable = this.afs.collection('listings').snapshotChanges().map(
-      changes => {
-        return changes.map(changeAction => {
-          var data = changeAction.payload.doc.data() as Listing;
-          data.id = changeAction.payload.doc.id;
-          return data;
-        })
-      }
-    )
-
     return this.listingsObservable;
   }
 
@@ -78,15 +86,15 @@ export class FirestoreProvider {
     return this.carsByUserIDObservable
   }
 
-  public updateUser (firstName, lastName, contactNum, uid) {
-      return this.afs.doc<User>('users/' + uid).update({
-        firstName: firstName,
-        lastName: lastName,
-        contactNum: contactNum
-      })
+  public updateUser(firstName, lastName, contactNum, uid) {
+    return this.afs.doc<User>('users/' + uid).update({
+      firstName: firstName,
+      lastName: lastName,
+      contactNum: contactNum
+    })
   }
 
-  public createListing = (car, departDate, departTime, noSeats, storageAvail, from, to) : Promise<firebase.firestore.DocumentReference> => {
+  public createListing = (car, departDate, departTime, noSeats, storageAvail, from, to): Promise<firebase.firestore.DocumentReference> => {
     return this.loginSystem.getUserObservable().first().toPromise().then(user => {
       let uid = user.uid;
       let carDocID = car.docID;
@@ -106,7 +114,7 @@ export class FirestoreProvider {
     })
   }
 
-  public createCar = (carMake, carModel, carRego, carYear) : Promise<firebase.firestore.DocumentReference> => {
+  public createCar = (carMake, carModel, carRego, carYear): Promise<firebase.firestore.DocumentReference> => {
     return this.loginSystem.getUserObservable().first().toPromise().then(user => {
       let uid = user.uid;
       return this.afs.collection('cars').add({

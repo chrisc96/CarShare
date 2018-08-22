@@ -9,7 +9,6 @@ import { combineLatest } from 'rxjs';
 import { of } from 'rxjs';
 
 
-type UserInfo = { firstName: string, lastName: string, contactNum: string };
 
 /*
   Generated class for the LoggedInProvider provider.
