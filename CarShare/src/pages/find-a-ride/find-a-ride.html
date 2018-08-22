@@ -16,8 +16,8 @@
 
 <ion-content class="home-bg">
   <div id="container">
-    <div id="content" *ngIf="listings.length>0">
-        <ion-list *ngFor="let listing of listings; let i = index">
+    <div id="content">
+        <ion-list *ngFor="let listing of listings | async; let i = index">
           <div id="listingDetails">
             <ion-item *ngIf="listing.firstName">
               <p>Listed by: {{ listing.firstName }} {{ listing.lastName }}</p>

@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { NavigationMenuProvider } from '../../providers/navigation-menu/navigation-menu';
 import { FirestoreListingsProvider } from "../../providers/firestore-listings/firestore-listings";
-import { Listing } from '../struct/listing'
+import { Listing } from '../struct/listing';
+import { Observable } from 'rxjs/Observable';
 
 /**
  * Generated class for the MyListingsPage page.
@@ -18,7 +19,7 @@ import { Listing } from '../struct/listing'
 })
 export class MyListingsPage {
 
-  listings : Listing[] = []
+  listings: Observable<Listing[]>;
 
   constructor(
     public navCtrl: NavController, 
@@ -27,9 +28,7 @@ export class MyListingsPage {
     public navMenu: NavigationMenuProvider,
     public listingsProvider: FirestoreListingsProvider
   ) {
-    this.listingsProvider.getUserListingsObservable().subscribe(listings => {
-      this.listings = listings;
-    })
+    this.listings = this.listingsProvider.getUserListingsObservable();
   }
 
   ionViewWillEnter() {

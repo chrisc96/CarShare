@@ -5,6 +5,7 @@ import { NavigationMenuProvider } from "../../providers/navigation-menu/navigati
 import 'rxjs/add/operator/map'
 import { Listing } from '../struct/listing'
 import { FirestoreListingsProvider } from "../../providers/firestore-listings/firestore-listings";
+import { Observable } from 'rxjs/Observable';
 
 /**
  * Generated class for the FindARidePage page.
@@ -20,7 +21,7 @@ import { FirestoreListingsProvider } from "../../providers/firestore-listings/fi
 })
 export class FindARidePage {
 
-  listings: Listing[] = [];
+  listings: Observable<Listing[]>;
 
   constructor(
     public navCtrl: NavController,
@@ -29,9 +30,7 @@ export class FindARidePage {
     public navMenu: NavigationMenuProvider,
     public listingsProvider: FirestoreListingsProvider
   ) {
-    this.listingsProvider.getAllListingsObservable().subscribe(listings => {
-        this.listings = listings;
-    })
+        this.listings = this.listingsProvider.getAllListingsObservable();
   }
 
   goToListing(listingIdx) {

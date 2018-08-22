@@ -15,8 +15,8 @@
   
   <ion-content class="home-bg">
     <div id="container">
-        <div id="content" *ngIf="listings.length>0">
-            <ion-list *ngFor="let listing of listings">
+        <div id="content">
+            <ion-list *ngFor="let listing of listings | async">
               <div id="listingDetails">
                 <ion-item *ngIf="listing.make">
                   Vehicle: {{ listing.make }} {{ listing.model }} ({{ listing.year }})
