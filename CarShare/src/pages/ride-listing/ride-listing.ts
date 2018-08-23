@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { NavigationMenuProvider } from '../../providers/navigation-menu/navigation-menu';
 import { Listing } from '../struct/listing';
+import { Observable } from 'rxjs/Observable';
 
 /**
  * Generated class for the RideListingPage page.
@@ -17,10 +18,13 @@ import { Listing } from '../struct/listing';
 })
 export class RideListingPage {
 
-  listing: Listing
+  listings: Observable<Listing[]>
+  listingIdx : number
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl : MenuController, public navMenu : NavigationMenuProvider) {
-    this.listing = navParams.data;
+    console.log(navParams.data);
+    this.listings = navParams.get('listingObs');
+    this.listingIdx = navParams.get('listingIndex')
   }
 
   ionViewWillEnter() {

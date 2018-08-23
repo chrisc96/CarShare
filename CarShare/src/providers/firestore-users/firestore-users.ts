@@ -1,10 +1,16 @@
-import { AngularFireAuth } from 'angularfire2/auth'
+// GENERAL 
 import { Injectable } from '@angular/core';
 
-import * as firebase from 'firebase';
-import { Observable } from "rxjs/Observable"
-import { User } from '../../pages/struct/user'
+// FIREBASE
+import { AngularFireAuth } from 'angularfire2/auth'
 import { AngularFirestore } from 'angularfire2/firestore';
+import * as firebase from 'firebase';
+
+// STRUCTS
+import { User } from '../../pages/struct/user'
+
+// RXJS
+import { Observable } from "rxjs/Observable"
 import { combineLatest } from 'rxjs';
 import { of } from 'rxjs';
 import 'rxjs/add/operator/mergeMap';

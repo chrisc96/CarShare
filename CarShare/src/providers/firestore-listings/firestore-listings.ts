@@ -1,20 +1,25 @@
+// GENERAL
 import { Injectable } from '@angular/core';
+
+// FIREBASE
 import { AngularFirestore } from 'angularfire2/firestore';
+import * as firebase from 'firebase';
+
+// STRUCTS
 import { Listing } from '../../pages/struct/listing';
 import { User } from '../../pages/struct/user';
+
+// PROVIDERS
 import { FirestoreUsersProvider } from '../../providers/firestore-users/firestore-users'
 
+// RXJS
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
-
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/first';
 import 'rxjs/add/operator/mergeMap'
-import * as firebase from 'firebase';
 import { combineLatest } from 'rxjs';
-import { of } from 'rxjs';
-import { Time } from '@angular/common';
 
 /*
   Generated class for the FirestoreListingsProvider provider.
@@ -27,7 +32,6 @@ export class FirestoreListingsProvider {
 
   allListingsObservable: Observable<any[]>;
   userListingsObservable: Observable<Listing[]>;
-  listings: Listing[];
 
   constructor(public afs: AngularFirestore, public usersProvider: FirestoreUsersProvider) {
 
@@ -43,18 +47,18 @@ export class FirestoreListingsProvider {
       })
     }).mergeMap(observables => combineLatest(observables))
 
-    var user = this.usersProvider.getUser()
-
-    this.userListingsObservable = this.afs.collection('listings', ref => ref.where('userDocumentID', '==', user.uid)).snapshotChanges().map(listings => {
-      return listings.map((listing) => {
-        const project_data = listing.payload.doc.data() as Listing;
-        const carID = project_data.carDocumentID;
-
-        return combineLatest(this.afs.doc('cars/' + carID).valueChanges(), (data1) => {
-          return {...project_data, ...data1};
-        })                 
-      })
-    }).mergeMap(observables => combineLatest(observables))
+    this.userListingsObservable = this.usersProvider.getUserObservable().flatMap(user => {
+      return this.afs.collection('listings', ref => ref.where('userDocumentID', '==', user.uid)).snapshotChanges().map(listings => {
+        return listings.map((listing) => {
+          const project_data = listing.payload.doc.data() as Listing;
+          const carID = project_data.carDocumentID;
+  
+          return combineLatest(this.afs.doc('cars/' + carID).valueChanges(), (data1) => {
+            return {...project_data, ...data1};
+          })                 
+        })
+      }).mergeMap(observables => combineLatest(observables))
+    });
   }
 
   public createListing = (car, departDate, departTime, noSeats, storageAvail, from, to): Promise<firebase.firestore.DocumentReference> => {

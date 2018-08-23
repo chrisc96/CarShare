@@ -30,11 +30,13 @@ export class FindARidePage {
     public navMenu: NavigationMenuProvider,
     public listingsProvider: FirestoreListingsProvider
   ) {
-        this.listings = this.listingsProvider.getAllListingsObservable();
+  
+    this.listings = this.listingsProvider.getAllListingsObservable();
+
   }
 
   goToListing(listingIdx) {
-    this.navCtrl.push(RideListingPage, this.listings[listingIdx]);
+    this.navCtrl.push(RideListingPage, {'listingObs' : this.listings, 'listingIndex' : listingIdx});
   }
 
   ionViewWillEnter() {

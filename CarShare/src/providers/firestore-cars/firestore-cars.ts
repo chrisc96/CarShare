@@ -1,21 +1,23 @@
+// GENERAL
 import { Injectable } from '@angular/core';
+
+// FIREBASE
 import { AngularFirestore } from 'angularfire2/firestore';
-import { Listing } from '../../pages/struct/listing';
-import { Car } from '../../pages/struct/car';
-import { User } from '../../pages/struct/user';
+import * as firebase from 'firebase';
+
+// PROVIDERS
 import { FirestoreUsersProvider } from '../../providers/firestore-users/firestore-users'
 
+// STRUCTS
+import { Car } from '../../pages/struct/car';
+
+// RXJS
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
-
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/first';
 import 'rxjs/add/operator/mergeMap'
-import * as firebase from 'firebase';
-import { combineLatest } from 'rxjs';
-import { of } from 'rxjs';
-import { Time } from '@angular/common';
 
 /*
   Generated class for the FirestoreCarsProvider provider.
