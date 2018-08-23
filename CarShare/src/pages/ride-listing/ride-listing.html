@@ -23,12 +23,12 @@
 <ion-content class="home-bg">
   <div id="container">
     <div id="content">
-      <div id="listingDetails">
-        <ion-item *ngIf="(listings | async) ? listings[listingIdx].firstName : null">
-          <p>Listed by: {{ listings[listingIdx].firstName }} {{ listings[listingIdx].lastName }}</p>
-          <p>Contact Number: {{ listings[listingIdx].contactNum }}</p>
+      <div id="listingDetails"> 
+        <ion-item *ngIf="listing.firstName">
+          <p>Listed by: {{ listing.firstName }} {{ listing.lastName }}</p>
+          <p>Contact Number: {{ listing.contactNum }}</p>
         </ion-item>
-        <!-- <ion-item *ngIf="listings[listingIdx].make">
+        <ion-item *ngIf="listing.make">
           Vehicle: {{ listing.make }} {{ listing.model }} ({{ listing.year }})
         </ion-item>
         <ion-item *ngIf="listing.departureDate">
@@ -51,8 +51,7 @@
         </ion-item>
         <ion-item *ngIf="listing.whosComing.length > 0">
           Sharing ride: {{ listing.whosComing }}
-        </ion-item> -->
-
+        </ion-item>
         <ion-item>
           <button ion-button block color='secondary' (click)='requestToShare()' >Request to Share</button>
         </ion-item>

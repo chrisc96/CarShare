@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map'
 import { Listing } from '../struct/listing'
 import { FirestoreListingsProvider } from "../../providers/firestore-listings/firestore-listings";
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from "rxjs";
 
 /**
  * Generated class for the FindARidePage page.
@@ -21,7 +22,8 @@ import { Observable } from 'rxjs/Observable';
 })
 export class FindARidePage {
 
-  listings: Observable<Listing[]>;
+  listings: Listing[];
+  listingSubscription : Subscription
 
   constructor(
     public navCtrl: NavController,
@@ -30,17 +32,24 @@ export class FindARidePage {
     public navMenu: NavigationMenuProvider,
     public listingsProvider: FirestoreListingsProvider
   ) {
-  
-    this.listings = this.listingsProvider.getAllListingsObservable();
+  }
 
+  ngOnInit() {
+    this.listingSubscription = this.listingsProvider.getAllListingsObservable().subscribe(listings => {
+      this.listings = listings
+    });
   }
 
   goToListing(listingIdx) {
-    this.navCtrl.push(RideListingPage, {'listingObs' : this.listings, 'listingIndex' : listingIdx});
+    this.navCtrl.push(RideListingPage, {'listing': this.listings[listingIdx]});
   }
-
+ 
   ionViewWillEnter() {
     this.menuCtrl.enable(true, 'navMenu');
     this.navMenu.setActivePage(FindARidePage)
+  }
+
+  ngOnDestroy() {
+    this.listingSubscription.unsubscribe()
   }
 }

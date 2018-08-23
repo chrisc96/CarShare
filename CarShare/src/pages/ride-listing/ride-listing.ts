@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angul
 import { NavigationMenuProvider } from '../../providers/navigation-menu/navigation-menu';
 import { Listing } from '../struct/listing';
 import { Observable } from 'rxjs/Observable';
+import { FirestoreListingsProvider } from '../../providers/firestore-listings/firestore-listings';
 
 /**
  * Generated class for the RideListingPage page.
@@ -18,13 +19,15 @@ import { Observable } from 'rxjs/Observable';
 })
 export class RideListingPage {
 
-  listings: Observable<Listing[]>
-  listingIdx : number
+  listing: Listing
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl : MenuController, public navMenu : NavigationMenuProvider) {
-    console.log(navParams.data);
-    this.listings = navParams.get('listingObs');
-    this.listingIdx = navParams.get('listingIndex')
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public menuCtrl : MenuController,
+              public navMenu : NavigationMenuProvider,
+              public listingsProvider : FirestoreListingsProvider
+  ) {
+    this.listing = navParams.get('listing')
   }
 
   ionViewWillEnter() {

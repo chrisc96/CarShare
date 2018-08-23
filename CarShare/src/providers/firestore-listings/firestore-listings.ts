@@ -35,29 +35,31 @@ export class FirestoreListingsProvider {
 
   constructor(public afs: AngularFirestore, public usersProvider: FirestoreUsersProvider) {
 
-    this.allListingsObservable = this.afs.collection('listings').snapshotChanges().map(listings => {
-      return listings.map((listing) => {
-        const project_data = listing.payload.doc.data() as Listing;
-        const carID = project_data.carDocumentID;
-        const userID = project_data.userDocumentID;
+    this.allListingsObservable = this.afs.collection('listings').valueChanges().map(listings => {
+      return listings.map((listing : Listing) => {
+
+        const carID = listing.carDocumentID;
+        const userID = listing.userDocumentID;
 
         return combineLatest(this.afs.doc('cars/' + carID).valueChanges(), this.afs.doc('users/' + userID).valueChanges(), (data1, data2) => {
-          return {...project_data, ...data1, ...data2};
-        })                 
+          return { ...listing, ...data1, ...data2 };
+        })
       })
     }).mergeMap(observables => combineLatest(observables))
 
     this.userListingsObservable = this.usersProvider.getUserObservable().flatMap(user => {
-      return this.afs.collection('listings', ref => ref.where('userDocumentID', '==', user.uid)).snapshotChanges().map(listings => {
-        return listings.map((listing) => {
-          const project_data = listing.payload.doc.data() as Listing;
-          const carID = project_data.carDocumentID;
-  
-          return combineLatest(this.afs.doc('cars/' + carID).valueChanges(), (data1) => {
-            return {...project_data, ...data1};
-          })                 
-        })
-      }).mergeMap(observables => combineLatest(observables))
+      if (user) {
+        return this.afs.collection('listings', ref => ref.where('userDocumentID', '==', user.uid)).snapshotChanges().map(listings => {
+          return listings.map((listing) => {
+            const project_data = listing.payload.doc.data() as Listing;
+            const carID = project_data.carDocumentID;
+
+            return combineLatest(this.afs.doc('cars/' + carID).valueChanges(), (data1) => {
+              return { ...project_data, ...data1 };
+            })
+          })
+        }).mergeMap(observables => combineLatest(observables))
+      }
     });
   }
 

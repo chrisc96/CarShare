@@ -71,7 +71,10 @@ export class PostARidePage {
     private ngZone: NgZone,
   ) {
 
-    this.carsProvider.carsByUserIDObservable.subscribe(car => {
+  }
+
+  ngOnInit() {
+    this.carsProvider.getCarsByUIDObservable().subscribe(car => {
       this.cars = car;
       this.carCount = this.cars.length
       this.dataReturned = true
