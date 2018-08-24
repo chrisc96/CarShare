@@ -6,7 +6,7 @@ Ionic Android App
 
 ## Current Progress
 
-10/16 pages done
+10/17 pages done
 
 ## Page List:
 
