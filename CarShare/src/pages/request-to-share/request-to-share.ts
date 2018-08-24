@@ -22,6 +22,7 @@ export class RequestToSharePage {
 
   listing : Listing
   user : User
+  successfulRequest : boolean
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -30,35 +31,38 @@ export class RequestToSharePage {
     public usersProvider : FirestoreUsersProvider,
     public listingsProvider : FirestoreListingsProvider
 ) {
-  this.listing = navParams.get('listing')
-  this.user = this.usersProvider.getUser()
-  this.addShareRequest()
+  this.listing = navParams.get('listing');
+  this.user = this.usersProvider.getUser();
+  this.successfulRequest = false;
+
+  this.addShareRequest();
 }
 
   addShareRequest() {
     if (!this.user || !this.listing) return;
 
     if(!this.requesterOwnsListing() && !this.alreadyRequested()) {
-      this.listingsProvider.addRequest(this.listing)
+      this.listingsProvider.addRequest(this.listing);
+      this.successfulRequest = true;
     }
   }
 
   requesterOwnsListing() {
-    return this.user.uid === this.listing.userDocumentID
+    return this.user.uid === this.listing.userDocumentID;
   }
 
   alreadyRequested() {
-    this.listing.whoWantsToCome.forEach(userId => {
-      if (userId == this.user.uid) {
+    for (var i = 0; i < this.listing.whoWantsToCome.length; i++) {
+      if (this.listing.whoWantsToCome[i] == this.user.uid) {
         return true;
       }
-    });
+    }
 
-    this.listing.whosComing.forEach(userId => {
-      if (userId == this.user.uid) {
+    for (var j = 0; j < this.listing.whosComing.length; j++) {
+      if (this.listing.whosComing[j] == this.user.uid) {
         return true;
       }
-    });
+    }
 
     return false;
   }

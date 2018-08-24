@@ -14,5 +14,6 @@
 
 
 <ion-content padding>
-
+  <p *ngIf="successfulRequest">Your request has been sent</p>
+  <p *ngIf="!successfulRequest">Your request failed to send</p>
 </ion-content>
