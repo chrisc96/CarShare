@@ -27,17 +27,18 @@ Ionic Android App
 * Page 14: Car details (+ edit) page
 * Page 15: Edit my listing page
 * Page 16: Post to facebook page
+* Page 17: Find a ride (with no listings listed)
 
 ## Current status
 
 To Do:
-* 3, 6, 9.2, 11, 14, 15, 16
+* 3, 6, 9.2, 11, 14, 15, 16, 17
 
 #### What each person has left to do:
 
 Thomas: 3, 6, 16
 
-Chris: 9.2, 11, 14, 15
+Chris: 9.2, 11, 14, 15, 17
 
 #### In Progress:
 
