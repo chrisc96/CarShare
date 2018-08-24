@@ -48,7 +48,8 @@ export class ReviewRideShareRequestPage {
     this.listingsProvider.updateRequest(this.listings[i])
   }
 
-  rejectShareRequest() {
-    
+  rejectShareRequest(i, j) {
+    this.listings[i].whoWantsToCome.splice(j, 1)
+    this.listingsProvider.updateRequest(this.listings[i])
   }
 }
