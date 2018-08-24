@@ -6,6 +6,7 @@ import { Listing } from '../struct/listing';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs';
 import { PostARidePage } from '../post-a-ride/post-a-ride';
+import { of } from 'rxjs';
 
 /**
  * Generated class for the MyListingsPage page.
@@ -22,8 +23,8 @@ import { PostARidePage } from '../post-a-ride/post-a-ride';
 export class MyListingsPage {
 
   listings: Listing[];
-  listingCount: number;
-  dataReturned: boolean = false;
+  listingCount: number = 0;
+  emitted: boolean = true;
   listingSubscription: Subscription
 
   constructor(
@@ -34,15 +35,10 @@ export class MyListingsPage {
     public listingsProvider: FirestoreListingsProvider
   ) {
     this.listingsProvider.getUserListingsObservable().subscribe(listings => {
+      console.log('some shit changed', ' listings: ', listings)
       this.listings = listings;
-
-    });
-  }
-
-  ngOnInit() {
-    this.listingSubscription = this.listingsProvider.getUserListingsObservable().subscribe(listings => {
-      this.listings = listings;
-      this.dataReturned = true
+      this.listingCount = this.listings.length;
+      this.emitted = true
     });
   }
 
@@ -52,19 +48,10 @@ export class MyListingsPage {
   }
 
   userHasListings() {
-    console.log(this.listings)
-    if (this.listings !== undefined) {
-      this.listingCount = this.listings.length;
-      return this.listingCount !== 0
-    }
-    return false;
+    return this.listingCount !== 0
   }
 
   goToPostARide() {
     this.navCtrl.push(PostARidePage)
-  }
-
-  ngOnDestroy() {
-    this.listingSubscription.unsubscribe()
   }
 }

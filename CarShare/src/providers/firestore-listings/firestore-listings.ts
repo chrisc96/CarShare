@@ -19,6 +19,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/first';
 import 'rxjs/add/operator/mergeMap'
+import { of } from 'rxjs';
 import { combineLatest } from 'rxjs';
 
 /*
@@ -49,15 +50,14 @@ export class FirestoreListingsProvider {
 
     this.userListingsObservable = this.usersProvider.getUserObservable().flatMap(user => {
       if (user) {
-        return this.afs.collection('listings', ref => ref.where('userDocumentID', '==', user.uid)).snapshotChanges().map(listings => {
-          return listings.map((listing) => {
-            const project_data = listing.payload.doc.data() as Listing;
-            const carID = project_data.carDocumentID;
-
-            return combineLatest(this.afs.doc('cars/' + carID).valueChanges(), (data1) => {
-              return { ...project_data, ...data1 };
+        return this.afs.collection('listings', ref => ref.where('userDocumentID', '==', user.uid)).valueChanges().map(listings => {
+            return listings.map((listing : Listing) => {
+              const carID = listing.carDocumentID;
+  
+              return combineLatest(this.afs.doc('cars/' + carID).valueChanges(), (data1) => {
+                return { ...listing, ...data1 };
+              })
             })
-          })
         }).mergeMap(observables => combineLatest(observables))
       }
     });
