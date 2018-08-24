@@ -21,6 +21,7 @@ import { MyListingsPage } from "../pages/my-listings/my-listings";
 import { AddCarToProfilePage } from "../pages/add-car-to-profile/add-car-to-profile";
 import { ProfilePage } from "../pages/profile/profile";
 import { RidesImTakingPage } from "../pages/rides-im-taking/rides-im-taking";
+import { RequestToSharePage } from "../pages/request-to-share/request-to-share";
 import { ReviewRideShareRequestPage } from "../pages/review-ride-share-request/review-ride-share-request";
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { FirestoreListingsProvider } from '../providers/firestore-listings/firestore-listings';
@@ -50,6 +51,7 @@ const firebaseConfig = {
     AddCarToProfilePage,
     ProfilePage,
     RidesImTakingPage,
+    RequestToSharePage,
     ReviewRideShareRequestPage
   ],
   imports: [
@@ -82,6 +84,7 @@ const firebaseConfig = {
     AddCarToProfilePage,
     ProfilePage,
     RidesImTakingPage,
+    RequestToSharePage,
     ReviewRideShareRequestPage
   ],
   providers: [

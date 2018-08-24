@@ -36,12 +36,15 @@ export class FirestoreListingsProvider {
 
   constructor(public afs: AngularFirestore, public usersProvider: FirestoreUsersProvider) {
 
-    this.allListingsObservable = this.afs.collection('listings').valueChanges().map(listings => {
-      return listings.map((listing : Listing) => {
+    this.allListingsObservable = this.afs.collection('listings').snapshotChanges().map(listings => {
+      return listings.map(changeAction => {
+
+        const listing = changeAction.payload.doc.data() as Listing;
 
         const carID = listing.carDocumentID;
         const userID = listing.userDocumentID;
-
+        listing.id = changeAction.payload.doc.id;
+        
         return combineLatest(this.afs.doc('cars/' + carID).valueChanges(), this.afs.doc('users/' + userID).valueChanges(), (data1, data2) => {
           return { ...listing, ...data1, ...data2 };
         })
@@ -83,11 +86,9 @@ export class FirestoreListingsProvider {
     })
   }
 
-  public updateUser(firstName, lastName, contactNum, uid) {
-    return this.afs.doc<User>('users/' + uid).update({
-      firstName: firstName,
-      lastName: lastName,
-      contactNum: contactNum
+  public addRequest(listing) {
+    return this.afs.doc<Listing>('listings/' + listing.id).update({
+      whoWantsToCome: listing.whoWantsToCome
     })
   }
 
