@@ -6,7 +6,7 @@ Ionic Android App
 
 ## Current Progress
 
-6/16 pages done
+10/16 pages done
 
 ## Page List:
 
@@ -31,24 +31,27 @@ Ionic Android App
 ## Current status
 
 To Do:
-* 2, 3, 6, 8, 9.1, 9.2, 11, 14, 15, 16
+* 3, 6, 9.2, 11, 14, 15, 16
 
 #### What each person has left to do:
 
-Thomas: 2, 3, 6, 8, 16
+Thomas: 3, 6, 16
 
-Chris: 9.1, 9.2, 11, 14, 15
+Chris: 9.2, 11, 14, 15
 
 #### In Progress:
-* 2 - Thomas
-* 3 - Thomas
+
+* 9.2 - Styling - View your ride listings (with rides existing) - Chris
+* 2 - Styling - Find a ride listings - Chris
 
 #### Already done:
 * 1 - Home page - Chris
+* 2 - Find a ride - Chris/Thomas
 * 4 - Login - Chris
 * 5 - Signup - Chris/Thomas
-* 10 - Navigation Bar - Chris
 * 7 - Post a ride page - Chris
+* 9.1 - View your ride listings (with no rides listed) - Chris/Thomas
+* 10 - Navigation Bar - Chris
 * 12 - Add car page - Chris
 * 13 - User details (+ edit) page - Thomas
 
