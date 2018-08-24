@@ -17,12 +17,12 @@
   <div id="container">
     <div id="content">
 
-        <div id="noListingsContainer" [hidden]="userHasListings()">
-          <div id='noListingsImage'></div>
-          <div id='noListingsTitle'>You don't have any listings!</div>
-          <div id='noListingsSubText'>Add a listing to be able to view it here</div>
-          <button id='addAListingsBtn' ion-button block outline (click)='goToPostARide()'>Add a listing</button>
-        </div>
+      <div id="noListingsContainer" [hidden]="userHasListings()">
+        <div id='noListingsImage'></div>
+        <div id='noListingsTitle'>You don't have any listings!</div>
+        <div id='noListingsSubText'>Add a listing to be able to view it here</div>
+        <button id='addAListingsBtn' ion-button block outline (click)='goToPostARide()'>Add a listing</button>
+      </div>
 
       <div [hidden]="!userHasListings()">
         <ion-list *ngFor="let listing of listings">

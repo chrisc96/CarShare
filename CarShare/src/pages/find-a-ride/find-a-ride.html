@@ -16,7 +16,13 @@
 
 <ion-content class="home-bg">
   <div id="container">
+      <ion-refresher (ionRefresh)="doRefresh($event)" (ionPull)="doPulling($event)">
+          <ion-refresher-content pullingText="Pull to refresh..." refreshingText="Refreshing..."  pullMax="0" pullMin="125">
+          </ion-refresher-content>
+        </ion-refresher>
     <div id="content">
+
+      <div [hidden]="!userHasListings()">
         <ion-list *ngFor="let listing of listings; let i = index">
           <div id="listingDetails">
             <ion-item *ngIf="listing.firstName">
@@ -52,6 +58,7 @@
             </ion-item>
           </div>
         </ion-list>
+      </div>
     </div>
   </div>
 </ion-content>

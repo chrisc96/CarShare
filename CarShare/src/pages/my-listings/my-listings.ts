@@ -24,7 +24,6 @@ export class MyListingsPage {
 
   listings: Listing[];
   listingCount: number = 0;
-  emitted: boolean = true;
   listingSubscription: Subscription
 
   constructor(
@@ -35,10 +34,8 @@ export class MyListingsPage {
     public listingsProvider: FirestoreListingsProvider
   ) {
     this.listingsProvider.getUserListingsObservable().subscribe(listings => {
-      console.log('some shit changed', ' listings: ', listings)
       this.listings = listings;
       this.listingCount = this.listings.length;
-      this.emitted = true
     });
   }
 

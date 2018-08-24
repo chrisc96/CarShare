@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { IonicPage, NavController, NavParams, MenuController } from "ionic-angular";
+import { IonicPage, NavController, NavParams, MenuController, Refresher } from "ionic-angular";
 import { RideListingPage } from "../ride-listing/ride-listing";
 import { NavigationMenuProvider } from "../../providers/navigation-menu/navigation-menu";
 import 'rxjs/add/operator/map'
@@ -7,6 +7,7 @@ import { Listing } from '../struct/listing'
 import { FirestoreListingsProvider } from "../../providers/firestore-listings/firestore-listings";
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from "rxjs";
+import { PostARidePage } from "../post-a-ride/post-a-ride";
 
 /**
  * Generated class for the FindARidePage page.
@@ -23,7 +24,8 @@ import { Subscription } from "rxjs";
 export class FindARidePage {
 
   listings: Listing[];
-  listingSubscription : Subscription
+  listingCount: number = 0;
+  listingSubscription: Subscription
 
   constructor(
     public navCtrl: NavController,
@@ -37,6 +39,7 @@ export class FindARidePage {
   ngOnInit() {
     this.listingSubscription = this.listingsProvider.getAllListingsObservable().subscribe(listings => {
       this.listings = listings;
+      this.listingCount = this.listings.length;
     });
   }
 
@@ -52,4 +55,23 @@ export class FindARidePage {
   ngOnDestroy() {
     this.listingSubscription.unsubscribe()
   }
+
+  userHasListings() {
+    return this.listingCount !== 0
+  }
+
+  goToPostARide() {
+    this.navCtrl.push(PostARidePage);
+  }
+
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+    }, 2000);
+  }
+
+  doPulling(refresher: Refresher) {}
 }
