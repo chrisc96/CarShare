@@ -36,7 +36,7 @@ export class FindARidePage {
 
   ngOnInit() {
     this.listingSubscription = this.listingsProvider.getAllListingsObservable().subscribe(listings => {
-      this.listings = listings
+      this.listings = listings;
     });
   }
 

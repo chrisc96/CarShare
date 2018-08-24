@@ -4,6 +4,8 @@ import { NavigationMenuProvider } from '../../providers/navigation-menu/navigati
 import { FirestoreListingsProvider } from "../../providers/firestore-listings/firestore-listings";
 import { Listing } from '../struct/listing';
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs';
+import { PostARidePage } from '../post-a-ride/post-a-ride';
 
 /**
  * Generated class for the MyListingsPage page.
@@ -19,20 +21,50 @@ import { Observable } from 'rxjs/Observable';
 })
 export class MyListingsPage {
 
-  listings: Observable<Listing[]>;
+  listings: Listing[];
+  listingCount: number;
+  dataReturned: boolean = false;
+  listingSubscription: Subscription
 
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
-    public menuCtrl: MenuController, 
+    public menuCtrl: MenuController,
     public navMenu: NavigationMenuProvider,
     public listingsProvider: FirestoreListingsProvider
   ) {
-    this.listings = this.listingsProvider.getUserListingsObservable();
+    this.listingsProvider.getUserListingsObservable().subscribe(listings => {
+      this.listings = listings;
+
+    });
+  }
+
+  ngOnInit() {
+    this.listingSubscription = this.listingsProvider.getUserListingsObservable().subscribe(listings => {
+      this.listings = listings;
+      this.dataReturned = true
+    });
   }
 
   ionViewWillEnter() {
     this.menuCtrl.enable(true, 'navMenu');
     this.navMenu.setActivePage(MyListingsPage)
+  }
+
+  userHasListings() {
+    console.log(this.listings)
+    if (this.listings !== undefined) {
+      this.listingCount = this.listings.length;
+      return this.listingCount !== 0
+    }
+    return false;
+  }
+
+  goToPostARide() {
+    this.navCtrl.push(PostARidePage)
+  }
+
+  ngOnDestroy() {
+    this.listingSubscription.unsubscribe()
   }
 }

@@ -136,6 +136,7 @@ export class PostARidePage {
     if (this.cars) {
       return this.carCount == 0
     }
+    return false;
   }
 
   tryPost(e) {

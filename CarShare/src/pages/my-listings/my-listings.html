@@ -5,45 +5,59 @@
   Ionic pages and navigation.
 -->
 <ion-toolbar>
-    <button ion-button menuToggle left>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>
-      My Listings
-    </ion-title>
-  </ion-toolbar>
-  
-  <ion-content class="home-bg">
-    <div id="container">
-        <div id="content">
-            <ion-list *ngFor="let listing of listings | async">
-              <div id="listingDetails">
-                <ion-item *ngIf="listing.make">
-                  Vehicle: {{ listing.make }} {{ listing.model }} ({{ listing.year }})
-                </ion-item>
-                <ion-item *ngIf="listing.departureDate">
-                  Departs At: {{ listing.departureDate }} {{ listing.departureTime }}
-                </ion-item>
-                <ion-item *ngIf="listing.destination">
-                  Destination: {{ listing.destination }}
-                </ion-item>
-                <ion-item *ngIf="listing.meetingPoint">
-                  Meeting Point: {{ listing.meetingPoint }}
-                </ion-item>
-                <ion-item *ngIf="listing.seatsAvailable">
-                  Seats Available: {{ listing.seatsAvailable }}
-                </ion-item>
-                <ion-item *ngIf="listing.storageSpace">
-                  Storage Space: {{ listing.storageSpace }}
-                </ion-item>
-                <ion-item *ngIf="listing.whoWantsToCome.length > 0">
-                  Want to ride: {{ listing.whoWantsToCome }}
-                </ion-item>
-                <ion-item *ngIf="listing.whosComing.length > 0">
-                  Sharing ride: {{ listing.whosComing }}
-                </ion-item>
-              </div>
-            </ion-list>
+  <button ion-button menuToggle left>
+    <ion-icon name="menu"></ion-icon>
+  </button>
+  <ion-title>
+    My Listings
+  </ion-title>
+</ion-toolbar>
+
+<ion-content class="home-bg">
+  <div id="container">
+    <div id="content">
+
+      <div *ngIf="dataReturned">
+
+        <div id="noListingsContainer" [hidden]="userHasListings()">
+          <div id='noListingsImage'></div>
+          <div id='noListingsTitle'>You don't have any listings!</div>
+          <div id='noListingsSubText'>Add a listing to be able to view it here</div>
+          <button id='addAListingsBtn' ion-button block outline (click)='goToPostARide()'>Add a listing</button>
         </div>
+
+        <div [hidden]="!userHasListings()">
+          <ion-list *ngFor="let listing of listings">
+            <div id="listingDetails">
+              <ion-item *ngIf="listing.make">
+                Vehicle: {{ listing.make }} {{ listing.model }} ({{ listing.year }})
+              </ion-item>
+              <ion-item *ngIf="listing.departureDate">
+                Departs At: {{ listing.departureDate }} {{ listing.departureTime }}
+              </ion-item>
+              <ion-item *ngIf="listing.destination">
+                Destination: {{ listing.destination }}
+              </ion-item>
+              <ion-item *ngIf="listing.meetingPoint">
+                Meeting Point: {{ listing.meetingPoint }}
+              </ion-item>
+              <ion-item *ngIf="listing.seatsAvailable">
+                Seats Available: {{ listing.seatsAvailable }}
+              </ion-item>
+              <ion-item *ngIf="listing.storageSpace">
+                Storage Space: {{ listing.storageSpace }}
+              </ion-item>
+              <ion-item *ngIf="listing.whoWantsToCome.length > 0">
+                Want to ride: {{ listing.whoWantsToCome }}
+              </ion-item>
+              <ion-item *ngIf="listing.whosComing.length > 0">
+                Sharing ride: {{ listing.whosComing }}
+              </ion-item>
+            </div>
+          </ion-list>
+        </div>
+
+      </div>
     </div>
-  </ion-content>
+  </div>
+</ion-content>

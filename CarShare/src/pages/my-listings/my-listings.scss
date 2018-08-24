@@ -8,11 +8,9 @@ page-my-listings {
 
     #content {
         width: inherit;
-        height: -webkit-fit-content;
-        height: -moz-fit-content;
         height: fit-content;
         position: relative;
-        top: 10%;
+        margin-top: 56px;
     }
 
     #listingDetails {
@@ -25,5 +23,45 @@ page-my-listings {
         padding: 0 0.5em;
         height: 35px;
         font-size: 1.7rem;
+    }
+
+    #noListingsImage {
+        background: url(../../assets/imgs/noCars.png);
+        width: 100px;
+        height: 100px;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #noListingsContainer {
+        width: 75%;
+        margin-left: auto;
+        margin-right: auto;
+
+    }
+
+    #addAListingsBtn {
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        border-color: #ffc977;
+        color: #ffc977;
+    }
+
+    #noListingsTitle {
+        font-size: 2rem;
+        color: black;
+        font-weight: 300;
+        margin-bottom: 15px;
+    }
+
+    #noListingsSubText {
+        color: black;
+        font-size: 1.5rem;
+        font-weight: 300;
+        margin-bottom: 20px;
     }
 }
