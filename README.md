@@ -46,6 +46,7 @@ Chris: 9.2, 11, 14, 15
 * 2 - Styling - Find a ride listings - Chris
 * 3 - Car share listings details page - Thomas
 * 6 - User requests to carpool page - Thomas
+* 8 - Review user request to join your listing page - Thomas
 
 #### Already done:
 * 1 - Home page - Chris
