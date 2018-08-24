@@ -44,6 +44,7 @@ Chris: 9.2, 11, 14, 15, 17
 
 * 9.2 - Styling - View your ride listings (with rides existing) - Chris
 * 2 - Styling - Find a ride listings - Chris
+* 17 - Find a ride (with no listings listed) - Chris
 
 #### Already done:
 * 1 - Home page - Chris
