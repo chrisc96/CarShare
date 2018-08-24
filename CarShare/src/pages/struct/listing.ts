@@ -9,7 +9,7 @@ export class Listing {
                        public storageSpace: boolean,
                        public timeCreated: Date,
                        public userDocumentID: string,
-                       public whoWantsToCome: string[],
-                       public whosComing: string[]) {
+                       public whoWantsToCome: any[],
+                       public whosComing: any[]) {
     }
 }

@@ -37,6 +37,7 @@ export class MyListingsPage {
       this.listings = listings;
       this.listingCount = this.listings.length;
     });
+    console.log(this.listings)
   }
 
   ionViewWillEnter() {

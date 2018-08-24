@@ -53,9 +53,13 @@ export class FirestoreListingsProvider {
 
     this.userListingsObservable = this.usersProvider.getUserObservable().flatMap(user => {
       if (user) {
-        return this.afs.collection('listings', ref => ref.where('userDocumentID', '==', user.uid)).valueChanges().map(listings => {
-            return listings.map((listing : Listing) => {
+        return this.afs.collection('listings', ref => ref.where('userDocumentID', '==', user.uid)).snapshotChanges().map(listings => {
+            return listings.map(changeAction => {
+              
+              const listing = changeAction.payload.doc.data() as Listing;
+
               const carID = listing.carDocumentID;
+              listing.id = changeAction.payload.doc.id;
   
               return combineLatest(this.afs.doc('cars/' + carID).valueChanges(), (data1) => {
                 return { ...listing, ...data1 };
@@ -89,6 +93,13 @@ export class FirestoreListingsProvider {
   public addRequest(listing) {
     return this.afs.doc<Listing>('listings/' + listing.id).update({
       whoWantsToCome: listing.whoWantsToCome
+    })
+  }
+
+  public updateRequest(listing) {
+    return this.afs.doc<Listing>('listings/' + listing.id).update({
+      whoWantsToCome: listing.whoWantsToCome,
+      whosComing: listing.whosComing
     })
   }
 

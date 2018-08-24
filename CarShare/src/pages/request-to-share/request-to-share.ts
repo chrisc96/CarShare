@@ -42,6 +42,7 @@ export class RequestToSharePage {
     if (!this.user || !this.listing) return;
 
     if(!this.requesterOwnsListing() && !this.alreadyRequested()) {
+      this.listing.whoWantsToCome.push(Object.assign({}, this.user))
       this.listingsProvider.addRequest(this.listing);
       this.successfulRequest = true;
     }
@@ -53,13 +54,13 @@ export class RequestToSharePage {
 
   alreadyRequested() {
     for (var i = 0; i < this.listing.whoWantsToCome.length; i++) {
-      if (this.listing.whoWantsToCome[i] == this.user.uid) {
+      if (this.listing.whoWantsToCome[i].uid == this.user.uid) {
         return true;
       }
     }
 
     for (var j = 0; j < this.listing.whosComing.length; j++) {
-      if (this.listing.whosComing[j] == this.user.uid) {
+      if (this.listing.whosComing[j].uid == this.user.uid) {
         return true;
       }
     }

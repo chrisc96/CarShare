@@ -105,4 +105,16 @@ export class FirestoreUsersProvider {
       return this.user;
     }
   }
+
+  getUserById(uid) {
+    var user;
+
+    this.afs.doc<User>('users/' + uid).valueChanges().subscribe(data => {
+      user = data;
+    });
+
+    user.uid = uid;
+
+    return user;
+  }
 }
