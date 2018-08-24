@@ -32,13 +32,13 @@ Ionic Android App
 ## Current status
 
 To Do:
-* 3, 6, 9.2, 11, 14, 15, 16, 17
+* 3, 6, 9.2, 11, 14, 15, 16
 
 #### What each person has left to do:
 
 Thomas: 3, 6, 16
 
-Chris: 9.2, 11, 14, 15, 17
+Chris: 9.2, 11, 14, 15
 
 #### In Progress:
 
@@ -55,6 +55,7 @@ Chris: 9.2, 11, 14, 15, 17
 * 10 - Navigation Bar - Chris
 * 12 - Add car page - Chris
 * 13 - User details (+ edit) page - Thomas
+* 17 - Find a ride (with no listings listed)
 
 #### Minor Todos:
 * Add a loading bar while cars are being pulled in post a ride (instead of the empty screen shown)
