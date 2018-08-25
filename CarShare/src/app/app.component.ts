@@ -1,5 +1,5 @@
 import { Component, ViewChild } from "@angular/core";
-import { Nav, Platform } from "ionic-angular";
+import { Nav, Platform, MenuController } from "ionic-angular";
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 
@@ -29,7 +29,8 @@ export class MyApp {
     statusBar: StatusBar,
     splashScreen: SplashScreen,
     public navMenu: NavigationMenuProvider,
-    public usersProvider: FirestoreUsersProvider
+    public usersProvider: FirestoreUsersProvider,
+    public menuCtrl: MenuController
   ) {
 
     platform.ready().then(() => {
@@ -51,6 +52,12 @@ export class MyApp {
   openPage(page) {
     this.pages.forEach(element => {
       if (page.component === element.component) {
+
+        if (this.nav.getActive().component === element.component) {
+          this.closeMenu()
+          return;
+        }
+
         // we need to check if the user is logged in
         // if not, require a login and then go to the page first
         if (element.requiresLogin && !this.usersProvider.userLoggedIn()) {
@@ -90,5 +97,13 @@ export class MyApp {
     this.usersProvider.logout().then(() => {
       this.nav.push(HomePage)
     });
+  }
+
+  openMenu() {
+    this.menuCtrl.open();
+  }
+ 
+  closeMenu() {
+    this.menuCtrl.close();
   }
 }

@@ -1,4 +1,4 @@
-<ion-menu id='navMenu' [content]='mycontent'>
+<ion-menu id='navMenu' #navMenu [content]='mycontent'>
     <ion-content>
         <ion-list>
             <div menuClose="navMenu" class='navUserArea' [style.cursor]="checkLoggedIn() ? 'pointer' : 'auto' " (click)='goToProfile()'>

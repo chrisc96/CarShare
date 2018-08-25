@@ -12,6 +12,7 @@ import { MyListingsPage } from '../my-listings/my-listings';
 import { AddCarToProfilePage } from '../add-car-to-profile/add-car-to-profile';
 import { FirestoreCarsProvider } from '../../providers/firestore-cars/firestore-cars';
 import { FirestoreListingsProvider } from '../../providers/firestore-listings/firestore-listings';
+import { Subscription } from '../../../node_modules/rxjs';
 
 
 /**
@@ -57,6 +58,8 @@ export class PostARidePage {
     storageAvailable: ['', [Validators.required]],
   })
 
+  carSubscription : Subscription
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -73,8 +76,9 @@ export class PostARidePage {
 
   }
 
-  ngOnInit() {
-    this.carsProvider.getCarsByUIDObservable().subscribe(car => {
+  ionViewDidLoad() {
+    this.carSubscription = this.carsProvider.getCarsByUIDObservable().subscribe(car => {
+      console.log('post a ride update')
       this.cars = car;
       this.carCount = this.cars.length
       this.dataReturned = true
@@ -211,5 +215,9 @@ export class PostARidePage {
 
   goToAddACarPage() {
     this.navCtrl.push(AddCarToProfilePage, { toPage: PostARidePage })
+  }
+
+  ionViewDidLeave() {
+    this.carSubscription.unsubscribe()
   }
 }

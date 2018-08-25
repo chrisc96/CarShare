@@ -37,8 +37,9 @@ export class FindARidePage {
   ) {
   }
 
-  ngOnInit() {
+  ionViewDidLoad() {
     this.listingSubscription = this.listingsProvider.getAllListingsObservable().subscribe(listings => {
+      console.log('find a ride update')
       this.listings = listings;
       this.listingCount = this.listings.length;
     });
@@ -53,7 +54,7 @@ export class FindARidePage {
     this.navMenu.setActivePage(FindARidePage)
   }
 
-  ngOnDestroy() {
+  ionViewDidLeave() {
     this.listingSubscription.unsubscribe()
   }
 

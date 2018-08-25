@@ -36,16 +36,23 @@ export class MyListingsPage {
     public navMenu: NavigationMenuProvider,
     public listingsProvider: FirestoreListingsProvider
   ) {
-    this.listingsProvider.getUserListingsObservable().subscribe(listings => {
-      this.listings = listings;
-      this.listingCount = this.listings.length;
-    });
-    console.log(this.listings)
   }
 
   ionViewWillEnter() {
     this.menuCtrl.enable(true, 'navMenu');
     this.navMenu.setActivePage(MyListingsPage)
+  }
+
+  ionViewDidLoad() {
+    this.listingSubscription = this.listingsProvider.getUserListingsObservable().subscribe(listings => {
+      console.log('user listings changed')
+      this.listings = listings;
+      this.listingCount = this.listings.length;
+    });
+  }
+
+  ionViewDidLeave() {
+    this.listingSubscription.unsubscribe()
   }
 
   userHasListings() {
