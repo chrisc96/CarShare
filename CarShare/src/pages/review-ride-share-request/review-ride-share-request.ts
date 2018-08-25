@@ -3,10 +3,6 @@ import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angul
 import { NavigationMenuProvider } from "../../providers/navigation-menu/navigation-menu";
 import { Listing } from '../struct/listing';
 import { FirestoreListingsProvider } from '../../providers/firestore-listings/firestore-listings';
-import { FirestoreUsersProvider } from '../../providers/firestore-users/firestore-users';
-import { User } from '../../../node_modules/firebase';
-import { Subscription } from '../../../node_modules/rxjs';
-
 
 /**
  * Generated class for the ReviewRideShareRequestPage page.
@@ -29,8 +25,7 @@ export class ReviewRideShareRequestPage {
     public navParams: NavParams,
     public menuCtrl: MenuController,
     public navMenu: NavigationMenuProvider,
-    public listingsProvider: FirestoreListingsProvider,
-    public usersProvider : FirestoreUsersProvider
+    public listingsProvider: FirestoreListingsProvider
   ) {
     this.listingsProvider.getUserListingsObservable().subscribe(listings => {
       this.listings = listings;
@@ -45,17 +40,18 @@ export class ReviewRideShareRequestPage {
   acceptShareRequest(listingIndex, requesterIndex) {
     var listing = this.listings[listingIndex]
     var requester = listing.whoWantsToCome[requesterIndex]
-
+    
+    listing.seatsAvailable = (listing.seatsAvailable - 1);
     listing.whosComing.push(requester)
     listing.whoWantsToCome.splice(requesterIndex, 1)
 
-    this.listingsProvider.updateRequest(listing)
+    this.listingsProvider.updateListing(listing)
   }
 
   rejectShareRequest(listingIndex, requesterIndex) {
     var listing = this.listings[listingIndex]
 
     listing.whoWantsToCome.splice(requesterIndex, 1)
-    this.listingsProvider.updateRequest(listing)
+    this.listingsProvider.updateListing(listing)
   }
 }

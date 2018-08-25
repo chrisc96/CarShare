@@ -53,7 +53,6 @@ export class FirestoreListingsProvider {
     }).mergeMap(observables => combineLatest(observables))
 
     this.userListingsObservable = this.usersProvider.getUserObservable().flatMap(user => {
-      console.log('my listings')
       if (user) {
         return this.afs.collection('listings', ref => ref.where('userDocumentID', '==', user.uid)).snapshotChanges().map(listings => {
             return listings.map(changeAction => {
@@ -98,8 +97,16 @@ export class FirestoreListingsProvider {
     })
   }
 
-  public updateRequest(listing) {
+  public updateListing(listing) {
     return this.afs.doc<Listing>('listings/' + listing.id).update({
+      carDocumentID: listing.carDocumentID,
+      departureDate: listing.departureDate,
+      departureTime: listing.departureTime,
+      destination: listing.destination,
+      meetingPoint: listing.meetingPoint,
+      seatsAvailable: listing.seatsAvailable,
+      storageSpace: listing.storageSpace,
+      userDocumentID: listing.userDocumentID,
       whoWantsToCome: listing.whoWantsToCome,
       whosComing: listing.whosComing
     })

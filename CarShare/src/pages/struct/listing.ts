@@ -5,7 +5,7 @@ export class Listing {
                        public departureTime: string,
                        public destination: string,
                        public meetingPoint: string,
-                       public seatsAvailable: string,
+                       public seatsAvailable: number,
                        public storageSpace: boolean,
                        public timeCreated: Date,
                        public userDocumentID: string,
