@@ -76,6 +76,14 @@ export class FirestoreUsersProvider {
     })
   }
 
+  public updateUser(firstName, lastName, contactNum, uid) {
+    return this.afs.doc<User>('users/' + uid).update({
+      firstName: firstName,
+      lastName: lastName,
+      contactNum: contactNum
+    })
+  }
+
   // General methods
 
   logout() {
@@ -96,5 +104,17 @@ export class FirestoreUsersProvider {
     if (this.userLoggedIn()) {
       return this.user;
     }
+  }
+
+  getUserById(uid) {
+    var user;
+
+    this.afs.doc<User>('users/' + uid).valueChanges().subscribe(data => {
+      user = data;
+    });
+
+    user.uid = uid;
+
+    return user;
   }
 }

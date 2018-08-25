@@ -1,0 +1,19 @@
+<!--
+  Generated template for the RequestToSharePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>request-to-share</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <p *ngIf="successfulRequest">Your request has been sent</p>
+  <p *ngIf="!successfulRequest">Your request failed to send</p>
+</ion-content>

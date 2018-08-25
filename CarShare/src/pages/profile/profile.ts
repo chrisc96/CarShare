@@ -36,7 +36,6 @@ export class ProfilePage {
     public menuCtrl: MenuController,
     public navMenu: NavigationMenuProvider,
     public usersProvider: FirestoreUsersProvider,
-    public listingsProvider: FirestoreListingsProvider,
     public formBuilder: FormBuilder,
     private toastCtrl: ToastController
   ) {
@@ -56,7 +55,7 @@ export class ProfilePage {
     this.editBtnPressed = true;
     this.requestBeingSent = true;
 
-    this.listingsProvider.updateUser(this.firstName, this.lastName, this.contactNum, this.user.uid)
+    this.usersProvider.updateUser(this.firstName, this.lastName, this.contactNum, this.user.uid)
       .then(resp => {
         this.requestBeingSent = false;
         this.editBtnPressed = false;

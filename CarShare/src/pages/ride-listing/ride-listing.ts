@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { NavigationMenuProvider } from '../../providers/navigation-menu/navigation-menu';
 import { Listing } from '../struct/listing';
-import { Observable } from 'rxjs/Observable';
+import { RequestToSharePage } from '../request-to-share/request-to-share';
 import { FirestoreListingsProvider } from '../../providers/firestore-listings/firestore-listings';
 
 /**
@@ -40,6 +40,6 @@ export class RideListingPage {
   }
 
   requestToShare() {
-    
+    this.navCtrl.push(RequestToSharePage, {'listing': this.listing});
   }
 }

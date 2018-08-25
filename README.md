@@ -36,7 +36,7 @@ To Do:
 
 #### What each person has left to do:
 
-Thomas: 3, 6, 16
+Thomas: 3, 6, 8, 16
 
 Chris: 9.2, 11, 14, 15
 
@@ -44,6 +44,9 @@ Chris: 9.2, 11, 14, 15
 
 * 9.2 - Styling - View your ride listings (with rides existing) - Chris
 * 2 - Styling - Find a ride listings - Chris
+* 3 - Car share listings details page - Thomas
+* 6 - User requests to carpool page - Thomas
+* 8 - Review user request to join your listing page - Thomas
 
 #### Already done:
 * 1 - Home page - Chris
