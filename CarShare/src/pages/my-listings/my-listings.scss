@@ -68,7 +68,12 @@ page-my-listings {
         margin-top: 20px;
     }
 
+    
 
+
+
+
+    
     /* 
         Card design for listing
     */
@@ -82,17 +87,17 @@ page-my-listings {
     }
 
     .card {
-        height: 165px;
+        height: fit-content;
     }
 
     .card p {
         margin: 0 0 2px;
         font-weight: 900;
         line-height: 1.5;
-        font-size: 1.5rem;
         color: green;
         display: inline-block;
     }
+
 
     #lhs {
         float: left;
@@ -104,13 +109,15 @@ page-my-listings {
     }
 
         
-    #carImageHolder {
+    #carImage {
         background: url(../../assets/imgs/noImageOfCar.png);
-        height: calc(100% - 18px);
         background-size: contain;
-        vertical-align: middle;
         border-radius: 2px;
-        background-position-y: center;
+        background-repeat: no-repeat;
+        height: 99px;
+        width: 132px;
+        display: inline-block;
+        margin-bottom: -5px;
     }
 
     #rhs {
@@ -120,10 +127,6 @@ page-my-listings {
 
     .QuarterSeparator {
         height: 33.33%;
-        font-size: 1.5rem;
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
         display: flex;
         -ms-flex-align: flex-end;
         -webkit-box-align: center;
@@ -132,12 +135,12 @@ page-my-listings {
         height: fit-content;
     }
 
-    .IconSeparator {
+    .HalfHorizontalSeparator {
+        width: 50%;
         display: block;
         align-items: center;
         height: 100%;
     }
-
 
     #vehicleDetailsText {
         font-size: 1.5rem;
@@ -146,14 +149,12 @@ page-my-listings {
         line-height: normal;
         vertical-align: middle;
         font-weight: 100;
+        margin-bottom: 8px;
+        margin-top: 2px;
     }
     
     #vehicleDetails {
-        height: 20px;
-        bottom: 0;
-        line-height: 30px;
         width: 100%;
-        position: absolute;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -162,14 +163,14 @@ page-my-listings {
     .listingText {
         text-align: left;
         font-weight: 100;
-        font-size: 1.3rem;
+        font-size: 1.5rem;
     }
 
     .listingTitle {
         min-width: 45px;
         text-align: start;
         font-weight: 500;
-        font-size: 1.3rem;
+        font-size: 1.5rem;
     }
 
     #numSeats {
@@ -178,17 +179,15 @@ page-my-listings {
     }
 
     #tillImageEnd {
-        height: calc(100% - 18px);
-        display: grid;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
         align-items: center;
     }
 
     .lastItem {
         font-size: 1.5rem;
-        margin-top: 3px;
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
+        margin-bottom: 8px;
         display: flex;
         -ms-flex-align: flex-end;
         -webkit-box-align: center;
@@ -201,10 +200,39 @@ page-my-listings {
     }
 
     .rightHandSideIcon {
+        color: #5478ff;
+    }
+
+    .row {
+        display: flex!important;
+        align-content: center!important;
+        align-items: center!important;
+    }
+
+    .col {
+        padding: 0px !important; 
+    }
+
+    #carImageContainer {
+        text-align: center;
+    }
+    
+    .IconSeparator {
+        width: 33.3%;
+        display: block;
+        align-items: center;
+        height: 100%;
+    }
+
+    .leftHandSideIcon {
+        margin-right: 3px;
+    }
+
+    .rightHandSideIcon {
         color: green;;
     }
 
-    #actionButton {
+    #exlamationBtn {
         color: red;
     }
 }

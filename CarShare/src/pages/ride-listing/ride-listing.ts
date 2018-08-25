@@ -20,6 +20,7 @@ import { FirestoreListingsProvider } from '../../providers/firestore-listings/fi
 export class RideListingPage {
 
   listing: Listing
+  fromMyListings : boolean
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -27,7 +28,8 @@ export class RideListingPage {
               public navMenu : NavigationMenuProvider,
               public listingsProvider : FirestoreListingsProvider
   ) {
-    this.listing = navParams.get('listing')
+    this.listing = navParams.get('listing');
+    this.fromMyListings = navParams.get('fromMyListings');
   }
 
   ionViewWillEnter() {

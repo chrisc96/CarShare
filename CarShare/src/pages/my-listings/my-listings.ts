@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { PostARidePage } from '../post-a-ride/post-a-ride';
 import { of } from 'rxjs';
 import * as moment from 'moment';
+import { RideListingPage } from '../ride-listing/ride-listing';
 
 /**
  * Generated class for the MyListingsPage page.
@@ -45,7 +46,6 @@ export class MyListingsPage {
 
   ionViewDidLoad() {
     this.listingSubscription = this.listingsProvider.getUserListingsObservable().subscribe(listings => {
-      console.log('user listings changed')
       this.listings = listings;
       this.listingCount = this.listings.length;
     });
@@ -61,6 +61,10 @@ export class MyListingsPage {
 
   goToPostARide() {
     this.navCtrl.push(PostARidePage)
+  }
+
+  goToListingDetails(index) {
+    this.navCtrl.push(RideListingPage, {"listing": this.listings[index], 'fromMyListings': true})
   }
 
   getFormattedDateTime(index) {

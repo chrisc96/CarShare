@@ -90,7 +90,7 @@ export class AddCarToProfilePage {
   carCreatedToast() {
     // Show account created successfully
     let toast = this.toastCtrl.create({
-      message: 'Your ride listing has been posted!',
+      message: 'Your car has been added!',
       duration: 1000,
       position: 'top'
     });
@@ -102,5 +102,4 @@ export class AddCarToProfilePage {
 
     toast.present();
   }
-
 }

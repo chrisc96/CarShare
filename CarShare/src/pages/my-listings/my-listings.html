@@ -25,8 +25,59 @@
       </div>
 
       <div id="listingMargin" [hidden]="!userHasListings()">
+
         <ion-card *ngFor="let listing of listings; let i = index">
-          <ion-card-content>
+          <ion-grid>
+            <ion-card-content (click)="goToListingDetails(i)">
+              <ion-col>
+                <div id="carImageContainer">
+                  <div id="carImage"></div>
+                  <div id="vehicleDetails">
+                    <div id="vehicleDetailsText">{{ listing.make }} {{ listing.model }} {{ listing.year }}</div>
+                  </div>
+                </div>
+              </ion-col>
+              <ion-col>
+                <div class="lastItem">
+                  <div class="IconSeparator">
+                    <i class="fas fa-couch leftHandSideIcon"></i>
+                    <p id="numSeats rightHandSideIcon">{{ listing.seatsAvailable }}</p>
+                  </div>
+                  <div class="IconSeparator">
+                    <i class="fas fa-luggage-cart leftHandSideIcon"></i>
+                    <i class="fas fa-check rightHandSideIcon" *ngIf="listing.storageSpace"></i>
+                    <i class="fas fa-times rightHandSideIcon" *ngIf="!listing.storageSpace"></i>
+                  </div>
+                  <div class="IconSeparator" id="exlamationBtn" *ngIf="actionsToTake(i)">
+                    <i class="fas fa-exclamation-circle" [style.color]="red"></i>
+                  </div>
+                  <div class="IconSeparator rightHandSideIcon" *ngIf="!actionsToTake(i)">
+                    <i class="fas fa-info-circle"></i>
+                  </div>
+                </div>
+                <div id="tillImageEnd">
+                  <div class="QuarterSeparator">
+                    <div class="listingTitle">From:</div>
+                    <div class="listingText">{{ listing.meetingPoint }}
+                    </div>
+                  </div>
+                  <div class="QuarterSeparator">
+                    <div class="listingTitle">To:</div>
+                    <div class="listingText">{{ listing.destination }}
+                    </div>
+                  </div>
+                  <div class="QuarterSeparator">
+                    <div class="listingTitle">When:</div>
+                    <div class="listingText">{{ getFormattedDateTime(i) }}</div>
+                  </div>
+                </div>
+              </ion-col>
+            </ion-card-content>
+          </ion-grid>
+        </ion-card>
+
+        <!-- <ion-card *ngFor="let listing of listings; let i = index">
+          <ion-card-content (click)="goToListingDetails(i)">
             <div id="lhs">
               <div id="carImageHolder"></div>
               <div id="vehicleDetails">
@@ -53,22 +104,27 @@
                 </div>
               </div>
               <div class="lastItem">
-                <div class="IconSeparator" [style.width]="actionsToTake(i) ? '33.3%' : '50%' ">
+                <div class="IconSeparator">
                   <i class="fas fa-couch leftHandSideIcon"></i>
                   <p id="numSeats rightHandSideIcon">{{ listing.seatsAvailable }}</p>
                 </div>
-                <div class="IconSeparator" [style.width]="actionsToTake(i) ? '33.3%' : '50%' ">
+                <div class="IconSeparator">
                   <i class="fas fa-luggage-cart leftHandSideIcon"></i>
                   <i class="fas fa-check rightHandSideIcon" *ngIf="listing.storageSpace"></i>
                   <i class="fas fa-times rightHandSideIcon" *ngIf="!listing.storageSpace"></i>
                 </div>
-                <div class="IconSeparator" id="actionButton" [hidden]="!actionsToTake(i)" [style.width]="actionsToTake(i) ? '33.3%' : '50%' ">
-                  <i class="fas fa-exclamation-circle"></i>
+                <div class="IconSeparator" id="exlamationBtn" *ngIf="actionsToTake(i)">
+                  <i class="fas fa-exclamation-circle" [style.color]="red"></i>
+                </div>
+                <div class="IconSeparator rightHandSideIcon" *ngIf="!actionsToTake(i)">
+                  <i class="fas fa-info-circle"></i>
                 </div>
               </div>
             </div>
           </ion-card-content>
-        </ion-card>
+        </ion-card> -->
+
+
       </div>
     </div>
   </div>
