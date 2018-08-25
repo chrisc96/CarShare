@@ -23,6 +23,7 @@ export class RequestToSharePage {
   listing : Listing
   user : User
   successfulRequest : boolean
+  failedRequest : boolean
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -34,6 +35,7 @@ export class RequestToSharePage {
   this.listing = navParams.get('listing');
   this.user = this.usersProvider.getUser();
   this.successfulRequest = false;
+  this.failedRequest = false;
 
   this.addShareRequest();
 }
@@ -42,7 +44,10 @@ export class RequestToSharePage {
     if (!this.user || !this.listing) return;
 
     this.listing.whoWantsToCome.push(Object.assign({}, this.user))
-    this.listingsProvider.addRequest(this.listing);
-    this.successfulRequest = true;
+    this.listingsProvider.addRequest(this.listing).then(resp => {
+      this.successfulRequest = true;
+    }).catch(err => {
+      this.failedRequest = true;
+    });
   }
 }

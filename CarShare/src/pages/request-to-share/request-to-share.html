@@ -12,8 +12,14 @@
 
 </ion-header>
 
-
-<ion-content padding>
-  <p *ngIf="successfulRequest">Your request has been sent</p>
-  <p *ngIf="!successfulRequest">Your request failed to send</p>
+<ion-content class="home-bg">
+  <div id='container'>
+    <div id='content'>
+      <div id="shareContent">
+        <div id='shareImage'></div>
+        <div id='success' *ngIf="successfulRequest">Your request has been sent</div>
+        <div id='fail' *ngIf="failedRequest">There was a problem with your request. Please try again later</div>
+      </div>
+    </div>
+  </div>
 </ion-content>
