@@ -20,7 +20,7 @@
 
       <div id="listingMargin" [hidden]="!userHasListings()">
           <ion-card *ngFor="let listing of listings; let i = index">
-            <ion-card-content>
+            <ion-card-content (click)="goToListing(i)">
               <div id="lhs">
                 <div id="carImageHolder"></div>
                 <div id="vehicleDetails">

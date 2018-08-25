@@ -73,7 +73,7 @@ page-my-listings {
         Card design for listing
     */
 
-    .card-content-md {
+    .card-content {
         padding: 13px 16px;
         font-size: 1.4rem;
         line-height: 1.5;
@@ -89,10 +89,10 @@ page-my-listings {
         margin: 0 0 2px;
         font-weight: 900;
         line-height: 1.5;
-        color: #5478ff;
+        font-size: 1.5rem;
+        color: green;
         display: inline-block;
     }
-
 
     #lhs {
         float: left;
@@ -132,12 +132,12 @@ page-my-listings {
         height: fit-content;
     }
 
-    .HalfHorizontalSeparator {
-        width: 50%;
+    .IconSeparator {
         display: block;
         align-items: center;
         height: 100%;
     }
+
 
     #vehicleDetailsText {
         font-size: 1.5rem;
@@ -149,9 +149,9 @@ page-my-listings {
     }
     
     #vehicleDetails {
-        height: 19px;
+        height: 20px;
         bottom: 0;
-        line-height: 22px;
+        line-height: 30px;
         width: 100%;
         position: absolute;
         overflow: hidden;
@@ -185,6 +185,7 @@ page-my-listings {
 
     .lastItem {
         font-size: 1.5rem;
+        margin-top: 3px;
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
@@ -200,6 +201,10 @@ page-my-listings {
     }
 
     .rightHandSideIcon {
-        color: #5478ff;
+        color: green;;
+    }
+
+    #actionButton {
+        color: red;
     }
 }

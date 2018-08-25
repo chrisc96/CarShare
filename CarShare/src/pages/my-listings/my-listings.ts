@@ -27,7 +27,7 @@ export class MyListingsPage {
   listingCount: number = 0;
   listingSubscription: Subscription
 
-  formattedDateTime : any
+  formattedDateTime: any
 
   constructor(
     public navCtrl: NavController,
@@ -68,5 +68,10 @@ export class MyListingsPage {
     let time = this.listings[index].departureTime
     let datetime = "" + date + " " + time
     return moment(datetime).format("MMMM Do YYYY, h:mm a")
+  }
+
+  actionsToTake(index) {
+    let listing = this.listings[index];
+    return listing.whoWantsToCome.length !== 0
   }
 }

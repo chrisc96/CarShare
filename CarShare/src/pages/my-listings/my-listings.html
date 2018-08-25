@@ -37,11 +37,15 @@
               <div id="tillImageEnd">
                 <div class="QuarterSeparator">
                   <div class="listingTitle">From:</div>
-                  <div class="listingText">{{ listing.meetingPoint.split(",")[0] }} {{ listing.meetingPoint.split(",")[1] }} {{ listing.meetingPoint.split(",")[2] }}</div>
+                  <div class="listingText">{{ listing.meetingPoint.split(",")[0] }} {{ listing.meetingPoint.split(",")[1] }} {{ listing.meetingPoint.split(",")[2]
+                    }}
+                  </div>
                 </div>
                 <div class="QuarterSeparator">
                   <div class="listingTitle">To:</div>
-                  <div class="listingText">{{ listing.destination.split(",")[0] }} {{ listing.destination.split(",")[1] }} {{ listing.destination.split(",")[2] }}</div>
+                  <div class="listingText">{{ listing.destination.split(",")[0] }} {{ listing.destination.split(",")[1] }} {{ listing.destination.split(",")[2]
+                    }}
+                  </div>
                 </div>
                 <div class="QuarterSeparator">
                   <div class="listingTitle">When:</div>
@@ -49,14 +53,17 @@
                 </div>
               </div>
               <div class="lastItem">
-                <div class="HalfHorizontalSeparator">
+                <div class="IconSeparator" [style.width]="actionsToTake(i) ? '33.3%' : '50%' ">
                   <i class="fas fa-couch leftHandSideIcon"></i>
                   <p id="numSeats rightHandSideIcon">{{ listing.seatsAvailable }}</p>
                 </div>
-                <div class="HalfHorizontalSeparator">
+                <div class="IconSeparator" [style.width]="actionsToTake(i) ? '33.3%' : '50%' ">
                   <i class="fas fa-luggage-cart leftHandSideIcon"></i>
                   <i class="fas fa-check rightHandSideIcon" *ngIf="listing.storageSpace"></i>
                   <i class="fas fa-times rightHandSideIcon" *ngIf="!listing.storageSpace"></i>
+                </div>
+                <div class="IconSeparator" id="actionButton" [hidden]="!actionsToTake(i)" [style.width]="actionsToTake(i) ? '33.3%' : '50%' ">
+                  <i class="fas fa-exclamation-circle"></i>
                 </div>
               </div>
             </div>

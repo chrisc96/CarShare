@@ -39,7 +39,6 @@ export class FindARidePage {
 
   ionViewDidLoad() {
     this.listingSubscription = this.listingsProvider.getAllListingsObservable().subscribe(listings => {
-      console.log('find a ride update')
       this.listings = listings;
       this.listingCount = this.listings.length;
     });
