@@ -1,7 +1,7 @@
 export class Listing {
     public constructor(public id: string,
                        public carDocumentID: string,
-                       public depatureDate: string,
+                       public departureDate: string,
                        public departureTime: string,
                        public destination: string,
                        public meetingPoint: string,

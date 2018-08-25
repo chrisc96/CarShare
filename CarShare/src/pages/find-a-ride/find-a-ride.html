@@ -16,49 +16,48 @@
 
 <ion-content class="home-bg">
   <div id="container">
-      <ion-refresher (ionRefresh)="doRefresh($event)" (ionPull)="doPulling($event)">
-          <ion-refresher-content pullingText="Pull to refresh..." refreshingText="Refreshing..."  pullMax="0" pullMin="125">
-          </ion-refresher-content>
-        </ion-refresher>
     <div id="content">
 
-      <div [hidden]="!userHasListings()">
-        <ion-list *ngFor="let listing of listings; let i = index">
-          <div id="listingDetails">
-            <ion-item *ngIf="listing.firstName">
-              <p>Listed by: {{ listing.firstName }} {{ listing.lastName }}</p>
-              <p>Contact Number: {{ listing.contactNum }}</p>
-            </ion-item>
-            <ion-item *ngIf="listing.make">
-              Vehicle: {{ listing.make }} {{ listing.model }} ({{ listing.year }})
-            </ion-item>
-            <ion-item *ngIf="listing.departureDate">
-              Departs At: {{ listing.departureDate }} {{ listing.departureTime }}
-            </ion-item>
-            <ion-item *ngIf="listing.destination">
-              Destination: {{ listing.destination }}
-            </ion-item>
-            <ion-item *ngIf="listing.meetingPoint">
-              Meeting Point: {{ listing.meetingPoint }}
-            </ion-item>
-            <ion-item *ngIf="listing.seatsAvailable">
-              Seats Available: {{ listing.seatsAvailable }}
-            </ion-item>
-            <ion-item *ngIf="listing.storageSpace">
-              Storage Space: {{ listing.storageSpace }}
-            </ion-item>
-            <ion-item *ngIf="listing.whoWantsToCome.length > 0">
-              Want to ride: {{ listing.whoWantsToCome }}
-            </ion-item>
-            <ion-item *ngIf="listing.whosComing.length > 0">
-              Sharing ride: {{ listing.whosComing }}
-            </ion-item>
-            <ion-item>
-              <button ion-button block color='secondary' (click)='goToListing(i)'>Go To Listing</button>
-            </ion-item>
-          </div>
-        </ion-list>
-      </div>
+      <div id="listingMargin" [hidden]="!userHasListings()">
+          <ion-card *ngFor="let listing of listings; let i = index">
+            <ion-card-content>
+              <div id="lhs">
+                <div id="carImageHolder"></div>
+                <div id="vehicleDetails">
+                  <div id="vehicleDetailsText">{{ listing.make }} {{ listing.model }}</div>
+                </div>
+              </div>
+              <div id="rhs">
+                <div id="tillImageEnd">
+                  <div class="QuarterSeparator">
+                    <div class="listingTitle">From:</div>
+                    <div class="listingText">{{ listing.meetingPoint.split(",")[0] }} {{ listing.meetingPoint.split(",")[1] }} {{ listing.meetingPoint.split(",")[2] }}</div>
+                  </div>
+                  <div class="QuarterSeparator">
+                    <div class="listingTitle">To:</div>
+                    <div class="listingText">{{ listing.destination.split(",")[0] }} {{ listing.destination.split(",")[1] }} {{ listing.destination.split(",")[2] }}</div>
+                  </div>
+                  <div class="QuarterSeparator">
+                    <div class="listingTitle">When:</div>
+                    <div class="listingText">{{ getFormattedDateTime(i) }}</div>
+                  </div>
+                </div>
+                <div class="lastItem">
+                  <div class="HalfHorizontalSeparator">
+                    <i class="fas fa-couch leftHandSideIcon"></i>
+                    <p id="numSeats rightHandSideIcon">{{ listing.seatsAvailable }}</p>
+                  </div>
+                  <div class="HalfHorizontalSeparator">
+                    <i class="fas fa-luggage-cart leftHandSideIcon"></i>
+                    <i class="fas fa-check rightHandSideIcon" *ngIf="listing.storageSpace"></i>
+                    <i class="fas fa-times rightHandSideIcon" *ngIf="!listing.storageSpace"></i>
+                  </div>
+                </div>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </div>
+
     </div>
   </div>
 </ion-content>

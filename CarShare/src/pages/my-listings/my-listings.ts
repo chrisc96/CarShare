@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs';
 import { PostARidePage } from '../post-a-ride/post-a-ride';
 import { of } from 'rxjs';
+import * as moment from 'moment';
 
 /**
  * Generated class for the MyListingsPage page.
@@ -25,6 +26,8 @@ export class MyListingsPage {
   listings: Listing[];
   listingCount: number = 0;
   listingSubscription: Subscription
+
+  formattedDateTime : any
 
   constructor(
     public navCtrl: NavController,
@@ -50,5 +53,12 @@ export class MyListingsPage {
 
   goToPostARide() {
     this.navCtrl.push(PostARidePage)
+  }
+
+  getFormattedDateTime(index) {
+    let date = this.listings[index].departureDate
+    let time = this.listings[index].departureTime
+    let datetime = "" + date + " " + time
+    return moment(datetime).format("MMMM Do YYYY, h:mm a")
   }
 }

@@ -29,16 +29,19 @@
     "angularfire2": "^5.0.0-rc.11",
     "firebase": "^5.3.1",
     "firebase-tools": "^4.2.0",
+    "font-awesome": "^4.7.0",
     "ionic": "^3.20.0",
     "ionic-angular": "3.9.2",
     "ionicons": "3.0.0",
+    "moment": "^2.22.2",
     "rxjs": "^6.0.0",
     "rxjs-compat": "^6.2.2",
     "sw-toolbox": "3.6.0",
     "zone.js": "0.8.26"
   },
   "config": {
-    "ionic_generate_source_map": "false"
+    "ionic_generate_source_map": "false",
+    "ionic_copy": "./config/copy.config.js"
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.1.11",

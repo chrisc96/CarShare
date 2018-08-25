@@ -8,6 +8,7 @@ import { FirestoreListingsProvider } from "../../providers/firestore-listings/fi
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from "rxjs";
 import { PostARidePage } from "../post-a-ride/post-a-ride";
+import * as moment from 'moment';
 
 /**
  * Generated class for the FindARidePage page.
@@ -64,14 +65,10 @@ export class FindARidePage {
     this.navCtrl.push(PostARidePage);
   }
 
-  doRefresh(refresher) {
-    console.log('Begin async operation', refresher);
-
-    setTimeout(() => {
-      console.log('Async operation has ended');
-      refresher.complete();
-    }, 2000);
+  getFormattedDateTime(index) {
+    let date = this.listings[index].departureDate
+    let time = this.listings[index].departureTime
+    let datetime = "" + date + " " + time
+    return moment(datetime).format("MMMM Do YYYY, h:mm a")
   }
-
-  doPulling(refresher: Refresher) {}
 }
