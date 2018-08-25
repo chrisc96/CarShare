@@ -53,7 +53,7 @@
           Sharing ride: {{ listing.whosComing }}
         </ion-item>
         <ion-item>
-          <button ion-button block color='secondary' (click)='requestToShare()' >Request to Share</button>
+          <button ion-button block color='secondary' (click)='requestToShare()' [disabled]="!allowedToRequest()">Request to Share</button>
         </ion-item>
       </div>
     </div>

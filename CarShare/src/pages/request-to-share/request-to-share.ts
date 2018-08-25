@@ -41,30 +41,8 @@ export class RequestToSharePage {
   addShareRequest() {
     if (!this.user || !this.listing) return;
 
-    if(!this.requesterOwnsListing() && !this.alreadyRequested()) {
-      this.listing.whoWantsToCome.push(Object.assign({}, this.user))
-      this.listingsProvider.addRequest(this.listing);
-      this.successfulRequest = true;
-    }
-  }
-
-  requesterOwnsListing() {
-    return this.user.uid === this.listing.userDocumentID;
-  }
-
-  alreadyRequested() {
-    for (var i = 0; i < this.listing.whoWantsToCome.length; i++) {
-      if (this.listing.whoWantsToCome[i].uid == this.user.uid) {
-        return true;
-      }
-    }
-
-    for (var j = 0; j < this.listing.whosComing.length; j++) {
-      if (this.listing.whosComing[j].uid == this.user.uid) {
-        return true;
-      }
-    }
-
-    return false;
+    this.listing.whoWantsToCome.push(Object.assign({}, this.user))
+    this.listingsProvider.addRequest(this.listing);
+    this.successfulRequest = true;
   }
 }

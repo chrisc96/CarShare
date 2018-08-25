@@ -3,7 +3,8 @@ import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angul
 import { NavigationMenuProvider } from '../../providers/navigation-menu/navigation-menu';
 import { Listing } from '../struct/listing';
 import { RequestToSharePage } from '../request-to-share/request-to-share';
-import { FirestoreListingsProvider } from '../../providers/firestore-listings/firestore-listings';
+import { FirestoreUsersProvider } from '../../providers/firestore-users/firestore-users';
+import { User } from '../struct/user';
 
 /**
  * Generated class for the RideListingPage page.
@@ -20,16 +21,18 @@ import { FirestoreListingsProvider } from '../../providers/firestore-listings/fi
 export class RideListingPage {
 
   listing: Listing
-  fromMyListings : boolean
+  fromMyListings: boolean
+  user: User
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public menuCtrl : MenuController,
               public navMenu : NavigationMenuProvider,
-              public listingsProvider : FirestoreListingsProvider
+              public usersProvider : FirestoreUsersProvider
   ) {
     this.listing = navParams.get('listing');
     this.fromMyListings = navParams.get('fromMyListings');
+    this.user = usersProvider.getUser();
   }
 
   ionViewWillEnter() {
@@ -43,5 +46,29 @@ export class RideListingPage {
 
   requestToShare() {
     this.navCtrl.push(RequestToSharePage, {'listing': this.listing});
+  }
+
+  allowedToRequest() {
+    return !this.requesterOwnsListing() && !this.alreadyRequested()
+  }
+
+  requesterOwnsListing() {
+    return this.user.uid === this.listing.userDocumentID;
+  }
+
+  alreadyRequested() {
+    for (var i = 0; i < this.listing.whoWantsToCome.length; i++) {
+      if (this.listing.whoWantsToCome[i].uid == this.user.uid) {
+        return true;
+      }
+    }
+
+    for (var j = 0; j < this.listing.whosComing.length; j++) {
+      if (this.listing.whosComing[j].uid == this.user.uid) {
+        return true;
+      }
+    }
+
+    return false;
   }
 }
