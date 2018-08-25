@@ -42,14 +42,20 @@ export class ReviewRideShareRequestPage {
     this.navMenu.setActivePage(ReviewRideShareRequestPage)
   }
 
-  acceptShareRequest(i, j) {
-    this.listings[i].whosComing.push(this.listings[i].whoWantsToCome[j])
-    this.listings[i].whoWantsToCome.splice(j, 1)
-    this.listingsProvider.updateRequest(this.listings[i])
+  acceptShareRequest(listingIndex, requesterIndex) {
+    var listing = this.listings[listingIndex]
+    var requester = listing.whoWantsToCome[requesterIndex]
+
+    listing.whosComing.push(requester)
+    listing.whoWantsToCome.splice(requesterIndex, 1)
+
+    this.listingsProvider.updateRequest(listing)
   }
 
-  rejectShareRequest(i, j) {
-    this.listings[i].whoWantsToCome.splice(j, 1)
-    this.listingsProvider.updateRequest(this.listings[i])
+  rejectShareRequest(listingIndex, requesterIndex) {
+    var listing = this.listings[listingIndex]
+
+    listing.whoWantsToCome.splice(requesterIndex, 1)
+    this.listingsProvider.updateRequest(listing)
   }
 }

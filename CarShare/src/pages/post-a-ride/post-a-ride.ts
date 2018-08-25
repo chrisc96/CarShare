@@ -78,7 +78,6 @@ export class PostARidePage {
 
   ionViewDidLoad() {
     this.carSubscription = this.carsProvider.getCarsByUIDObservable().subscribe(car => {
-      console.log('post a ride update')
       this.cars = car;
       this.carCount = this.cars.length
       this.dataReturned = true
