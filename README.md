@@ -32,18 +32,18 @@ Ionic Android App
 ## Current status
 
 To Do:
-* 3, 6, 9.2, 11, 14, 15, 16
+* 3, 6, 8, 9.2, 11, 14, 15, 16
 
 #### What each person has left to do:
 
 Thomas: 3, 6, 8, 16
 
-Chris: 9.2, 11, 14, 15
+Chris: 11, 14, 15
 
 #### In Progress:
 
-* 9.2 - Styling - View your ride listings (with rides existing) - Chris
-* 2 - Styling - Find a ride listings - Chris
+* 11 - Car shares I'm going on - Chris
+
 * 3 - Car share listings details page - Thomas
 * 6 - User requests to carpool page - Thomas
 * 8 - Review user request to join your listing page - Thomas
@@ -55,14 +55,18 @@ Chris: 9.2, 11, 14, 15
 * 5 - Signup - Chris/Thomas
 * 7 - Post a ride page - Chris
 * 9.1 - View your ride listings (with no rides listed) - Chris/Thomas
+* 9.2 - View your ride listings (with rides existing) - Chris
 * 10 - Navigation Bar - Chris
 * 12 - Add car page - Chris
 * 13 - User details (+ edit) page - Thomas
 * 17 - Find a ride (with no listings listed)
 
+#### UX ToDos:
+* Listing details page
+* Edit user details page
+
 #### Minor Todos:
 * Add a loading bar while cars are being pulled in post a ride (instead of the empty screen shown)
-* Remove car collection and make sure cars are being added to a users collection. Also will need to change the way the cars are pulled down in Post A Ride
 * Improve UX.
 * Implement searching on 'find a ride' page
 * Implement filtering on 'find a ride' page
