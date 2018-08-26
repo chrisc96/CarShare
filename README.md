@@ -38,7 +38,7 @@ To Do:
 
 Thomas: 3, 16
 
-Chris: 11, 14, 15
+Chris: 11, 14
 
 #### In Progress:
 
@@ -59,7 +59,8 @@ Chris: 11, 14, 15
 * 10 - Navigation Bar - Chris
 * 12 - Add car page - Chris
 * 13 - User details (+ edit) page - Thomas
-* 17 - Find a ride (with no listings listed)
+* 15 - Edit my listing page - Chris
+* 17 - Find a ride (with no listings listed) - Chris
 
 #### UX ToDos:
 * Listing details page
