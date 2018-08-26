@@ -43,11 +43,15 @@
                     <div id="tillImageEnd">
                       <div class="QuarterSeparator">
                         <div class="requestTitle">Name:</div>
-                        <div class="requestText" *ngIf="shareRequest.firstName">{{ shareRequest.firstName }} {{ shareRequest.lastName }}</div>
+                        <div class="requestText" *ngIf="shareRequest.firstName"> {{ shareRequest.firstName }} {{ shareRequest.lastName }}</div>
                       </div>
                       <div class="QuarterSeparator">
                         <div class="requestTitle">Number:</div>
                         <div class="requestText" *ngIf="shareRequest.contactNum"> {{ shareRequest.contactNum }}</div>
+                      </div>
+                      <div class="QuarterSeparator">
+                        <div class="requestTitle">For:</div>
+                        <div class="requestText"> {{ listing.destination }} {{ listing.departureDate }} {{ listing.departureTime }}</div>
                       </div>
                     </div>
                   </ion-col>
