@@ -5,6 +5,7 @@ import { Listing } from '../struct/listing';
 import { RequestToSharePage } from '../request-to-share/request-to-share';
 import { FirestoreUsersProvider } from '../../providers/firestore-users/firestore-users';
 import { User } from '../struct/user';
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the RideListingPage page.
@@ -21,8 +22,8 @@ import { User } from '../struct/user';
 export class RideListingPage {
 
   listing: Listing
-  fromMyListings: boolean
   user: User
+  fromMyListings : boolean = false;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -33,6 +34,8 @@ export class RideListingPage {
     this.listing = navParams.get('listing');
     this.fromMyListings = navParams.get('fromMyListings');
     this.user = usersProvider.getUser();
+    console.log(this.fromMyListings)
+    console.log('user', this.user)
   }
 
   ionViewWillEnter() {
@@ -45,30 +48,44 @@ export class RideListingPage {
   }
 
   requestToShare() {
-    this.navCtrl.push(RequestToSharePage, {'listing': this.listing});
+    if (!this.user) {
+      this.navCtrl.push(LoginPage, {'toPage' : RequestToSharePage, 'dataToPass' : this.listing})
+    }
+    else {
+      this.navCtrl.push(RequestToSharePage, {'listing': this.listing});
+    }
   }
+
 
   allowedToRequest() {
     return !this.requesterOwnsListing() && !this.alreadyRequested()
   }
 
   requesterOwnsListing() {
-    return this.user.uid === this.listing.userDocumentID;
+    if (!this.user) {
+      return false;
+    }
+    else {
+      this.user.uid === this.listing.userDocumentID;
+    }
   }
 
   alreadyRequested() {
-    for (var i = 0; i < this.listing.whoWantsToCome.length; i++) {
-      if (this.listing.whoWantsToCome[i].uid == this.user.uid) {
-        return true;
+    if (!this.user) {
+      return false;
+    }
+    else {
+      for (var i = 0; i < this.listing.whoWantsToCome.length; i++) {
+        if (this.listing.whoWantsToCome[i].uid == this.user.uid) {
+          return true;
+        }
+      }
+  
+      for (var j = 0; j < this.listing.whosComing.length; j++) {
+        if (this.listing.whosComing[j].uid == this.user.uid) {
+          return true;
+        }
       }
     }
-
-    for (var j = 0; j < this.listing.whosComing.length; j++) {
-      if (this.listing.whosComing[j].uid == this.user.uid) {
-        return true;
-      }
-    }
-
-    return false;
   }
 }

@@ -81,8 +81,7 @@ export class MyApp {
   }
 
   checkLoggedIn() {
-    var val = this.usersProvider.userLoggedIn()
-    return val;
+    return this.usersProvider.userLoggedIn();
   }
 
   getFirstName() {

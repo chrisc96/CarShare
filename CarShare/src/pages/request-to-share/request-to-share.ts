@@ -32,7 +32,7 @@ export class RequestToSharePage {
     public usersProvider : FirestoreUsersProvider,
     public listingsProvider : FirestoreListingsProvider
 ) {
-  this.listing = navParams.get('listing');
+  this.listing = navParams.data.listing;
   this.user = this.usersProvider.getUser();
   this.successfulRequest = false;
   this.failedRequest = false;
@@ -41,7 +41,7 @@ export class RequestToSharePage {
 }
 
   addShareRequest() {
-    if (!this.user || !this.listing) return;
+    if (!this.user || !this.listing) return; // Shouldn't ever fire, we should be logged in at this point
 
     this.listing.whoWantsToCome.push(Object.assign({}, this.user))
     this.listingsProvider.addRequest(this.listing).then(resp => {

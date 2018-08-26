@@ -9,6 +9,8 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from "rxjs";
 import { PostARidePage } from "../post-a-ride/post-a-ride";
 import * as moment from 'moment';
+import { FirestoreUsersProvider } from "../../providers/firestore-users/firestore-users";
+import { LoginPage } from "../login/login";
 
 /**
  * Generated class for the FindARidePage page.
@@ -33,7 +35,8 @@ export class FindARidePage {
     public navParams: NavParams,
     public menuCtrl: MenuController,
     public navMenu: NavigationMenuProvider,
-    public listingsProvider: FirestoreListingsProvider
+    public listingsProvider: FirestoreListingsProvider,
+    public userProvider : FirestoreUsersProvider
   ) {
   }
 
@@ -62,7 +65,12 @@ export class FindARidePage {
   }
 
   goToPostARide() {
-    this.navCtrl.push(PostARidePage);
+    if (this.userProvider.userLoggedIn()) {
+      this.navCtrl.push(PostARidePage);
+    }
+    else {
+      this.navCtrl.push(LoginPage, {'toPage': PostARidePage})
+    }
   }
 
   getFormattedDateTime(index) {

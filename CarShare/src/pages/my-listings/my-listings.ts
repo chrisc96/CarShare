@@ -60,6 +60,7 @@ export class MyListingsPage {
   }
 
   goToPostARide() {
+    // If we're on this page, we're logged in, so don't need to check
     this.navCtrl.push(PostARidePage)
   }
 

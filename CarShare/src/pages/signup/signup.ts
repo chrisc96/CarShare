@@ -51,6 +51,8 @@ export class SignupPage {
   passwordWeak: boolean = false;
 
   whereToGo: any
+  keyToSend : any
+  dataToSend : any
 
   // Form validation
   signupForm = this.formBuilder.group({
@@ -70,7 +72,11 @@ export class SignupPage {
     private toastCtrl: ToastController,
     public menuCtrl : MenuController
   ) {
+    console.log(navParams.data)
     this.whereToGo = navParams.data.pageToGo;
+    this.dataToSend = navParams.data.listing;
+    console.log(this.whereToGo)
+    console.log(this.dataToSend)
   }
 
   ionViewWillEnter() {
@@ -131,7 +137,7 @@ export class SignupPage {
 
     toast.onDidDismiss(() => {
       // Go back to Login page to login with new credentials
-      this.navCtrl.push(this.whereToGo)
+      this.navCtrl.push(this.whereToGo, {'listing': this.dataToSend})
         .then(() => {
           const index = this.navCtrl.getActive().index;
           this.navCtrl.remove(index - 2, 2); // Removes the login and signup page

@@ -8,7 +8,7 @@
                     </div>
                 </div>
                 <div class='navUserRHSArea'>
-                    <div class='navHelloUser' *ngIf='checkLoggedIn()'>Hello, {{this.usersProvider.getUser().firstName}}</div>
+                    <div class='navHelloUser' *ngIf='checkLoggedIn()'>Hello, {{getFirstName()}}</div>
                     <div class='navHelloUser' *ngIf='!checkLoggedIn()'>Hello, Guest!</div>
                 </div>
             </div>

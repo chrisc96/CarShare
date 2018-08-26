@@ -19,22 +19,24 @@ import { FirestoreUsersProvider } from "../../providers/firestore-users/firestor
 })
 export class LoginPage {
 
-  pageToGoTo : any;
+  pageToGoTo: any;
+  keyDataToPass: any;
+  valueDataToPass: any;
 
   @ViewChild('email') email = '';
   @ViewChild('password') password = '';
 
-  loginButtonPressed : boolean = false;
+  loginButtonPressed: boolean = false;
 
-  emailIsValid : boolean = true
-  emailNotEmpty : boolean = true
-  emailIsInvalid : boolean = true
+  emailIsValid: boolean = true
+  emailNotEmpty: boolean = true
+  emailIsInvalid: boolean = true
 
-  passwordIsValid : boolean = true
-  passwordNotEmpty : boolean = true
+  passwordIsValid: boolean = true
+  passwordNotEmpty: boolean = true
 
-  requestBeingSent : boolean = false;
-  requestDidFail : boolean = false;
+  requestBeingSent: boolean = false;
+  requestDidFail: boolean = false;
 
   loginForm = this.formBuilder.group({
     emailControl: ['', Validators.compose([Validators.maxLength(70), Validators.pattern('^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$'), Validators.required])],
@@ -42,13 +44,16 @@ export class LoginPage {
   })
 
   constructor(
-    public formBuilder : FormBuilder,
-    public navCtrl: NavController, 
-    public navParams: NavParams, 
-    public usersProvider : FirestoreUsersProvider,
-    public menuCtrl : MenuController
+    public formBuilder: FormBuilder,
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public usersProvider: FirestoreUsersProvider,
+    public menuCtrl: MenuController
   ) {
     this.pageToGoTo = this.navParams.data.toPage;
+    this.valueDataToPass = this.navParams.data.dataToPass
+    console.log(this.pageToGoTo)
+    console.log(this.valueDataToPass)
   }
 
   ionViewWillEnter() {
@@ -56,7 +61,7 @@ export class LoginPage {
   }
 
   goToSignupPage() {
-    this.navCtrl.push(SignupPage, {'pageToGo': this.pageToGoTo});
+    this.navCtrl.push(SignupPage, { 'pageToGo': this.pageToGoTo, 'listing': this.valueDataToPass});
   }
 
   tryLogin() {
@@ -65,19 +70,24 @@ export class LoginPage {
 
     if (this.emailIsValid && this.passwordIsValid) {
       this.requestBeingSent = true;
-      
+
       this.usersProvider.login(this.email, this.password)
-      .then( resp => {
-        this.requestBeingSent = false; // finished sending request, set to false
-        this.password = ''
-        this.navCtrl.push(this.pageToGoTo);
-      })
-      .catch( err => {
-        this.requestBeingSent = false;
-        this.requestDidFail = true;
-        
-        this.password = ''; // User probably got password wrong, empty
-      });
+        .then(resp => {
+          this.requestBeingSent = false; // finished sending request, set to false
+          this.password = ''
+
+          this.navCtrl.push(this.pageToGoTo, { 'listing': this.valueDataToPass })
+          .then(() => {
+            const index = this.navCtrl.getActive().index;
+            this.navCtrl.remove(index - 1, 1); // Removes the login page from potential back buttons
+          })
+        })
+        .catch(err => {
+          this.requestBeingSent = false;
+          this.requestDidFail = true;
+
+          this.password = ''; // User probably got password wrong, empty
+        });
     }
   }
 
