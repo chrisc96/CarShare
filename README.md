@@ -38,13 +38,11 @@ To Do:
 
 Thomas: 3, 16
 
-Chris: 11, 14
+Chris: 14 
 
 #### In Progress:
 
-* 11 - Car shares I'm going on - Chris
-
-* 3 - Car share listings details page - Thomas
+* 3 - Car share listings details page - Thomas/Chris
 
 #### Already done:
 * 1 - Home page - Chris
@@ -57,6 +55,7 @@ Chris: 11, 14
 * 9.1 - View your ride listings (with no rides listed) - Chris/Thomas
 * 9.2 - View your ride listings (with rides existing) - Chris
 * 10 - Navigation Bar - Chris
+* 11 - Car shares I'm going on - Chris
 * 12 - Add car page - Chris
 * 13 - User details (+ edit) page - Thomas
 * 15 - Edit my listing page - Chris
