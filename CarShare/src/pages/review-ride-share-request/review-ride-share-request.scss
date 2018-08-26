@@ -27,7 +27,7 @@ page-review-ride-share-request {
      */
 
      .card-content {
-         padding: 13px 16px;
+         padding: 13px 13px;
          font-size: 1.4rem;
          line-height: 1.5;
          height: 100%;
@@ -135,7 +135,13 @@ page-review-ride-share-request {
          padding: 0px;
      }
      
-     #iconButton {
+     .iconButton {
+        background-color: transparent;
+        outline:none;
+        font-size: 20px;
+     }
 
+     .rightHandSideIcon {
+         margin-right: 65px;
      }
 }
