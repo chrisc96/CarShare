@@ -7,12 +7,91 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>edit-listing</ion-title>
+    <ion-title>Edit Listing</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="home-bg">
+  <div id="container">
+    <div id="content">
+      <div *ngIf='dataReturned'>
+        <form id='carsExist' [formGroup]='editRideForm'>
+          <ion-item>
+            <ion-label class='carSelectText' color="primary">
+              <ion-icon name="ios-car" class='postIcon'></ion-icon>
+              <div class='placeholderText'>Car to use:</div>
+            </ion-label>
+            <ion-select formControlName='carControl' (ionChange)="onChange($event)" [(ngModel)]="carIndex">
+              <ion-option *ngFor='let car of cars; let i = index' [selected]="carIndex === i"  value="{{i}}">
+                {{car.make + ' ' + car.model}}
+              </ion-option>
+              <ion-option>
+                Add new car
+              </ion-option>
+            </ion-select>
+          </ion-item>
 
+          <ion-item>
+            <ion-label>
+              <ion-icon class='postIcon' name="ios-briefcase-outline"></ion-icon>
+              <div class='placeholderText'>Space for bags?</div>
+            </ion-label>
+            <ion-checkbox item-end formControlName='storageAvailable' [(ngModel)]="storageAvail"></ion-checkbox>
+          </ion-item>
+
+          <ion-item>
+            <ion-label color="primary">
+              <ion-icon name='ios-contacts-outline' class='postIcon'></ion-icon>
+              <div class='placeholderText'>No. Seats Available:</div>
+            </ion-label>
+            <ion-input formControlName='seatsControl' min='0' max='10' type="number" [(ngModel)]="noSeats"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label color="primary">
+              <ion-icon name="ios-map-outline" class='postIcon'></ion-icon>
+              <div class='placeholderText'>Meeting Place:</div>
+            </ion-label>
+            <ion-input formControlName='meetingPlaceControl' #meetingPlace class='formControl' autocorrect='off' spellcheck='off' autocapitalize='off'></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label color="primary">
+              <ion-icon name="ios-map-outline" class='postIcon'></ion-icon>
+              <div class='placeholderText'>Destination:</div>
+            </ion-label>
+            <ion-input formControlName='destPlaceControl' #destPlace class='formControl' autocorrect='off' spellcheck='off' autocapitalize='off'></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label color="primary">
+              <ion-icon name="ios-calendar-outline" class='postIcon'></ion-icon>
+              <div class='placeholderText'>Departure Date:</div>
+            </ion-label>
+            <ion-datetime formControlName='dateControl' min="2018" max="2030" displayFormat="MMM DD,YYYY" pickerFormat="MMM DD,YYYY"
+              [(ngModel)]="departureDate"></ion-datetime>
+          </ion-item>
+
+          <ion-item>
+            <ion-label color="primary">
+              <ion-icon name="ios-time-outline" class='postIcon'></ion-icon>
+              <div class='placeholderText'>Departure Time:</div>
+            </ion-label>
+            <ion-datetime formControlName='timeControl' displayFormat="H:mm" pickerFormat="HH:mm" [(ngModel)]="departureTime"></ion-datetime>
+          </ion-item>
+
+          <p class="formErrorText" *ngIf='!allFieldsValid() && updateBtnPressed'>All fields are required</p>
+
+          <ion-item class='postBtn'>
+            <button ion-button block color='secondary' #submit *ngIf='updateBeingSent'>
+              <ion-spinner name="bubbles"></ion-spinner>
+            </button>
+            <button ion-button block color='secondary' #submit (click)='tryUpdate($event)' *ngIf='!updateBeingSent'>Update</button>
+          </ion-item>
+        </form>
+      </div>
+    </div>
+  </div>
 </ion-content>

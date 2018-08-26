@@ -30,6 +30,8 @@ export class FirestoreCarsProvider {
 
   carsByUserIDObservable: Observable<Car[]>;
 
+  cars : any[]
+
   constructor(public afs: AngularFirestore, public usersProvider: FirestoreUsersProvider) {
     
     let userObservable = this.usersProvider.getUserObservable();
@@ -55,6 +57,9 @@ export class FirestoreCarsProvider {
       }
     })
 
+    this.carsByUserIDObservable.subscribe(cars => {
+      this.cars = cars;
+    })
   }
 
   public getCarsByUIDObservable() {

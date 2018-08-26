@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FirestoreCarsProvider } from '../../providers/firestore-cars/firestore-cars';
+import { Listing } from '../struct/listing';
 
 /**
  * Generated class for the AddCarToProfilePage page.
@@ -21,6 +22,7 @@ export class AddCarToProfilePage {
   addCarBtnPressed: boolean = false
 
   goTo: any
+  dataToPass : Listing
 
   addCarForm = this.formBuilder.group({
     make: ['', [Validators.required]],
@@ -36,7 +38,8 @@ export class AddCarToProfilePage {
     private toastCtrl: ToastController,
     public carsProvider: FirestoreCarsProvider
   ) {
-    this.goTo = navParams.get('toPage');
+    this.goTo = navParams.data.toPage;
+    this.dataToPass = navParams.data.listing;
   }
 
   tryAddCar(e) {
@@ -97,7 +100,7 @@ export class AddCarToProfilePage {
 
     toast.onDidDismiss(() => {
       // Go back to Login page to login with new credentials
-      this.navCtrl.push(this.goTo)
+      this.navCtrl.push(this.goTo, {'listing': this.dataToPass})
     })
 
     toast.present();

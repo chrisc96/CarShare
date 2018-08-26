@@ -10,7 +10,6 @@ import { NavigationMenuProvider } from "../providers/navigation-menu/navigation-
 import { FindARidePage } from "../pages/find-a-ride/find-a-ride";
 import { MyListingsPage } from "../pages/my-listings/my-listings";
 import { FirestoreUsersProvider } from "../providers/firestore-users/firestore-users";
-import { ReviewRideShareRequestPage } from "../pages/review-ride-share-request/review-ride-share-request";
 import { ProfilePage } from "../pages/profile/profile";
 
 @Component({

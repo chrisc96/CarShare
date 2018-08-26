@@ -21,7 +21,7 @@ import { Subscription } from '../../../node_modules/rxjs';
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
+ 
 @IonicPage()
 @Component({
   selector: 'page-post-a-ride',
@@ -48,6 +48,8 @@ export class PostARidePage {
   requestBeingSent: boolean = false
   postBtnPressed: boolean = false
 
+  carSubscription : Subscription
+
   postRideForm = this.formBuilder.group({
     carControl: ['', [Validators.required]],
     meetingPlaceControl: ['', [Validators.required]],
@@ -57,8 +59,6 @@ export class PostARidePage {
     seatsControl: ['', [Validators.required]],
     storageAvailable: ['', [Validators.required]],
   })
-
-  carSubscription : Subscription
 
   constructor(
     public navCtrl: NavController,

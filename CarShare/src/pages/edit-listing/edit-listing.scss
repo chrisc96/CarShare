@@ -1,3 +1,156 @@
 page-edit-listing {
+    .toolbar-title-md {
+        font-size: 2rem;
+        text-align: start;
+        font-weight: 500;
+        color: #424242;
+    }
+ 
+      #container {
+        display: inline-flex;
+        height: 100%;
+        width: 100%;
+        text-align: center;
+    }
 
+    #content {
+        width: inherit;
+        height: -webkit-fit-content;
+        height: -moz-fit-content;
+        height: fit-content;
+        position: relative;
+        top: 50%;
+        -webkit-transform: translateY(-60%);
+        transform: translateY(-60%);
+    }
+
+    #noCarsImage {
+        background: url(../../assets/imgs/noCars.png);
+        width: 100px;
+        height: 100px;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #noCarsContainer {
+        width: 75%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #addACarBtn {
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        border-color: #ffc977;
+        color: #ffc977;
+    }
+
+    #noCarsTitle {
+        font-size: 2rem;
+        color: black;
+        font-weight: 300;
+        margin-bottom: 15px;
+    }
+
+    #noCarsSubText {
+        color: black;
+        font-size: 1.5rem;
+        font-weight: 300;
+        margin-bottom: 20px;
+    }
+
+    .text-input-md {
+        margin: 0;
+    }
+
+    .text-input {
+        font-size: 1.4rem;
+    }
+
+    .otherDetails {
+        width:100%;
+        height: fit-content;
+    }
+
+    .details {
+        height: 125px;
+    }
+
+    .label-md[stacked] {
+        font-size: 1.6rem;
+    }
+
+    textarea.text-input.text-input-md {
+        height: 100px;
+    }
+
+    .postIcon {
+        margin-right: 7px;
+        vertical-align: middle;
+        font-size: 2.5rem;
+        color: #488aff;
+    }
+
+    .placeholderText {
+        vertical-align: middle;
+        display: inline-block;
+        color: #488aff;
+        font-size: 1.4rem;
+    }
+    #carsExist {
+        width: 90%;
+        margin: auto;
+        background-color: white;
+    }
+
+    .item .item-button {
+        padding: 0 0.5em;
+        height: 35px;
+        font-size: 1.7rem;
+    }
+
+    .datetime-text {
+        font-size: 1.4rem;
+        float: left;
+    }
+
+    ion-select {
+        padding-left: 0!important;
+        max-width: 100%;
+    }
+
+    .carSelectText {
+        margin-right: 0px;
+        min-width: 110px !important;
+        max-width: 110px !important;
+    }
+
+    .select {
+        width: 100%;
+    }
+
+    .item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+        border-bottom-color: #f53d3d;
+        border-bottom-width: 2px;
+        -webkit-box-shadow: none!important;
+    }
+
+    .item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+        border-bottom-color: #32db64;
+        border-bottom-width: 2px;
+        -webkit-box-shadow: none!important;
+    }
+
+    .formErrorText {
+        text-align: left;
+        padding-left: 16px;
+        color: red !important;
+        margin-top: 8px !important;
+        font-size: 1.3rem !important;
+        margin-bottom: 0;
+    }
 }
