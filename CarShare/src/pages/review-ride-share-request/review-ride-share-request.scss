@@ -9,14 +9,13 @@ page-review-ride-share-request {
          text-align: center;
      }
 
-     #content {
-         width: inherit;
-         height: -webkit-fit-content;
-         height: -moz-fit-content;
-         height: fit-content;
-         position: relative;
-         margin-top: 56px;
-     }
+    #content {
+        width: inherit;
+        height: -webkit-fit-content;
+        height: -moz-fit-content;
+        height: fit-content;
+        position: relative;
+    }
 
      #requestMargin {
          margin-top: 20px;
@@ -55,15 +54,16 @@ page-review-ride-share-request {
      }
          
      #requestImage {
-         background: url(../../assets/imgs/userBlank.png);
-         background-size: contain;
-         border-radius: 2px;
-         background-repeat: no-repeat;
-         height: 99px;
-         width: 132px;
-         display: inline-block;
-         margin-bottom: -5px;
-     }
+        background: url(../../assets/imgs/userBlank.png);
+        background-size: contain;
+        border-radius: 2px;
+        background-repeat: no-repeat;
+        height: 96px;
+        width: 96px;
+        margin-bottom: 5px;
+        margin-right: auto;
+        margin-left: auto;
+    }
 
      #rhs {
          position: relative;
@@ -94,11 +94,11 @@ page-review-ride-share-request {
      }
 
      .requestTitle {
-         min-width: 45px;
-         text-align: start;
-         font-weight: 500;
-         font-size: 1.5rem;
-     }
+        min-width: 65px;
+        text-align: start;
+        font-weight: 500;
+        font-size: 1.5rem;
+    }
 
      #tillImageEnd {
          -webkit-box-align: center;
@@ -108,14 +108,21 @@ page-review-ride-share-request {
      }
 
      .lastItem {
-         font-size: 1.5rem;
-         margin-bottom: 8px;
-         display: flex;
-         -ms-flex-align: flex-end;
-         -webkit-box-align: center;
-         -webkit-align-items: flex-end;
-         align-items: center;
-     }
+        font-size: 1.5rem;
+        margin-bottom: 8px;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-align: flex-end;
+        -webkit-box-align: center;
+        -webkit-align-items: flex-end;
+        align-items: center;
+        width: 38%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-right: 4px;
+    }
 
      .row {
          display: flex!important;
@@ -128,8 +135,9 @@ page-review-ride-share-request {
      }
 
      #requestImageContainer {
-         text-align: center;
-     }
+        text-align: center;
+        height: fit-content;
+    }
 
      .grid {
          padding: 0px;
@@ -139,9 +147,5 @@ page-review-ride-share-request {
         background-color: transparent;
         outline:none;
         font-size: 20px;
-     }
-
-     .rightHandSideIcon {
-         margin-right: 65px;
      }
 }

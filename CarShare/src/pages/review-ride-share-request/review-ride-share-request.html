@@ -12,52 +12,57 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
+<!-- <ion-toolbar>
+  <button ion-button menuToggle left>
+    <ion-icon name="menu"></ion-icon>
+  </button>
+
+</ion-toolbar> -->
 
 <ion-content class="home-bg">
   <div id="container">
-    <div class="content">
+    <div id="content">
+
       <div id="requestMargin">
-        <div *ngFor="let shareRequest of listing.whoWantsToCome; let j = index">
-          <ion-card>
-            <ion-grid>
-              <ion-card-content>
-                <ion-col>
-                  <div id="requestImageContainer">
-                    <div id="requestImage"></div>
-                  </div>
-                </ion-col>
-                <ion-col>
-                  <div class="lastItem">
-                    <div class="HalfHorizontalSeparator">
-                      <button (click)="acceptShareRequest(j)" class="iconButton">
-                        <ion-icon name="checkmark-circle" color="secondary"></ion-icon>
-                      </button>
+
+          <div *ngFor="let shareRequest of listing.whoWantsToCome; let j = index">
+            <ion-card>
+              <ion-grid>
+                <ion-card-content>
+                  <ion-col>
+                    <div id="requestImageContainer">
+                      <div id="requestImage"></div>
                     </div>
-                    <div class="HalfHorizontalSeparator">
-                      <button (click)="rejectShareRequest(j)" class="iconButton">
-                        <ion-icon name="close-circle" color="danger" class="rightHandSideIcon"></ion-icon>
-                      </button>
+                  </ion-col>
+                  <ion-col>
+                    <div class="lastItem">
+                      <div class="HalfHorizontalSeparator">
+                        <button (click)="acceptShareRequest(j)" class="iconButton">
+                            <ion-icon name="checkmark-circle" color="secondary"></ion-icon>
+                          </button>
+                      </div>
+                      <div class="HalfHorizontalSeparator">
+                        <button (click)="rejectShareRequest(j)" class="iconButton">
+                          <ion-icon name="close-circle" color="danger" class="rightHandSideIcon"></ion-icon>
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                  <div id="tillImageEnd">
-                    <div class="QuarterSeparator">
-                      <div class="requestTitle">Name:</div>
-                      <div class="requestText" *ngIf="shareRequest.firstName"> {{ shareRequest.firstName }} {{ shareRequest.lastName }}</div>
+                    <div id="tillImageEnd">
+                      <div class="QuarterSeparator">
+                        <div class="requestTitle">Name:</div>
+                        <div class="requestText" *ngIf="shareRequest.firstName"> {{ shareRequest.firstName }} {{ shareRequest.lastName }}</div>
+                      </div>
+                      <div class="QuarterSeparator">
+                        <div class="requestTitle">Number:</div>
+                        <div class="requestText" *ngIf="shareRequest.contactNum"> {{ shareRequest.contactNum }}</div>
+                      </div>
                     </div>
-                    <div class="QuarterSeparator">
-                      <div class="requestTitle">Number:</div>
-                      <div class="requestText" *ngIf="shareRequest.contactNum"> {{ shareRequest.contactNum }}</div>
-                    </div>
-                    <div class="QuarterSeparator">
-                      <div class="requestTitle">For:</div>
-                      <div class="requestText"> {{ listing.destination }} {{ listing.departureDate }} {{ listing.departureTime }}</div>
-                    </div>
-                  </div>
-                </ion-col>
-              </ion-card-content>
-            </ion-grid>
-          </ion-card>
-        </div>
+                  </ion-col>
+                </ion-card-content>
+              </ion-grid>
+            </ion-card>
+          </div>
+
       </div>
     </div>
   </div>
