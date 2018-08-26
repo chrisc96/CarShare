@@ -1,11 +1,10 @@
 import { Component } from "@angular/core";
-import { IonicPage, NavController, NavParams, MenuController, Refresher } from "ionic-angular";
+import { IonicPage, NavController, NavParams, MenuController } from "ionic-angular";
 import { RideListingPage } from "../ride-listing/ride-listing";
 import { NavigationMenuProvider } from "../../providers/navigation-menu/navigation-menu";
-import 'rxjs/add/operator/map'
-import { Listing } from '../struct/listing'
+import 'rxjs/add/operator/map';
+import { Listing } from '../struct/listing';
 import { FirestoreListingsProvider } from "../../providers/firestore-listings/firestore-listings";
-import { Observable } from 'rxjs/Observable';
 import { Subscription } from "rxjs";
 import { PostARidePage } from "../post-a-ride/post-a-ride";
 import * as moment from 'moment';
