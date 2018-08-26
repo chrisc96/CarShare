@@ -3,10 +3,8 @@ import { IonicPage, NavController, NavParams, MenuController, Popover } from 'io
 import { NavigationMenuProvider } from '../../providers/navigation-menu/navigation-menu';
 import { FirestoreListingsProvider } from "../../providers/firestore-listings/firestore-listings";
 import { Listing } from '../struct/listing';
-import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs';
 import { PostARidePage } from '../post-a-ride/post-a-ride';
-import { of } from 'rxjs';
 import * as moment from 'moment';
 import { RideListingPage } from '../ride-listing/ride-listing';
 import { ReviewRideShareRequestPage } from '../review-ride-share-request/review-ride-share-request';

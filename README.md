@@ -36,7 +36,7 @@ To Do:
 
 #### What each person has left to do:
 
-Thomas: 3, 6, 8, 16
+Thomas: 3, 16
 
 Chris: 11, 14, 15
 
@@ -45,15 +45,15 @@ Chris: 11, 14, 15
 * 11 - Car shares I'm going on - Chris
 
 * 3 - Car share listings details page - Thomas
-* 6 - User requests to carpool page - Thomas
-* 8 - Review user request to join your listing page - Thomas
 
 #### Already done:
 * 1 - Home page - Chris
 * 2 - Find a ride - Chris/Thomas
 * 4 - Login - Chris
 * 5 - Signup - Chris/Thomas
+* 6 - User requests to carpool page - Thomas
 * 7 - Post a ride page - Chris
+* 8 - Review user request to join your listing page - Thomas
 * 9.1 - View your ride listings (with no rides listed) - Chris/Thomas
 * 9.2 - View your ride listings (with rides existing) - Chris
 * 10 - Navigation Bar - Chris

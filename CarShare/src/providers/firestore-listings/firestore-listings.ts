@@ -7,7 +7,6 @@ import * as firebase from 'firebase';
 
 // STRUCTS
 import { Listing } from '../../pages/struct/listing';
-import { User } from '../../pages/struct/user';
 
 // PROVIDERS
 import { FirestoreUsersProvider } from '../../providers/firestore-users/firestore-users'
@@ -18,8 +17,7 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/first';
-import 'rxjs/add/operator/mergeMap'
-import { of } from 'rxjs';
+import 'rxjs/add/operator/mergeMap';
 import { combineLatest } from 'rxjs';
 
 /*
