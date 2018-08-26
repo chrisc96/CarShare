@@ -83,7 +83,6 @@ page-my-listings {
         font-size: 1.4rem;
         line-height: 1.5;
         height: 100%;
-        cursor: pointer;
     }
 
     .card {
@@ -238,5 +237,42 @@ page-my-listings {
 
     .grid {
         padding: 0px;
+        position: relative;
+    }
+
+    i.fas.fa-info-circle, i.fas.fa-exclamation-circle, #reviewTxt {
+        cursor: pointer;
+    }
+
+    i.fas.fa-cog, i.far.fa-arrow-alt-circle-right {
+        font-size: 2rem;
+        vertical-align: middle;
+    }
+
+    #reviewTxt {
+        color: red;
+        text-decoration: underline;
+    }
+
+    .listingDetails {
+        margin-top: 7px;
+        margin-right: 7px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: fit-content;
+        cursor: pointer;
+        z-index: 5;
+    }
+
+    .settings {
+        margin-top: 7px;
+        margin-left: 7px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: fit-content;
+        cursor: pointer;
+        z-index: 5;
     }
 }

@@ -18,7 +18,7 @@ import { FirestoreListingsProvider } from '../../providers/firestore-listings/fi
 })
 export class ReviewRideShareRequestPage {
 
-  listings: Listing[]
+  listing : Listing;
 
   constructor(
     public navCtrl: NavController,
@@ -27,9 +27,8 @@ export class ReviewRideShareRequestPage {
     public navMenu: NavigationMenuProvider,
     public listingsProvider: FirestoreListingsProvider
   ) {
-    this.listingsProvider.getUserListingsObservable().subscribe(listings => {
-      this.listings = listings;
-    });
+
+    this.listing = navParams.data.listing;
   }
 
   ionViewWillEnter() {
@@ -37,21 +36,18 @@ export class ReviewRideShareRequestPage {
     this.navMenu.setActivePage(ReviewRideShareRequestPage)
   }
 
-  acceptShareRequest(listingIndex, requesterIndex) {
-    var listing = this.listings[listingIndex]
-    var requester = listing.whoWantsToCome[requesterIndex]
+  acceptShareRequest(requesterIndex) {
+    var requester = this.listing.whoWantsToCome[requesterIndex]
     
-    listing.seatsAvailable = (listing.seatsAvailable - 1);
-    listing.whosComing.push(requester)
-    listing.whoWantsToCome.splice(requesterIndex, 1)
+    this.listing.seatsAvailable = (this.listing.seatsAvailable - 1);
+    this.listing.whosComing.push(requester)
+    this.listing.whoWantsToCome.splice(requesterIndex, 1)
 
-    this.listingsProvider.updateListing(listing)
+    this.listingsProvider.updateListing(this.listing)
   }
 
-  rejectShareRequest(listingIndex, requesterIndex) {
-    var listing = this.listings[listingIndex]
-
-    listing.whoWantsToCome.splice(requesterIndex, 1)
-    this.listingsProvider.updateListing(listing)
+  rejectShareRequest(requesterIndex) {
+    this.listing.whoWantsToCome.splice(requesterIndex, 1)
+    this.listingsProvider.updateListing(this.listing)
   }
 }

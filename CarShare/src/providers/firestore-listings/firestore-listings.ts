@@ -112,6 +112,10 @@ export class FirestoreListingsProvider {
     })
   }
 
+  public deleteListing(listing) {
+    return this.afs.doc<Listing>('listings/' + listing.id).delete()
+  }
+
   public getUserListingsObservable() {
     return this.userListingsObservable;
   }

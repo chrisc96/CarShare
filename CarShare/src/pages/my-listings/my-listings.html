@@ -28,7 +28,14 @@
 
         <ion-card *ngFor="let listing of listings; let i = index">
           <ion-grid>
-            <ion-card-content (click)="goToListingDetails(i)">
+            <div class="settings" (click)="presentSettingsPopover($event, i)">
+              <i class="fas fa-cog"></i>
+            </div>
+            <div class="listingDetails" (click)="goToListingDetails(i)">
+              <p>More info</p>
+              <i class="far fa-arrow-alt-circle-right"></i>
+            </div>
+            <ion-card-content>
               <ion-col>
                 <div id="carImageContainer">
                   <div id="carImage"></div>
@@ -48,10 +55,11 @@
                     <i class="fas fa-check rightHandSideIcon" *ngIf="listing.storageSpace"></i>
                     <i class="fas fa-times rightHandSideIcon" *ngIf="!listing.storageSpace"></i>
                   </div>
-                  <div class="IconSeparator" id="exlamationBtn" *ngIf="actionsToTake(i)">
+                  <div class="IconSeparator" id="exlamationBtn" *ngIf="actionsToTake(i)" (click)="goToReviewShareRequests(i)">
                     <i class="fas fa-exclamation-circle" [style.color]="red"></i>
+                    <p id="reviewTxt">Review</p>
                   </div>
-                  <div class="IconSeparator rightHandSideIcon" *ngIf="!actionsToTake(i)">
+                  <div class="IconSeparator rightHandSideIcon" *ngIf="!actionsToTake(i)" (click)="goToListingDetails(i)">
                     <i class="fas fa-info-circle"></i>
                   </div>
                 </div>

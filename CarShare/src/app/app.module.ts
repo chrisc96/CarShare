@@ -23,6 +23,9 @@ import { ProfilePage } from "../pages/profile/profile";
 import { RidesImTakingPage } from "../pages/rides-im-taking/rides-im-taking";
 import { RequestToSharePage } from "../pages/request-to-share/request-to-share";
 import { ReviewRideShareRequestPage } from "../pages/review-ride-share-request/review-ride-share-request";
+import { SettingsPopoverPage } from "../pages/settings-popover/settings-popover"
+import { EditListingPage } from  "../pages/edit-listing/edit-listing"
+
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { FirestoreListingsProvider } from '../providers/firestore-listings/firestore-listings';
 import { FirestoreUsersProvider } from '../providers/firestore-users/firestore-users';
@@ -52,7 +55,9 @@ const firebaseConfig = {
     ProfilePage,
     RidesImTakingPage,
     RequestToSharePage,
-    ReviewRideShareRequestPage
+    ReviewRideShareRequestPage,
+    SettingsPopoverPage,
+    EditListingPage
   ],
   imports: [
     BrowserModule,
@@ -85,7 +90,9 @@ const firebaseConfig = {
     ProfilePage,
     RidesImTakingPage,
     RequestToSharePage,
-    ReviewRideShareRequestPage
+    ReviewRideShareRequestPage,
+    SettingsPopoverPage,
+    EditListingPage
   ],
   providers: [
     StatusBar,

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, Popover } from 'ionic-angular';
 import { NavigationMenuProvider } from '../../providers/navigation-menu/navigation-menu';
 import { FirestoreListingsProvider } from "../../providers/firestore-listings/firestore-listings";
 import { Listing } from '../struct/listing';
@@ -9,6 +9,10 @@ import { PostARidePage } from '../post-a-ride/post-a-ride';
 import { of } from 'rxjs';
 import * as moment from 'moment';
 import { RideListingPage } from '../ride-listing/ride-listing';
+import { ReviewRideShareRequestPage } from '../review-ride-share-request/review-ride-share-request';
+import { PopoverController } from 'ionic-angular';
+import { SettingsPopoverPage } from '../settings-popover/settings-popover';
+
 
 /**
  * Generated class for the MyListingsPage page.
@@ -35,7 +39,8 @@ export class MyListingsPage {
     public navParams: NavParams,
     public menuCtrl: MenuController,
     public navMenu: NavigationMenuProvider,
-    public listingsProvider: FirestoreListingsProvider
+    public listingsProvider: FirestoreListingsProvider,
+    public popoverCtrl : PopoverController
   ) {
   }
 
@@ -68,6 +73,10 @@ export class MyListingsPage {
     this.navCtrl.push(RideListingPage, {"listing": this.listings[index], 'fromMyListings': true})
   }
 
+  goToReviewShareRequests(index) {
+    this.navCtrl.push(ReviewRideShareRequestPage, {'listing': this.listings[index]})
+  }
+
   getFormattedDateTime(index) {
     let date = this.listings[index].departureDate
     let time = this.listings[index].departureTime
@@ -78,5 +87,12 @@ export class MyListingsPage {
   actionsToTake(index) {
     let listing = this.listings[index];
     return listing.whoWantsToCome.length !== 0
+  }
+
+  presentSettingsPopover(event, index) {
+    let settingsPopover = this.popoverCtrl.create(SettingsPopoverPage, {'listing' : this.listings[index]});
+    settingsPopover.present({
+      ev: event
+    });
   }
 }
