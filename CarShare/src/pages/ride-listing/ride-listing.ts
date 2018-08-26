@@ -23,7 +23,7 @@ export class RideListingPage {
 
   listing: Listing
   user: User
-  fromMyListings : boolean = false;
+  dontShowRequestToShare : boolean = false;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -32,9 +32,9 @@ export class RideListingPage {
               public usersProvider : FirestoreUsersProvider
   ) {
     this.listing = navParams.get('listing');
-    this.fromMyListings = navParams.get('fromMyListings');
+    this.dontShowRequestToShare = navParams.get('fromMyListings');
     this.user = usersProvider.getUser();
-    console.log(this.fromMyListings)
+    console.log(this.dontShowRequestToShare)
     console.log('user', this.user)
   }
 

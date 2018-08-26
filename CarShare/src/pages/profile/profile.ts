@@ -39,10 +39,7 @@ export class ProfilePage {
     public formBuilder: FormBuilder,
     private toastCtrl: ToastController
   ) {
-
-    this.usersProvider.getUserObservable().subscribe(user => {
-      this.user = user;
-    })
+    this.user = this.usersProvider.getUser();
   }
 
   editDetailsForm = this.formBuilder.group({

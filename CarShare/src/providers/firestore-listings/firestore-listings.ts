@@ -71,12 +71,11 @@ export class FirestoreListingsProvider {
       }
     });
 
-    this.ridesUserTakingObservable = this.afs.collection('listings').snapshotChanges().map(listings => {
+    this.ridesUserTakingObservable = this.afs.collection('listings').valueChanges().map(listings => {
       if (listings) {
         return listings.filter(changeAction => {
-          const listing = changeAction.payload.doc.data() as Listing;
+          const listing = changeAction as Listing;
           const userPoster = listing.userDocumentID;
-          listing.id = changeAction.payload.doc.id;
 
           let iDidntPostThisListing = true;
           let comingOnThisListing = false;
@@ -95,12 +94,12 @@ export class FirestoreListingsProvider {
 
           return comingOnThisListing && iDidntPostThisListing
         }).map(changeAction => {
-          const listing = changeAction.payload.doc.data() as Listing;
+          const listing = changeAction as Listing;
+          const userPoster = listing.userDocumentID;
           const carID = listing.carDocumentID;
-          const userID = listing.userDocumentID;
-          listing.id = changeAction.payload.doc.id;
+          listing.id = listing.id;
         
-          return combineLatest(this.afs.doc('cars/' + carID).valueChanges(), this.afs.doc('users/' + userID).valueChanges(), (data1, data2) => {
+          return combineLatest(this.afs.doc('cars/' + carID).valueChanges(), this.afs.doc('users/' + userPoster).valueChanges(), (data1, data2) => {
             return { ...listing, ...data1, ...data2 };
           })
         })

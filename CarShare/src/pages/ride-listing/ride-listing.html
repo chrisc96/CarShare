@@ -46,7 +46,7 @@
         <ion-item *ngIf="listing.storageSpace">
           Storage Space: {{ listing.storageSpace }}
         </ion-item>
-        <ion-item>
+        <ion-item *ngIf="!dontShowRequestToShare">
           <button ion-button block color='secondary' (click)='requestToShare()' [disabled]="!allowedToRequest()">Request to Share</button>
         </ion-item>
       </div>

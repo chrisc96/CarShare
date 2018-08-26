@@ -74,6 +74,10 @@ export class MyApp {
     return page.component == this.navMenu.activePage;
   }
 
+  checkAccountActive() {
+    return this.navMenu.activePage === ProfilePage;
+  }
+
   goToProfile() {
     if (this.checkLoggedIn() && this.nav.getActive().component !== ProfilePage) {
       this.nav.push(ProfilePage)

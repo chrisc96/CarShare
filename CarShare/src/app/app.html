@@ -1,7 +1,7 @@
 <ion-menu id='navMenu' #navMenu [content]='mycontent'>
     <ion-content>
         <ion-list>
-            <div menuClose="navMenu" class='navUserArea' [style.cursor]="checkLoggedIn() ? 'pointer' : 'auto' " (click)='goToProfile()'>
+            <div menuClose="navMenu" class='navUserArea' [class.activeHighlight]='checkAccountActive()' [style.cursor]="checkLoggedIn() ? 'pointer' : 'auto' " (click)='goToProfile()'>
                 <div class='navUserIconArea'>
                     <div class="navUserOutline navProfileNoImg">
                         <div class='navUserIcon'></div>
