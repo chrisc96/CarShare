@@ -11,6 +11,7 @@ import { FindARidePage } from "../pages/find-a-ride/find-a-ride";
 import { MyListingsPage } from "../pages/my-listings/my-listings";
 import { FirestoreUsersProvider } from "../providers/firestore-users/firestore-users";
 import { ProfilePage } from "../pages/profile/profile";
+import { RidesImTakingPage } from "../pages/rides-im-taking/rides-im-taking";
 
 @Component({
   templateUrl: "app.html"
@@ -44,6 +45,7 @@ export class MyApp {
       { title: 'Find a ride', component: FindARidePage, requiresLogin: false },
       { title: 'Post a ride', component: PostARidePage, requiresLogin: true },
       { title: 'My listings', component: MyListingsPage, requiresLogin: true },
+      { title: "Rides I'm taking", component: RidesImTakingPage, requiresLogin: true }
     ]
   }
 

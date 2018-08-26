@@ -19,6 +19,7 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/first';
 import 'rxjs/add/operator/mergeMap';
 import { combineLatest } from 'rxjs';
+import { of } from 'rxjs';
 
 /*
   Generated class for the FirestoreListingsProvider provider.
@@ -31,6 +32,8 @@ export class FirestoreListingsProvider {
 
   allListingsObservable: Observable<Listing[]>;
   userListingsObservable: Observable<Listing[]>;
+  ridesUserTakingObservable: Observable<Listing[]>;
+  
 
   constructor(public afs: AngularFirestore, public usersProvider: FirestoreUsersProvider) {
 
@@ -67,6 +70,42 @@ export class FirestoreListingsProvider {
         }).mergeMap(observables => combineLatest(observables))
       }
     });
+
+    this.ridesUserTakingObservable = this.afs.collection('listings').snapshotChanges().map(listings => {
+      if (listings) {
+        return listings.filter(changeAction => {
+          const listing = changeAction.payload.doc.data() as Listing;
+          const userPoster = listing.userDocumentID;
+          listing.id = changeAction.payload.doc.id;
+
+          let iDidntPostThisListing = true;
+          let comingOnThisListing = false;
+          listing.whosComing.forEach(el => {
+            if (userPoster === el.uid) {
+              iDidntPostThisListing = false;
+              return;
+            }
+
+            // 
+            if (el.uid === this.usersProvider.getUser().uid) {
+              comingOnThisListing = true;
+              return;
+            }
+          })
+
+          return comingOnThisListing && iDidntPostThisListing
+        }).map(changeAction => {
+          const listing = changeAction.payload.doc.data() as Listing;
+          const carID = listing.carDocumentID;
+          const userID = listing.userDocumentID;
+          listing.id = changeAction.payload.doc.id;
+        
+          return combineLatest(this.afs.doc('cars/' + carID).valueChanges(), this.afs.doc('users/' + userID).valueChanges(), (data1, data2) => {
+            return { ...listing, ...data1, ...data2 };
+          })
+        })
+      }
+    }).mergeMap(observables => combineLatest(observables))
   }
 
   public createListing = (car, departDate, departTime, noSeats, storageAvail, from, to): Promise<firebase.firestore.DocumentReference> => {
@@ -120,5 +159,9 @@ export class FirestoreListingsProvider {
 
   public getAllListingsObservable() {
     return this.allListingsObservable;
+  }
+
+  public getRidesUserIsTakingObservable() {
+    return this.ridesUserTakingObservable;
   }
 }

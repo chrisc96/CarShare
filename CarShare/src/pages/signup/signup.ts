@@ -72,11 +72,8 @@ export class SignupPage {
     private toastCtrl: ToastController,
     public menuCtrl : MenuController
   ) {
-    console.log(navParams.data)
     this.whereToGo = navParams.data.pageToGo;
     this.dataToSend = navParams.data.listing;
-    console.log(this.whereToGo)
-    console.log(this.dataToSend)
   }
 
   ionViewWillEnter() {

@@ -4,15 +4,76 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>ridesImTaking</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-
-</ion-content>
+<ion-toolbar>
+    <button ion-button menuToggle left>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Rides I'm Taking
+    </ion-title>
+  </ion-toolbar>
+  
+  <ion-content class="home-bg">
+    <div id="container">
+      <div id="content">
+  
+        <div id="noListingsContainer" [hidden]="userTakingRides()">
+          <div id='noListingsImage'></div>
+          <div id='noListingsTitle'>You're not taking any rides :(</div>
+          <div id='noListingsSubText'>Go to Find a Ride to request to join a ride!</div>
+          <button id='addAListingsBtn' ion-button block outline (click)='goToFindARide()'>Find a Ride</button>
+        </div>
+  
+        <div id="listingMargin" [hidden]="!userTakingRides()">
+          <div *ngFor="let listing of listings; let i = index">
+            <ion-card>
+              <ion-grid>
+                <ion-card-content (click)="goToListing(i)">
+                  <ion-col>
+                    <div id="carImageContainer">
+                      <div id="carImage"></div>
+                      <div id="vehicleDetails">
+                        <div id="vehicleDetailsText">{{ listing.make }} {{ listing.model }} {{ listing.year }}</div>
+                      </div>
+                    </div>
+                  </ion-col>
+                  <ion-col>
+                    <div class="lastItem">
+                      <div class="HalfHorizontalSeparator">
+                        <i class="fas fa-couch leftHandSideIcon"></i>
+                        <p id="numSeats rightHandSideIcon">{{ listing.seatsAvailable }}</p>
+                      </div>
+                      <div class="HalfHorizontalSeparator">
+                        <i class="fas fa-luggage-cart leftHandSideIcon"></i>
+                        <i class="fas fa-check rightHandSideIcon" *ngIf="listing.storageSpace"></i>
+                        <i class="fas fa-times rightHandSideIcon" *ngIf="!listing.storageSpace"></i>
+                      </div>
+                    </div>
+                    <div id="tillImageEnd">
+                      <div class="QuarterSeparator">
+                        <div class="listingTitle">From:</div>
+                        <div class="listingText">{{ listing.meetingPoint }}
+                        </div>
+                      </div>
+                      <div class="QuarterSeparator">
+                        <div class="listingTitle">To:</div>
+                        <div class="listingText">{{ listing.destination }}
+                        </div>
+                      </div>
+                      <div class="QuarterSeparator">
+                        <div class="listingTitle">When:</div>
+                        <div class="listingText">{{ getFormattedDateTime(i) }}</div>
+                      </div>
+                    </div>
+                  </ion-col>
+                </ion-card-content>
+              </ion-grid>
+            </ion-card>
+          </div>
+        </div>
+  
+  
+  
+      </div>
+    </div>
+  </ion-content>

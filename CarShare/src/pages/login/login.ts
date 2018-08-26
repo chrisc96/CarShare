@@ -52,8 +52,6 @@ export class LoginPage {
   ) {
     this.pageToGoTo = this.navParams.data.toPage;
     this.valueDataToPass = this.navParams.data.dataToPass
-    console.log(this.pageToGoTo)
-    console.log(this.valueDataToPass)
   }
 
   ionViewWillEnter() {

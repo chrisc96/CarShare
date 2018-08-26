@@ -159,14 +159,6 @@ export class EditListingPage {
   }
 
   allFieldsValid() {
-    console.log('carControl', this.editRideForm.controls['carControl'].valid, ' value', this.editRideForm.controls['carControl'].value)
-    console.log('meetingPlaceControl', this.editRideForm.controls['meetingPlaceControl'].valid, ' value', this.editRideForm.controls['meetingPlaceControl'].value)
-    console.log('destPlaceControl', this.editRideForm.controls['destPlaceControl'].valid, ' value', this.editRideForm.controls['destPlaceControl'].value)
-    console.log('dateControl', this.editRideForm.controls['dateControl'].valid, ' value', this.editRideForm.controls['dateControl'].value)
-    console.log('timeControl', this.editRideForm.controls['timeControl'].valid, ' value', this.editRideForm.controls['timeControl'].value)
-    console.log('seatsControl', this.editRideForm.controls['seatsControl'].valid, ' value', this.editRideForm.controls['seatsControl'].value)
-    console.log('storageAvailable', this.editRideForm.controls['storageAvailable'].valid, ' value', this.editRideForm.controls['storageAvailable'].value)
-
     return this.editRideForm.controls['carControl'].valid &&
       this.editRideForm.controls['meetingPlaceControl'].valid &&
       this.editRideForm.controls['destPlaceControl'].valid &&
@@ -209,13 +201,11 @@ export class EditListingPage {
         this.initialListing.year === car.year &&
         this.initialListing.rego === car.rego) {
         this.carIndex = count;
-        console.log('here', this.carIndex)
         return;
       }
       count++;
     });
 
-    console.log('dawdaw', this.initialListing)
 
     this.editRideForm.controls['meetingPlaceControl'].setValue(this.initialListing.meetingPoint)
     this.editRideForm.controls['destPlaceControl'].setValue(this.initialListing.destination)
