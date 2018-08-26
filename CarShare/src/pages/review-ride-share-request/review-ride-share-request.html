@@ -15,22 +15,48 @@
 
 <ion-content class="home-bg">
   <div id="container">
-    <div class="content" *ngFor="let listing of listings; let i = index">
-      <ion-item *ngFor="let shareRequest of listing.whoWantsToCome; let j = index">
-        <div class="details">
-          <p *ngIf="shareRequest.firstName">{{ shareRequest.firstName }} {{ shareRequest.lastName }}</p>
-          <p *ngIf="shareRequest.contactNum"> {{ shareRequest.contactNum }}</p>
+    <div id="content">
+      <div id="requestMargin">
+        <div *ngFor="let listing of listings; let i = index">
+          <div *ngFor="let shareRequest of listing.whoWantsToCome; let j = index">
+            <ion-card>
+              <ion-grid>
+                <ion-card-content>
+                  <ion-col>
+                    <div id="requestImageContainer">
+                      <div id="requestImage"></div>
+                    </div>
+                  </ion-col>
+                  <ion-col>
+                    <div class="lastItem">
+                      <div class="HalfHorizontalSeparator">
+                        <button (click)="acceptShareRequest(i, j)" class="iconButton">
+                            <ion-icon name="checkmark-circle" color="secondary"></ion-icon>
+                          </button>
+                      </div>
+                      <div class="HalfHorizontalSeparator">
+                        <button (click)="rejectShareRequest(i, j)" class="iconButton">
+                          <ion-icon name="close-circle" color="danger"></ion-icon>
+                        </button>
+                      </div>
+                    </div>
+                    <div id="tillImageEnd">
+                      <div class="QuarterSeparator">
+                        <div class="requestTitle">From:</div>
+                        <div class="requestText" *ngIf="shareRequest.firstName">{{ shareRequest.firstName }} {{ shareRequest.lastName }}</div>
+                      </div>
+                      <div class="QuarterSeparator">
+                        <div class="requestTitle">To:</div>
+                        <div class="requestText" *ngIf="shareRequest.contactNum"> {{ shareRequest.contactNum }}</div>
+                      </div>
+                    </div>
+                  </ion-col>
+                </ion-card-content>
+              </ion-grid>
+            </ion-card>
+          </div>
         </div>
-        <div class="icons">
-          <button (click)="acceptShareRequest(i, j)">
-            <ion-icon name="checkmark-circle" color="secondary"></ion-icon>
-          </button>
-          
-          <button (click)="rejectShareRequest(i, j)">
-            <ion-icon name="close-circle" color="danger"></ion-icon>
-          </button>
-        </div>
-      </ion-item>
+      </div>
     </div>
   </div>
 </ion-content>
