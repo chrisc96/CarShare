@@ -44,7 +44,10 @@
           Seats Available: {{ listing.seatsAvailable }}
         </ion-item>
         <ion-item *ngIf="listing.storageSpace">
-          Storage Space: {{ listing.storageSpace }}
+          Storage Space: yes
+        </ion-item>
+        <ion-item *ngIf="!listing.storageSpace">
+          Storage Space: no
         </ion-item>
         <ion-item *ngIf="!dontShowRequestToShare">
           <button ion-button block color='secondary' (click)='requestToShare()' [disabled]="!allowedToRequest()">Request to Share</button>

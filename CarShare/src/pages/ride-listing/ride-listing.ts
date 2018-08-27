@@ -34,8 +34,6 @@ export class RideListingPage {
     this.listing = navParams.get('listing');
     this.dontShowRequestToShare = navParams.get('fromMyListings');
     this.user = usersProvider.getUser();
-    console.log(this.dontShowRequestToShare)
-    console.log('user', this.user)
   }
 
   ionViewWillEnter() {
@@ -55,7 +53,6 @@ export class RideListingPage {
       this.navCtrl.push(RequestToSharePage, {'listing': this.listing});
     }
   }
-
 
   allowedToRequest() {
     return !this.requesterOwnsListing() && !this.alreadyRequested()
