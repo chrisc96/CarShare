@@ -37,7 +37,7 @@
                   <ion-col>
                     <div class="lastItem">
                       <div class="HalfHorizontalSeparator">
-                        <button (click)="acceptShareRequest(j)" class="iconButton">
+                        <button (click)="acceptShareRequest(j)" class="iconButton" [disabled]="listing.seatsAvailable <= 0">
                             <ion-icon name="checkmark-circle" color="secondary"></ion-icon>
                           </button>
                       </div>

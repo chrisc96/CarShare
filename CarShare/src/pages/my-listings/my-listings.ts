@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, Popover } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { NavigationMenuProvider } from '../../providers/navigation-menu/navigation-menu';
 import { FirestoreListingsProvider } from "../../providers/firestore-listings/firestore-listings";
 import { Listing } from '../struct/listing';
@@ -84,7 +84,7 @@ export class MyListingsPage {
 
   actionsToTake(index) {
     let listing = this.listings[index];
-    return listing.whoWantsToCome.length !== 0
+    return listing.whoWantsToCome.length !== 0 && listing.seatsAvailable > 0
   }
 
   presentSettingsPopover(event, index) {
