@@ -7,6 +7,7 @@ import { Listing } from '../struct/listing';
 import { Subscription } from '../../../node_modules/rxjs';
 import { RideListingPage } from '../ride-listing/ride-listing';
 import * as moment from 'moment';
+import { FindARidePage } from '../find-a-ride/find-a-ride';
 
 /**
  * Generated class for the RidesImTakingPage page.
@@ -54,6 +55,10 @@ export class RidesImTakingPage {
 
   goToListing(listingIdx) {
     this.navCtrl.push(RideListingPage, { 'listing': this.listings[listingIdx], 'fromMyListings': true });
+  }
+
+  goToFindARide() {
+    this.navCtrl.push(FindARidePage);
   }
 
   ionViewDidLeave() {
