@@ -6,7 +6,7 @@ Ionic Android App
 
 ## Current Progress
 
-10/17 pages done
+15/17 pages done
 
 ## Page List:
 
@@ -32,17 +32,15 @@ Ionic Android App
 ## Current status
 
 To Do:
-* 3, 6, 8, 9.2, 11, 14, 15, 16
+* 14, 16
 
 #### What each person has left to do:
 
-Thomas: 3, 16
+Thomas: 16
 
-Chris: 14 
+Chris: 14
 
 #### In Progress:
-
-* 3 - Car share listings details page - Thomas/Chris
 
 #### Already done:
 * 1 - Home page - Chris
@@ -64,9 +62,3 @@ Chris: 14
 #### UX ToDos:
 * Listing details page
 * Edit user details page
-
-#### Minor Todos:
-* Add a loading bar while cars are being pulled in post a ride (instead of the empty screen shown)
-* Improve UX.
-* Implement searching on 'find a ride' page
-* Implement filtering on 'find a ride' page
